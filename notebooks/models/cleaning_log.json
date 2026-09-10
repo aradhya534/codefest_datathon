@@ -1,0 +1,30 @@
+{
+  "Negative/Zero duration": {
+    "count": 9475,
+    "pct": 1.895
+  },
+  "Negative base_fare": {
+    "count": 9530,
+    "pct": 1.906
+  },
+  "Zero dist + nonzero fare": {
+    "count": 7187,
+    "pct": 1.437
+  },
+  "Passenger count <= 0": {
+    "count": 3758,
+    "pct": 0.752
+  },
+  "Voided/No-charge trips": {
+    "count": 3958,
+    "pct": 0.792
+  },
+  "Unrealistic speed": {
+    "count": 115,
+    "pct": 0.023
+  },
+  "Trip > 5 hours": {
+    "count": 214,
+    "pct": 0.043
+  }
+}

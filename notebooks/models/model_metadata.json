@@ -1,0 +1,116 @@
+{
+  "features": [
+    "distance_miles",
+    "rider_count",
+    "rate_class_id",
+    "origin_loc_id",
+    "dest_loc_id",
+    "pickup_hour",
+    "pickup_dayofweek",
+    "pickup_month",
+    "is_weekend",
+    "is_rush_hour",
+    "is_night",
+    "is_airport_pickup",
+    "is_airport_dropoff",
+    "inter_borough",
+    "pickup_borough_enc",
+    "dropoff_borough_enc",
+    "pickup_service_zone_enc",
+    "dropoff_service_zone_enc",
+    "toll_total"
+  ],
+  "fare_target": "base_fare",
+  "duration_target": "trip_duration_min",
+  "best_fare_model": "LightGBM",
+  "best_dur_model": "XGBoost",
+  "fare_results": {
+    "LinearRegression": {
+      "Val": {
+        "RMSE": 12.9893,
+        "MAE": 5.3358,
+        "R2": 0.6202
+      },
+      "Test": {
+        "RMSE": 13.3125,
+        "MAE": 5.3301,
+        "R2": 0.6102
+      }
+    },
+    "XGBoost": {
+      "Val": {
+        "RMSE": 10.4633,
+        "MAE": 3.0673,
+        "R2": 0.7536
+      },
+      "Test": {
+        "RMSE": 10.4869,
+        "MAE": 3.0978,
+        "R2": 0.7581
+      }
+    },
+    "LightGBM": {
+      "Val": {
+        "RMSE": 9.8108,
+        "MAE": 3.0794,
+        "R2": 0.7834
+      },
+      "Test": {
+        "RMSE": 10.1101,
+        "MAE": 3.101,
+        "R2": 0.7752
+      },
+      "Tuned": {
+        "RMSE": 10.0907,
+        "MAE": 3.0973,
+        "R2": 0.776
+      }
+    }
+  },
+  "duration_results": {
+    "LinearRegression": {
+      "Val": {
+        "RMSE": 7.9942,
+        "MAE": 5.2507,
+        "R2": 0.6843
+      },
+      "Test": {
+        "RMSE": 8.1916,
+        "MAE": 5.2511,
+        "R2": 0.6795
+      }
+    },
+    "XGBoost": {
+      "Val": {
+        "RMSE": 5.6891,
+        "MAE": 3.2881,
+        "R2": 0.8401
+      },
+      "Test": {
+        "RMSE": 5.9298,
+        "MAE": 3.2672,
+        "R2": 0.832
+      },
+      "Tuned": {
+        "RMSE": 5.7908,
+        "MAE": 3.1318,
+        "R2": 0.8398
+      }
+    },
+    "LightGBM": {
+      "Val": {
+        "RMSE": 5.8416,
+        "MAE": 3.4072,
+        "R2": 0.8315
+      },
+      "Test": {
+        "RMSE": 6.0743,
+        "MAE": 3.3923,
+        "R2": 0.8238
+      }
+    }
+  },
+  "sample_size": 500000,
+  "cv_fare_rmse": 9.9455,
+  "cv_dur_rmse": 5.559
+}
