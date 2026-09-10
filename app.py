@@ -109,6 +109,7 @@ st.markdown("""
     .badge-info    { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
     .badge-purple  { background: rgba(192, 132, 252, 0.15); color: #c084fc; border: 1px solid rgba(192, 132, 252, 0.3); }
     .badge-amber   { background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); }
+    .badge-danger  { background: rgba(244, 63, 94, 0.15); color: #f43f5e; border: 1px solid rgba(244, 63, 94, 0.3); }
     
     /* Digital Ride Ticket */
     .ticket-card {
@@ -147,17 +148,6 @@ st.markdown("""
         margin-right: 6px;
     }
     
-    /* Section Headers */
-    .section-title {
-        font-size: 18px;
-        font-weight: 700;
-        color: #f8fafc;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: 12px;
-    }
-    
     /* Custom Tabs */
     .stTabs [data-baseweb="tab-list"] {
         gap: 6px;
@@ -194,7 +184,7 @@ def init_platform():
     predictor = UrbanFlowPredictor()
     assistant = AIMobilityAssistant()
     
-    # Load Zone Data
+    # Load Zone Data safely
     zone_file = os.path.abspath(os.path.join(BASE_DIR, "..", "Urban_Flow_Analytics_Zone_Dataset.csv"))
     if not os.path.exists(zone_file):
         zone_file = os.path.join(BASE_DIR, "Urban_Flow_Analytics_Zone_Dataset.csv")
@@ -228,10 +218,14 @@ def init_platform():
     # Load Anomaly Audit
     audit_file = os.path.join(BASE_DIR, "cleaned_data", "anomaly_cleaning_audit.csv")
     audit_df = pd.read_csv(audit_file) if os.path.exists(audit_file) else pd.DataFrame()
+    
+    # Load 72h Forecast Series
+    ts_file = os.path.join(BASE_DIR, "notebooks", "spatiotemporal", "forecast_72h_series.csv")
+    forecast_df = pd.read_csv(ts_file) if os.path.exists(ts_file) else pd.DataFrame()
         
-    return predictor, assistant, zones_df, hotspots_df, metadata, kpi_df, audit_df
+    return predictor, assistant, zones_df, hotspots_df, metadata, kpi_df, audit_df, forecast_df
 
-predictor, assistant, zones_df, hotspots_df, metadata, kpi_df, audit_df = init_platform()
+predictor, assistant, zones_df, hotspots_df, metadata, kpi_df, audit_df, forecast_df = init_platform()
 
 # Extract model metrics
 fare_engine = metadata.get("best_fare_model", "XGBoost")
@@ -256,7 +250,7 @@ with st.sidebar:
     st.markdown("""
     <div style="background: rgba(34, 197, 94, 0.12); border: 1px solid rgba(34, 197, 94, 0.35); border-radius: 8px; padding: 8px 12px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
         <span style="color: #4ade80; font-size: 14px;">●</span>
-        <span style="font-size: 12px; font-weight: 700; color: #4ade80;">Production Engine Online</span>
+        <span style="font-size: 12px; font-weight: 700; color: #4ade80;">Production Engines Online</span>
     </div>
     """, unsafe_allow_html=True)
     
@@ -277,7 +271,7 @@ with st.sidebar:
     """, unsafe_allow_html=True)
     
     st.markdown("---")
-    st.markdown("##### 🧭 User Quick Presets")
+    st.markdown("##### 🧭 Instant Journey Presets")
     preset = st.selectbox(
         "Load Corridors Instant Template:",
         [
@@ -436,14 +430,24 @@ with tabs[0]:
         now_dt = datetime.now()
         if "Morning" in time_window:
             sim_dt = now_dt.replace(hour=8, minute=30)
+            traffic_advisory = "⚠️ Morning Commute Congestion Active (FDR Drive & Bridges busy)"
+            traffic_badge = "badge-amber"
         elif "Evening" in time_window:
             sim_dt = now_dt.replace(hour=18, minute=0)
+            traffic_advisory = "🚨 Evening Rush Hour Gridlock (+12 min arterial bottleneck delay)"
+            traffic_badge = "badge-danger"
         elif "Late Night" in time_window:
             sim_dt = now_dt.replace(hour=23, minute=30)
+            traffic_advisory = "🌙 Night-Owl Transit Corridor Active (Optimal traffic velocity)"
+            traffic_badge = "badge-purple"
         elif "Midday" in time_window:
             sim_dt = now_dt.replace(hour=14, minute=0)
+            traffic_advisory = "🟢 Normal Midday Traffic (Steady corridor flows)"
+            traffic_badge = "badge-success"
         else:
             sim_dt = now_dt
+            traffic_advisory = "⚡ Real-Time Live Telemetry Prediction"
+            traffic_badge = "badge-info"
             
         pred_quote = predictor.predict(
             origin_loc_id=chosen_orig,
@@ -462,7 +466,7 @@ with tabs[0]:
         <div class="ticket-card">
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <span class="badge badge-success">✓ Guaranteed Fare Lock</span>
-                <span style="font-size: 12px; color: #94a3b8;">Zero Data Leakage Mode</span>
+                <span class="badge {traffic_badge}">{traffic_advisory}</span>
             </div>
             
             <div class="ticket-route">
@@ -613,9 +617,37 @@ with tabs[2]:
     st.markdown("### 📈 The Fleet Dispatcher: 72-Hour Ahead Passenger Demand Forecasting")
     st.markdown("Autoregressive LightGBM time-series forecaster delivering **$R^2 = 94.68%$** with an **80% error reduction** over traditional Holt-Winters models.")
     
-    img_forecast = os.path.join(BASE_DIR, "notebooks", "spatiotemporal", "plots", "demand_forecast_72h.png")
-    if os.path.exists(img_forecast):
-        st.image(img_forecast, caption="Continuous 72-Hour Demand Curve across NYC Holdout Period", use_column_width=True)
+    # Interactive 72-Hour Forecast Plotly Line Chart
+    if not forecast_df.empty:
+        fig_fc = go.Figure()
+        fig_fc.add_trace(go.Scatter(
+            x=forecast_df['timestamp'], y=forecast_df['actual_demand'],
+            mode='lines', name='Actual Passenger Demand',
+            line=dict(color='#ffffff', width=2)
+        ))
+        fig_fc.add_trace(go.Scatter(
+            x=forecast_df['timestamp'], y=forecast_df['lightgbm_forecast'],
+            mode='lines', name='LightGBM 72h Forecaster (R²=94.68%)',
+            line=dict(color='#38bdf8', width=2.5)
+        ))
+        fig_fc.add_trace(go.Scatter(
+            x=forecast_df['timestamp'], y=forecast_df['holt_winters_baseline'],
+            mode='lines', name='Holt-Winters Baseline (R²=73.4%)',
+            line=dict(color='#f43f5e', width=1.5, dash='dot')
+        ))
+        fig_fc.update_layout(
+            title="Interactive 72-Hour Demand Curve (Zoom & Hover for Exact Hourly Volume)",
+            xaxis_title="Timeline (Consecutive Hours)",
+            yaxis_title="Trips / Hour",
+            paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(15,23,42,0.6)',
+            font=dict(color='#94a3b8'), height=320,
+            legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
+        )
+        st.plotly_chart(fig_fc, use_container_width=True)
+    else:
+        img_forecast = os.path.join(BASE_DIR, "notebooks", "spatiotemporal", "plots", "demand_forecast_72h.png")
+        if os.path.exists(img_forecast):
+            st.image(img_forecast, caption="Continuous 72-Hour Demand Curve across NYC Holdout Period", use_container_width=True)
         
     st.markdown("---")
     st.markdown("#### 🧭 Interactive Dispatch & Vehicle Prepositioning Console")
@@ -688,7 +720,7 @@ with tabs[3]:
         st.markdown("##### 💡 1-Click Interactive Prompts")
         st.caption("Click any prompt to run it instantly:")
         
-        p_click1 = st.button("💵 Fare & ETA from JFK to Times Square for 2 riders", use_container_width=True)
+        p_click1 = st.button("💵 Fare & ETA from JFK to Times Square (2 riders)", use_container_width=True)
         p_click2 = st.button("📍 Where should drivers position right now?", use_container_width=True)
         p_click3 = st.button("🏙️ How does demand compare across boroughs?", use_container_width=True)
         p_click4 = st.button("⚡ Estimate LGA to Financial District over 11 miles", use_container_width=True)
@@ -715,18 +747,19 @@ with tabs[3]:
                 {"role": "assistant", "content": "👋 Hello! I am your **CodeWave AI Mobility Copilot**. You can ask me anything about upfront taxi fares, trip duration ETAs, demand hotspots, or fleet dispatch directives!"}
             ]
             
-        active_prompt = None
-        if p_click1: active_prompt = "What is the estimated fare and arrival time from JFK to Times Square for 2 people over 15 miles?"
-        elif p_click2: active_prompt = "Where are the top demand hotspots where drivers should position?"
-        elif p_click3: active_prompt = "How do taxi flows compare across boroughs?"
-        elif p_click4: active_prompt = "Estimate trip fare and duration from LGA to Financial District over 11 miles"
+        def handle_user_message(query_text):
+            st.session_state.chat_history.append({"role": "user", "content": query_text})
+            ans_dict = assistant.answer_query(query_text)
+            st.session_state.chat_history.append({"role": "assistant", "content": ans_dict['answer']})
+            
+        if p_click1: handle_user_message("What is the estimated fare and arrival time from JFK to Times Square for 2 people over 15 miles?")
+        elif p_click2: handle_user_message("Where are the top demand hotspots where drivers should position?")
+        elif p_click3: handle_user_message("How do taxi flows compare across boroughs?")
+        elif p_click4: handle_user_message("Estimate trip fare and duration from LGA to Financial District over 11 miles")
         
-        chat_query = st.chat_input("Ask a mobility query (e.g., 'How much from LGA to Times Square?')...") or active_prompt
-        
-        if chat_query:
-            st.session_state.chat_history.append({"role": "user", "content": chat_query})
-            answer_dict = assistant.answer_query(chat_query)
-            st.session_state.chat_history.append({"role": "assistant", "content": answer_dict['answer']})
+        typed_query = st.chat_input("Ask a mobility query (e.g., 'How much from LGA to Times Square?')...")
+        if typed_query:
+            handle_user_message(typed_query)
             
         for msg in st.session_state.chat_history:
             with st.chat_message(msg["role"]):
@@ -736,6 +769,24 @@ with tabs[3]:
 with tabs[4]:
     st.markdown("### 📊 Executive Business Intelligence & Fleet ROI Calculator")
     st.markdown("Translating analytical findings into actionable management decisions, fuel savings, and driver revenue growth.")
+    
+    # Borough hourly profile from Power BI dataset
+    if not kpi_df.empty and 'pickup_borough' in kpi_df.columns:
+        st.markdown("##### 🏙️ Diurnal Transit Demand Patterns across NYC Boroughs")
+        borough_hourly = kpi_df.groupby(['pickup_borough', 'pickup_hour'])['total_trips'].sum().reset_index()
+        fig_bh = px.line(
+            borough_hourly, x='pickup_hour', y='total_trips', color='pickup_borough',
+            title="Hourly Trips by Borough (24-Hour Cycle)",
+            markers=True,
+            color_discrete_sequence=['#38bdf8', '#818cf8', '#4ade80', '#fbbf24', '#f43f5e']
+        )
+        fig_bh.update_layout(
+            xaxis=dict(title="Hour of Day (0–23)", tickmode='linear', tick0=0, dtick=2),
+            yaxis=dict(title="Aggregated Volume"),
+            paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(15,23,42,0.6)',
+            font=dict(color='#94a3b8'), height=280
+        )
+        st.plotly_chart(fig_bh, use_container_width=True)
     
     bi1, bi2 = st.columns(2, gap="medium")
     
@@ -754,9 +805,27 @@ with tabs[4]:
         
     with bi2:
         st.markdown("##### 🧹 Data Hygiene & Systematic Anomaly Filtering")
-        img_anom = os.path.join(BASE_DIR, "cleaned_data", "plots", "anomaly_impact_bar.png")
-        if os.path.exists(img_anom):
-            st.image(img_anom, caption="Distribution of 8 Systematic Anomaly Classes (7.82% Total Cleaned)", use_column_width=True)
+        if not audit_df.empty:
+            fig_anom = px.bar(
+                audit_df.sort_values('% Impact', ascending=True),
+                x='% Impact', y='Anomaly Class',
+                orientation='h',
+                text='% Impact',
+                color='% Impact',
+                color_continuous_scale='Reds',
+                hover_data=['Impacted Rows', 'Methodological Justification']
+            )
+            fig_anom.update_traces(texttemplate='%{text:.2f}%', textposition='outside')
+            fig_anom.update_layout(
+                title="8 Anomaly Classes Filtered (Hover for Justification)",
+                paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
+                font=dict(color='#94a3b8'), height=260, coloraxis_showscale=False
+            )
+            st.plotly_chart(fig_anom, use_container_width=True)
+        else:
+            img_anom = os.path.join(BASE_DIR, "cleaned_data", "plots", "anomaly_impact_bar.png")
+            if os.path.exists(img_anom):
+                st.image(img_anom, caption="Distribution of 8 Systematic Anomaly Classes (7.82% Total Cleaned)", use_container_width=True)
             
     st.markdown("---")
     st.markdown("#### 💰 Interactive Enterprise ROI & Fuel Savings Simulator")

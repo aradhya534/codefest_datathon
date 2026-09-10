@@ -64,7 +64,7 @@ def make_submission_zip(team_name="CodeWave"):
         ("notebooks/models", [f for f in ["fare_model_xgboost.pkl", "fare_model_lightgbm.pkl", "duration_model_xgboost.pkl", "corridor_speed_priors.json", "model_metadata.json", "cleaning_log.json"] if os.path.exists(os.path.join(base_dir, "notebooks", "models", f))]),
         ("notebooks/models/plots", os.listdir(os.path.join(base_dir, "notebooks", "models", "plots")) if os.path.exists(os.path.join(base_dir, "notebooks", "models", "plots")) else []),
         ("notebooks/models/splits", os.listdir(os.path.join(base_dir, "notebooks", "models", "splits")) if os.path.exists(os.path.join(base_dir, "notebooks", "models", "splits")) else []),
-        ("notebooks/spatiotemporal", ["demand_forecast_lgb.pkl", "hotspot_kmeans_model.pkl", "member3_metrics.json", "zone_hotspot_clusters.csv"]),
+        ("notebooks/spatiotemporal", [f for f in ["demand_forecast_lgb.pkl", "hotspot_kmeans_model.pkl", "member3_metrics.json", "zone_hotspot_clusters.csv", "forecast_72h_series.csv"] if os.path.exists(os.path.join(base_dir, "notebooks", "spatiotemporal", f))]),
         ("notebooks/spatiotemporal/plots", os.listdir(os.path.join(base_dir, "notebooks", "spatiotemporal", "plots")) if os.path.exists(os.path.join(base_dir, "notebooks", "spatiotemporal", "plots")) else [])
     ]
     
