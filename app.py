@@ -111,30 +111,61 @@ st.markdown("""
     .badge-amber   { background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); }
     .badge-danger  { background: rgba(244, 63, 94, 0.15); color: #f43f5e; border: 1px solid rgba(244, 63, 94, 0.3); }
     
-    /* Digital Ride Ticket */
-    .ticket-card {
-        background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
-        border: 2px solid #38bdf8;
+    /* Executive Upfront Quote Box */
+    .quote-box {
+        background: linear-gradient(140deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.88) 100%);
+        border: 1px solid rgba(56, 189, 248, 0.3);
         border-radius: 16px;
-        padding: 24px;
-        box-shadow: 0 16px 40px rgba(56, 189, 248, 0.16);
+        padding: 24px 26px;
+        box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45);
+        transition: border-color 0.2s ease;
     }
-    .ticket-route {
+    .quote-box:hover {
+        border-color: rgba(56, 189, 248, 0.5);
+    }
+    .quote-route-banner {
+        background: rgba(15, 23, 42, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        padding: 14px 18px;
+        margin: 14px 0;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        background: rgba(15, 23, 42, 0.6);
-        border: 1px dashed rgba(56, 189, 248, 0.3);
-        border-radius: 10px;
-        padding: 12px 16px;
-        margin: 12px 0;
     }
-    .ticket-price {
-        font-size: 46px;
+    .quote-price {
+        font-size: 48px;
         font-weight: 800;
         color: #38bdf8;
         letter-spacing: -1.5px;
-        margin: 4px 0;
+        line-height: 1.05;
+        margin: 6px 0 2px 0;
+    }
+    .quote-stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        background: rgba(15, 23, 42, 0.55);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 12px;
+        padding: 14px;
+        margin-top: 16px;
+    }
+    .quote-stat-item {
+        text-align: center;
+    }
+    .quote-stat-label {
+        font-size: 10px;
+        font-weight: 700;
+        color: #94a3b8;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+    }
+    .quote-stat-value {
+        font-size: 18px;
+        font-weight: 800;
+        color: #ffffff;
+        margin-top: 3px;
     }
     
     /* Step Indicator */
@@ -420,8 +451,18 @@ with tabs[0]:
             )
         with c_toll:
             toll_val = st.number_input("Bridge / Tunnel Tolls ($):", 0.0, 35.0, p_toll, 0.5, help="TLC recognized bridge/tunnel path fees.")
+
+        # Vehicle Tier Option
+        service_tier = st.radio(
+            "Vehicle Service Tier:",
+            ["🚕 Standard Yellow Cab (1-4 Pax)", "🚙 Comfort / XL SUV (Up to 6 Pax)", "⚡ Priority Green Eco (Hybrid/EV)"],
+            index=0,
+            horizontal=True
+        )
+        tier_multiplier = 1.25 if "Comfort" in service_tier else (1.08 if "Priority" in service_tier else 1.0)
+        tier_label = "Standard Yellow Cab" if tier_multiplier == 1.0 else ("Comfort SUV (XL)" if tier_multiplier == 1.25 else "Priority Green Hybrid")
             
-        calc_trigger = st.button("🚀 Calculate Guaranteed Price & ETA", type="primary", use_container_width=True)
+        calc_trigger = st.button("🚀 Re-Calculate Guaranteed Price & ETA", type="primary", use_container_width=True)
 
     with col_ticket:
         st.markdown("#### <span class='step-badge'>Step 3</span> Guaranteed Upfront Quote", unsafe_allow_html=True)
@@ -430,23 +471,23 @@ with tabs[0]:
         now_dt = datetime.now()
         if "Morning" in time_window:
             sim_dt = now_dt.replace(hour=8, minute=30)
-            traffic_advisory = "⚠️ Morning Commute Congestion Active (FDR Drive & Bridges busy)"
+            traffic_advisory = "⚠️ Morning Commute Congestion Active"
             traffic_badge = "badge-amber"
         elif "Evening" in time_window:
             sim_dt = now_dt.replace(hour=18, minute=0)
-            traffic_advisory = "🚨 Evening Rush Hour Gridlock (+12 min arterial bottleneck delay)"
+            traffic_advisory = "🚨 Evening Rush Hour Gridlock Buffer"
             traffic_badge = "badge-danger"
         elif "Late Night" in time_window:
             sim_dt = now_dt.replace(hour=23, minute=30)
-            traffic_advisory = "🌙 Night-Owl Transit Corridor Active (Optimal traffic velocity)"
+            traffic_advisory = "🌙 Night-Owl Transit Corridor Active"
             traffic_badge = "badge-purple"
         elif "Midday" in time_window:
             sim_dt = now_dt.replace(hour=14, minute=0)
-            traffic_advisory = "🟢 Normal Midday Traffic (Steady corridor flows)"
+            traffic_advisory = "🟢 Steady Off-Peak Corridor Flow"
             traffic_badge = "badge-success"
         else:
             sim_dt = now_dt
-            traffic_advisory = "⚡ Real-Time Live Telemetry Prediction"
+            traffic_advisory = "⚡ Real-Time Telemetry Flow"
             traffic_badge = "badge-info"
             
         pred_quote = predictor.predict(
@@ -458,79 +499,105 @@ with tabs[0]:
             toll_total=toll_val
         )
         
-        # Origin and Dest names lookup
-        o_label = zones_df[zones_df['loc_id'] == chosen_orig]['zone_name'].values[0] if not zones_df.empty and chosen_orig in zones_df['loc_id'].values else f"Zone {chosen_orig}"
-        d_label = zones_df[zones_df['loc_id'] == chosen_dest]['zone_name'].values[0] if not zones_df.empty and chosen_dest in zones_df['loc_id'].values else f"Zone {chosen_dest}"
+        # Origin and Dest lookup
+        o_row = zones_df[zones_df['loc_id'] == chosen_orig].iloc[0] if not zones_df.empty and chosen_orig in zones_df['loc_id'].values else None
+        d_row = zones_df[zones_df['loc_id'] == chosen_dest].iloc[0] if not zones_df.empty and chosen_dest in zones_df['loc_id'].values else None
         
+        o_name = o_row['zone_name'] if o_row is not None else f"Zone {chosen_orig}"
+        o_boro = o_row['borough_name'] if o_row is not None else "NYC"
+        d_name = d_row['zone_name'] if d_row is not None else f"Zone {chosen_dest}"
+        d_boro = d_row['borough_name'] if d_row is not None else "NYC"
+        
+        raw_fare = pred_quote['predicted_base_fare']
+        final_fare = round(raw_fare * tier_multiplier, 2)
+        dur_mins = pred_quote['predicted_duration_minutes']
+        arrival_str = pred_quote['estimated_arrival_time'].split(' ')[1]
+        speed_mph = (dist_val / (dur_mins / 60)) if dur_mins > 0 else 12.5
+        
+        # Premium Upfront Quote Card
         st.markdown(f"""
-        <div class="ticket-card">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span class="badge badge-success">✓ Guaranteed Fare Lock</span>
+        <div class="quote-box">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <span class="badge badge-success">✓ Guaranteed Fare Protection</span>
                 <span class="badge {traffic_badge}">{traffic_advisory}</span>
             </div>
             
-            <div class="ticket-route">
-                <div style="font-weight: 700; color: #38bdf8; font-size: 14px;">🟢 {o_label}</div>
-                <div style="font-size: 12px; color: #94a3b8;">➔ {dist_val:.1f} mi ➔</div>
-                <div style="font-weight: 700; color: #f43f5e; font-size: 14px;">🔴 {d_label}</div>
-            </div>
-            
-            <div style="margin-top: 14px;">
-                <div style="font-size: 12px; color: #94a3b8; font-weight: 700; text-transform: uppercase;">Guaranteed Upfront Base Fare</div>
-                <div class="ticket-price">${pred_quote['predicted_base_fare']:.2f}</div>
-            </div>
-            
-            <hr style="border-color: rgba(255,255,255,0.1); margin: 16px 0;">
-            
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-                <div>
-                    <div style="font-size: 11px; color: #94a3b8; font-weight: 700;">ESTIMATED TRAVEL TIME</div>
-                    <div style="font-size: 24px; font-weight: 800; color: #ffffff;">{pred_quote['predicted_duration_minutes']:.1f} mins</div>
+            <div class="quote-route-banner">
+                <div style="text-align: left; max-width: 42%;">
+                    <div style="font-size: 11px; font-weight: 700; color: #4ade80; text-transform: uppercase;">🟢 PICKUP</div>
+                    <div style="font-size: 15px; font-weight: 800; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{o_name}</div>
+                    <div style="font-size: 11px; color: #94a3b8;">{o_boro}</div>
                 </div>
+                <div style="text-align: center; color: #94a3b8; font-size: 12px; padding: 0 8px;">
+                    <span style="color: #38bdf8; font-size: 14px;">➔</span><br>
+                    <span style="font-weight: 700; color: #cbd5e1;">{dist_val:.1f} mi</span>
+                </div>
+                <div style="text-align: right; max-width: 42%;">
+                    <div style="font-size: 11px; font-weight: 700; color: #f43f5e; text-transform: uppercase;">🔴 DROPOFF</div>
+                    <div style="font-size: 15px; font-weight: 800; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{d_name}</div>
+                    <div style="font-size: 11px; color: #94a3b8;">{d_boro}</div>
+                </div>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 14px;">
                 <div>
-                    <div style="font-size: 11px; color: #94a3b8; font-weight: 700;">ON-TIME ARRIVAL</div>
-                    <div style="font-size: 24px; font-weight: 800; color: #38bdf8;">{pred_quote['estimated_arrival_time'].split(' ')[1]}</div>
+                    <div style="font-size: 11px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;">
+                        Guaranteed Upfront Fare ({tier_label})
+                    </div>
+                    <div class="quote-price">${final_fare:.2f}</div>
+                    <div style="font-size: 11px; color: #4ade80;">✓ Rate Locked • Zero surge surprise at destination</div>
+                </div>
+                <div style="text-align: right;">
+                    <span class="badge badge-info">Engine: {fare_engine} 🏆</span>
+                </div>
+            </div>
+            
+            <div class="quote-stats-grid">
+                <div class="quote-stat-item">
+                    <div class="quote-stat-label">Estimated Travel</div>
+                    <div class="quote-stat-value">{dur_mins:.1f} <span style="font-size: 12px; font-weight: 500; color: #94a3b8;">mins</span></div>
+                </div>
+                <div class="quote-stat-item">
+                    <div class="quote-stat-label">On-Time Dropoff</div>
+                    <div class="quote-stat-value" style="color: #38bdf8;">{arrival_str}</div>
+                </div>
+                <div class="quote-stat-item">
+                    <div class="quote-stat-label">Shortest Corridor</div>
+                    <div class="quote-stat-value">{dist_val:.1f} <span style="font-size: 12px; font-weight: 500; color: #94a3b8;">mi</span></div>
+                </div>
+                <div class="quote-stat-item">
+                    <div class="quote-stat-label">Corridor Velocity</div>
+                    <div class="quote-stat-value" style="color: #4ade80;">{speed_mph:.1f} <span style="font-size: 12px; font-weight: 500; color: #94a3b8;">mph</span></div>
                 </div>
             </div>
         </div>
         """, unsafe_allow_html=True)
         
-        # Operational driver metrics
-        effective_speed = (dist_val / (pred_quote['predicted_duration_minutes'] / 60)) if pred_quote['predicted_duration_minutes'] > 0 else 12.5
+        # Operational Economics & Transparent Breakdown
         fuel_cost = round(dist_val * 0.16, 2)
-        driver_takehome = round(pred_quote['predicted_base_fare'] * 0.78, 2)
+        driver_payout = round(final_fare * 0.78, 2)
+        platform_fee = round(final_fare * 0.12, 2)
+        taxes_surcharges = round(final_fare - (driver_payout + platform_fee), 2)
         
         st.markdown("<br>", unsafe_allow_html=True)
         op1, op2, op3 = st.columns(3)
         with op1:
-            st.metric("Effective Transit Speed", f"{effective_speed:.1f} mph", "Traffic Adjusted")
+            st.metric("Driver Net Take-Home", f"${driver_payout:.2f}", "78% Payout")
         with op2:
-            st.metric("Estimated Fuel Expense", f"${fuel_cost:.2f}", "-Operational")
+            st.metric("Estimated Fuel & Opex", f"${fuel_cost:.2f}", "-Operational")
         with op3:
-            st.metric("Driver Net Take-Home", f"${driver_takehome:.2f}", "78% Payout")
+            st.metric("Platform & City Fees", f"${platform_fee + taxes_surcharges:.2f}", "TLC / Regulatory")
             
-        # Transparent Cost Breakdown Chart
-        breakdown_df = pd.DataFrame({
-            'Component': ['Distance Meter', 'Bridges & Tolls', 'Airport Corridor Fee', 'Congestion Buffer'],
-            'Amount ($)': [
-                round(dist_val * 2.15 + 2.50, 2),
-                round(toll_val, 2),
-                15.00 if (chosen_orig in [1, 132, 138] or chosen_dest in [1, 132, 138]) else 0.00,
-                round(max(0, pred_quote['predicted_base_fare'] - (dist_val * 2.15 + 2.50 + toll_val)), 2)
-            ]
-        })
-        
-        fig_cost = px.bar(
-            breakdown_df, x='Component', y='Amount ($)',
-            color='Component', text='Amount ($)',
-            color_discrete_sequence=['#38bdf8', '#818cf8', '#c084fc', '#4ade80']
-        )
-        fig_cost.update_layout(
-            height=200, margin=dict(l=10, r=10, t=10, b=10),
-            paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
-            font=dict(color='#94a3b8'), showlegend=False
-        )
-        st.plotly_chart(fig_cost, use_container_width=True)
+        with st.expander("🧾 Itemized TLC Transparent Fare Breakdown"):
+            st.markdown(f"""
+            <div style="font-size: 13px; color: #cbd5e1; line-height: 1.8;">
+                • <b>Base Flagdrop Fee:</b> $3.00<br>
+                • <b>Corridor Mileage Fare ({dist_val:.1f} mi):</b> ${max(0, raw_fare - toll_val - 3.00):.2f}<br>
+                • <b>Bridge / Tunnel Tolls:</b> ${toll_val:.2f}<br>
+                • <b>Vehicle Tier Surcharge ({tier_label}):</b> ${final_fare - raw_fare:.2f}<br>
+                • <b>Guaranteed Passenger Total:</b> <b style="color: #38bdf8;">${final_fare:.2f}</b>
+            </div>
+            """, unsafe_allow_html=True)
 
 # ── TAB 2: GEOSPATIAL HOTSPOTS & ZONES ──────────────────────
 with tabs[1]:
