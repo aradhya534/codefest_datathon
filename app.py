@@ -491,51 +491,30 @@ with tabs[0]:
         arrival_str = pred_quote['estimated_arrival_time'].split(' ')[1]
         speed_mph = (dist_val / (dur_mins / 60)) if dur_mins > 0 else 12.5
         
-        # Clean Executive Upfront Quote Card
-        st.markdown(f"""
-        <div class="quote-box">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span class="badge badge-success">✓ Guaranteed Fare Lock</span>
-                <span class="badge {traffic_badge}">{traffic_advisory}</span>
-            </div>
+        # Premium Upfront Quote Container (Native Streamlit, Zero HTML Code Leakage)
+        with st.container(border=True):
+            b_col1, b_col2 = st.columns([1, 1.2])
+            with b_col1:
+                st.markdown('<span class="badge badge-success">✓ Guaranteed Fare Lock</span>', unsafe_allow_html=True)
+            with b_col2:
+                st.markdown(f'<span class="badge {traffic_badge}">{traffic_advisory}</span>', unsafe_allow_html=True)
+                
+            st.info(f"🚕 **Route:** {o_name} ({o_boro}) ➔ {d_name} ({d_boro}) • **{dist_val:.1f} mi**")
             
-            <div style="margin: 18px 0 10px 0;">
-                <div style="font-size: 12px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;">
-                    Upfront Passenger Fare ({tier_label})
-                </div>
-                <div class="quote-price">${final_fare:.2f}</div>
-                <div style="font-size: 12px; color: #4ade80; font-weight: 500; margin-top: 4px;">
-                    ✓ Fixed Price Guarantee • Zero Surge Surprises at Drop-off
-                </div>
-            </div>
+            st.metric(
+                label=f"Guaranteed Upfront Fare ({tier_label})",
+                value=f"${final_fare:.2f}",
+                delta="✓ Rate Locked • Zero Surge Surprises at Drop-off"
+            )
             
-            <div class="route-pill">
-                <span>🚕</span>
-                <span><b>{o_name}</b> <span style="color: #94a3b8;">({o_boro})</span></span>
-                <span style="color: #38bdf8; font-weight: 700; margin: 0 4px;">➔</span>
-                <span><b>{d_name}</b> <span style="color: #94a3b8;">({d_boro})</span></span>
-                <span style="margin-left: auto; color: #38bdf8; font-weight: 700;">{dist_val:.1f} mi</span>
-            </div>
+            st.divider()
             
-            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.08); margin: 16px 0;">
-            
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                <div>
-                    <div style="font-size: 11px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">ESTIMATED TRIP DURATION</div>
-                    <div style="font-size: 26px; font-weight: 800; color: #ffffff; margin-top: 2px;">
-                        {dur_mins:.1f} <span style="font-size: 14px; font-weight: 500; color: #94a3b8;">mins</span>
-                    </div>
-                </div>
-                <div>
-                    <div style="font-size: 11px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">GUARANTEED ARRIVAL TIME</div>
-                    <div style="font-size: 26px; font-weight: 800; color: #38bdf8; margin-top: 2px;">
-                        {arrival_str}
-                    </div>
-                </div>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-        
+            m1, m2 = st.columns(2)
+            with m1:
+                st.metric("Estimated Trip Duration", f"{dur_mins:.1f} mins", f"Speed: {speed_mph:.1f} mph")
+            with m2:
+                st.metric("Guaranteed Drop-Off Time", arrival_str, f"Corridor: {dist_val:.1f} mi")
+                
         # Operational Economics & Transparent Breakdown
         fuel_cost = round(dist_val * 0.16, 2)
         driver_payout = round(final_fare * 0.78, 2)
@@ -555,14 +534,12 @@ with tabs[0]:
             
         with st.expander("🧾 Itemized TLC Transparent Fare Breakdown"):
             st.markdown(f"""
-            <div style="font-size: 13px; color: #cbd5e1; line-height: 1.8;">
-                • <b>Base Flagdrop Fee:</b> $3.00<br>
-                • <b>Corridor Mileage Fare ({dist_val:.1f} mi):</b> ${max(0, raw_fare - toll_val - 3.00):.2f}<br>
-                • <b>Bridge / Tunnel Tolls:</b> ${toll_val:.2f}<br>
-                • <b>Vehicle Tier Surcharge ({tier_label}):</b> ${final_fare - raw_fare:.2f}<br>
-                • <b>Guaranteed Passenger Total:</b> <b style="color: #38bdf8;">${final_fare:.2f}</b>
-            </div>
-            """, unsafe_allow_html=True)
+- **Base Flagdrop Fee:** $3.00
+- **Corridor Mileage Fare ({dist_val:.1f} mi):** ${max(0, raw_fare - toll_val - 3.00):.2f}
+- **Bridge / Tunnel Tolls:** ${toll_val:.2f}
+- **Vehicle Tier Surcharge ({tier_label}):** ${final_fare - raw_fare:.2f}
+- **Guaranteed Passenger Total:** **${final_fare:.2f}**
+""")
 
 # ── TAB 2: GEOSPATIAL HOTSPOTS & ZONES ──────────────────────
 with tabs[1]:
