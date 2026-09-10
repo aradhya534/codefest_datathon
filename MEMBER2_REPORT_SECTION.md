@@ -33,27 +33,28 @@ Data hygiene was executed systematically with full empirical quantification acro
 | Anomaly Type | Condition | Action Taken | Records Impacted | % Impact |
 |---|---|---|---|---|
 | **Temporal Inversion / Zero Duration** | $t_{\text{duration}} \le 0$ | Removed | 9,475 | 1.895% |
-| **Negative Fare Values** | $\text{base\_fare} < 0$ | Removed | 9,530 | 1.906% |
-| **Zero Distance with Nonzero Fare** | $\text{dist} = 0 \land \text{fare} > 0$ | Removed | 7,187 | 1.437% |
-| **Zero or Negative Riders** | $\text{rider\_count} \le 0$ | Removed | 3,758 | 0.752% |
-| **Voided / Non-revenue Trips** | $\text{method} \in \{3, 6\}$ | Removed | 3,958 | 0.792% |
-| **Extreme Physical Speed** | $\text{speed} > 120\text{ mph} \lor \text{NaN}$ | Filtered | 115 | 0.023% |
-| **Outlier Duration** | $t_{\text{duration}} > 300\text{ min}$ (5h) | Filtered | 214 | 0.043% |
-| **Total Cleaned Sample** | — | — | **466,344 clean rows** | **6.73% removed** |
+| **Sub-minimum/Negative Base Fare** | $\text{base\_fare} < \$2.50$ | Removed | 9,995 | 1.999% |
+| **Extreme Outlier Fare** | $\text{base\_fare} > \$250.00$ | Filtered | 149 | 0.030% |
+| **Zero Distance with Nonzero Fare** | $\text{dist} \le 0 \land \text{fare} > 0$ | Removed | 6,852 | 1.370% |
+| **Zero or Negative Riders** | $\text{rider\_count} \le 0$ | Removed | 3,614 | 0.723% |
+| **Voided / Non-revenue Trips** | $\text{method} \in \{3, 4, 6\}$ | Removed | 8,597 | 1.719% |
+| **Extreme Physical Speed** | $\text{speed} > 85\text{ mph} \lor < 1\text{ mph}$ | Filtered | 616 | 0.123% |
+| **Excessive Duration** | $t_{\text{duration}} > 180\text{ min}$ (3h) | Filtered | 45 | 0.009% |
+| **Total Cleaned Sample** | — | — | **460,649 clean rows** | **7.87% removed** |
 
 ---
 
 ## 4. Modeling Architecture & Model Selection
 
 Three distinct inductive learning paradigms were benchmarked:
-1. **Linear Regression (ElasticNet/OLS with Median Imputation & Z-score Scaling):** Serves as an interpretable parametric baseline.
-2. **XGBoost (eXtreme Gradient Boosting with Histogram-based tree binning):** Optimized for depth-wise feature interaction and high variance reduction.
-3. **LightGBM (Light Gradient Boosting Machine):** Employs leaf-wise tree growth for faster convergence and gradient-based one-side sampling.
+1. **Linear Regression (Baseline with Median Imputation & Z-score Scaling):** Serves as an interpretable parametric baseline.
+2. **XGBoost (eXtreme Gradient Boosting with Histogram-based tree binning):** Optimized for depth-wise feature interaction and robust variance reduction.
+3. **LightGBM (Light Gradient Boosting Machine):** Employs leaf-wise tree growth with depth limits for superior convergence and gradient-based sampling.
 
 ### Data Partitioning Strategy
-- **Training Set:** 70% (326,440 records)
-- **Validation Set:** 15% (69,952 records)
-- **Out-of-Sample Test Set:** 15% (69,952 records)
+- **Training Set:** 70% (322,453 records)
+- **Validation Set:** 15% (69,098 records)
+- **Out-of-Sample Test Set:** 15% (69,098 records)
 - Fixed deterministic random seed (`SEED = 42`).
 
 ---
@@ -64,13 +65,13 @@ Three distinct inductive learning paradigms were benchmarked:
 
 | Model Architecture | Val RMSE (\$) | Val MAE (\$) | Val $R^2$ | Test RMSE (\$) | Test MAE (\$) | Test $R^2$ |
 |---|---|---|---|---|---|---|
-| **Linear Regression (Baseline)** | 12.989 | 5.336 | 0.6202 | 13.313 | 5.330 | 0.6102 |
-| **XGBoost** | 10.463 | 3.067 | 0.7536 | 10.487 | 3.098 | 0.7581 |
-| **LightGBM (Winner)** | **9.811** | **3.079** | **0.7834** | **10.110** | **3.101** | **0.7752** |
-| **Tuned LightGBM** | — | — | — | **$10.091** | **$3.097** | **0.7760** |
+| **Linear Regression (Baseline)** | 6.807 | 3.546 | 0.8626 | 6.827 | 3.534 | 0.8623 |
+| **XGBoost** | 3.695 | 1.891 | 0.9595 | 3.697 | 1.889 | 0.9596 |
+| **LightGBM (Winner 🏆)** | **3.543** | **1.881** | **0.9628** | **$3.588** | **$1.877** | **0.9620** |
 
-- **5-Fold Cross-Validation RMSE:** $\$9.9455 \pm 0.4580$
-- **Optimal Hyperparameters:** `learning_rate=0.03`, `max_depth=7`, `n_estimators=400`
+- **Test $R^2$ Score:** **96.20%** of total fare variance explained!
+- **Mean Absolute Error (MAE):** **\$1.88** (on average, fare estimates are accurate within \$1.88).
+- **5-Fold Cross-Validation RMSE:** $\$3.5206 \pm 0.1032$.
 
 ---
 
@@ -78,13 +79,13 @@ Three distinct inductive learning paradigms were benchmarked:
 
 | Model Architecture | Val RMSE (min) | Val MAE (min) | Val $R^2$ | Test RMSE (min) | Test MAE (min) | Test $R^2$ |
 |---|---|---|---|---|---|---|
-| **Linear Regression (Baseline)** | 7.994 | 5.251 | 0.6843 | 8.192 | 5.251 | 0.6795 |
-| **LightGBM** | 5.842 | 3.407 | 0.8315 | 6.074 | 3.392 | 0.8238 |
-| **XGBoost (Winner)** | **5.689** | **3.288** | **0.8401** | **5.930** | **3.267** | **0.8320** |
-| **Tuned XGBoost** | — | — | — | **5.791 min** | **3.132 min** | **0.8398** |
+| **Linear Regression (Baseline)** | 7.707 | 5.139 | 0.7009 | 7.656 | 5.128 | 0.7012 |
+| **LightGBM** | 5.427 | 3.313 | 0.8516 | 5.376 | 3.300 | 0.8527 |
+| **XGBoost (Winner 🏆)** | **5.300** | **3.208** | **0.8585** | **5.249 min** | **3.196 min** | **0.8596** |
 
-- **5-Fold Cross-Validation RMSE:** $5.5590 \pm 0.0807\text{ min}$
-- **Optimal Hyperparameters:** `learning_rate=0.05`, `max_depth=8`, `n_estimators=600`
+- **Test $R^2$ Score:** **85.96%** of trip duration variance explained!
+- **Mean Absolute Error (MAE):** **3.20 minutes** (ETA is accurate down to ~3 minutes).
+- **5-Fold Cross-Validation RMSE:** $5.3618 \pm 0.0401\text{ min}$.
 
 ---
 
@@ -97,17 +98,17 @@ As mandated by the evaluation rubrics, metric selection was governed by domain o
    - *Domain justification:* In passenger transportation, outlier errors (e.g., predicting an arrival time off by 25 minutes or a fare miscalculated by $30) cause catastrophic customer dissatisfaction and chargebacks. Because RMSE penalizes large residuals quadratically, models optimized on RMSE avoid severe over- or under-estimations.
 2. **Mean Absolute Error (MAE) — Operational Interpretability:**
    - *Mathematical formulation:* $\text{MAE} = \frac{1}{n}\sum_{i=1}^{n}|y_i - \hat{y}_i|$
-   - *Domain justification:* MAE provides direct real-world meaning for stakeholders and marketing: "On average, upfront base fares are within $\pm \$3.09$ of the true meter value, and trip ETA is accurate within $\pm 3.13$ minutes."
+   - *Domain justification:* MAE provides direct real-world meaning for stakeholders and marketing: "On average, upfront base fares are within $\pm \$1.88$ of the true meter value, and trip ETA is accurate within $\pm 3.20$ minutes."
 3. **Coefficient of Determination ($R^2$ Score) — Relative Variance Explained:**
    - *Mathematical formulation:* $R^2 = 1 - \frac{\sum (y_i - \hat{y}_i)^2}{\sum (y_i - \bar{y})^2}$
-   - *Domain justification:* Demonstrates that gradient boosting models account for over **84% of trip duration variability** and **77.6% of fare variance**, thoroughly outperforming standard linear approximations.
+   - *Domain justification:* Demonstrates that gradient boosting models account for over **86% of trip duration variability** and **96.2% of fare variance**, thoroughly outperforming standard linear approximations.
 
 ---
 
 ## 7. Feature Importance & Operational Insights
 
 Key drivers identified via Gini impurity / gain importance:
-1. **Trip Distance (`distance_miles`)**: Accounts for >68% of total split gain across both models, representing the primary physical cost driver.
+1. **Trip Distance (`distance_miles`)**: Accounts for >72% of total split gain for fares and >60% for duration.
 2. **Rate Class ID (`rate_class_id`) & Airport Indicators**: Fixed rates for airport transfers (JFK Flat Rate, Newark surcharge) significantly perturb linear relationships.
 3. **Diurnal Time Features (`pickup_hour`, `is_rush_hour`)**: Exhibit massive impact on duration prediction due to peak-period arterial bottlenecks.
 4. **Origin & Destination Zone Locality**: Reflects dense urban grid speeds (Manhattan) versus expressway speeds (Queens / Brooklyn connectors).
@@ -116,8 +117,8 @@ Key drivers identified via Gini impurity / gain importance:
 
 ## 8. Exported Deliverables Summary
 
-- **Fare Model:** `fare_model_lightgbm.pkl` (1.0 MB)
-- **Duration Model:** `duration_model_xgboost.pkl` (8.6 MB)
+- **Fare Model:** `fare_model_lightgbm.pkl` ($R^2 = 0.9620$)
+- **Duration Model:** `duration_model_xgboost.pkl` ($R^2 = 0.8596$)
 - **Model Metadata & Manifest:** `model_metadata.json`
 - **Reproducible Inference Engine:** `predict.py`
 - **Data Partitions:** `fare_train.csv`, `fare_val.csv`, `fare_test.csv`, `duration_train.csv`, `duration_val.csv`, `duration_test.csv`

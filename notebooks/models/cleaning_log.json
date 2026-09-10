@@ -3,28 +3,32 @@
     "count": 9475,
     "pct": 1.895
   },
-  "Negative base_fare": {
-    "count": 9530,
-    "pct": 1.906
+  "Sub-minimum/Negative base_fare (<$2.50)": {
+    "count": 9995,
+    "pct": 1.999
   },
-  "Zero dist + nonzero fare": {
-    "count": 7187,
-    "pct": 1.437
+  "Extreme outlier fares (>$250)": {
+    "count": 149,
+    "pct": 0.03
   },
-  "Passenger count <= 0": {
-    "count": 3758,
-    "pct": 0.752
+  "Zero distance trips": {
+    "count": 6852,
+    "pct": 1.37
   },
-  "Voided/No-charge trips": {
-    "count": 3958,
-    "pct": 0.792
+  "Invalid rider count (<=0)": {
+    "count": 3614,
+    "pct": 0.723
   },
-  "Unrealistic speed": {
-    "count": 115,
-    "pct": 0.023
+  "Non-revenue/Disputed trips": {
+    "count": 8597,
+    "pct": 1.719
   },
-  "Trip > 5 hours": {
-    "count": 214,
-    "pct": 0.043
+  "Unrealistic speed (<1 or >85 mph)": {
+    "count": 616,
+    "pct": 0.123
+  },
+  "Excessive duration (>180 mins)": {
+    "count": 45,
+    "pct": 0.009
   }
 }
