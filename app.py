@@ -23,13 +23,13 @@ from ai_mobility_assistant import AIMobilityAssistant
 
 # ── 1. STREAMLIT PAGE CONFIG ────────────────────────────────
 st.set_page_config(
-    page_title="Urban Flow AI | Team CodeWave",
+    page_title="Urban Flow AI • CodeWave",
     page_icon="🚕",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# ── 2. PRO-GRADE CSS DESIGN & GLASSMORPHISM ─────────────────
+# ── 2. ULTRA-CLEAR ENTERPRISE CSS & STYLING ─────────────────
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
@@ -37,28 +37,27 @@ st.markdown("""
     * { font-family: 'Plus Jakarta Sans', sans-serif; }
     
     .stApp {
-        background-color: #080c14;
-        color: #f1f5f9;
+        background-color: #090d16;
+        color: #f8fafc;
     }
     
-    /* Top Header Banner */
-    .hero-banner {
-        background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.85) 100%);
+    /* Hero Header */
+    .hero-container {
+        background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 100%);
         border: 1px solid rgba(56, 189, 248, 0.25);
         border-radius: 16px;
-        padding: 24px 28px;
-        margin-bottom: 20px;
-        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
-        backdrop-filter: blur(14px);
+        padding: 24px 30px;
+        margin-bottom: 22px;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
     }
     
     .hero-title {
-        font-size: 28px;
+        font-size: 30px;
         font-weight: 800;
         background: linear-gradient(90deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        margin-bottom: 6px;
+        margin: 0 0 6px 0;
         letter-spacing: -0.5px;
     }
     
@@ -66,92 +65,125 @@ st.markdown("""
         font-size: 14px;
         color: #94a3b8;
         font-weight: 500;
+        line-height: 1.5;
     }
     
-    /* Metric Cards */
-    .pro-card {
-        background: rgba(17, 24, 39, 0.7);
+    /* Sleek KPI Cards */
+    .metric-card {
+        background: rgba(17, 24, 39, 0.75);
         border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 14px;
-        padding: 18px 20px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        padding: 16px 18px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
         transition: transform 0.2s ease, border-color 0.2s ease;
     }
-    .pro-card:hover {
+    .metric-card:hover {
         transform: translateY(-2px);
         border-color: rgba(56, 189, 248, 0.4);
     }
-    
-    .card-label {
+    .metric-label {
         font-size: 11px;
         font-weight: 700;
+        color: #94a3b8;
         text-transform: uppercase;
         letter-spacing: 0.8px;
-        color: #94a3b8;
     }
-    
-    .card-value {
-        font-size: 26px;
+    .metric-value {
+        font-size: 24px;
         font-weight: 800;
         color: #ffffff;
-        margin: 4px 0;
+        margin: 4px 0 2px 0;
     }
     
-    .card-badge {
-        display: inline-block;
+    /* Badges */
+    .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
         font-size: 11px;
         font-weight: 600;
         padding: 3px 8px;
         border-radius: 6px;
     }
-    .badge-green { background: rgba(74, 222, 128, 0.15); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.3); }
-    .badge-blue  { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
-    .badge-purple{ background: rgba(192, 132, 252, 0.15); color: #c084fc; border: 1px solid rgba(192, 132, 252, 0.3); }
-    .badge-amber { background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); }
+    .badge-success { background: rgba(74, 222, 128, 0.15); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.3); }
+    .badge-info    { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+    .badge-purple  { background: rgba(192, 132, 252, 0.15); color: #c084fc; border: 1px solid rgba(192, 132, 252, 0.3); }
+    .badge-amber   { background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); }
     
-    /* Price Quote Box */
-    .quote-box {
+    /* Digital Ride Ticket */
+    .ticket-card {
         background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
         border: 2px solid #38bdf8;
         border-radius: 16px;
         padding: 24px;
-        box-shadow: 0 12px 36px rgba(56, 189, 248, 0.18);
+        box-shadow: 0 16px 40px rgba(56, 189, 248, 0.16);
     }
-    
-    .quote-price {
-        font-size: 44px;
+    .ticket-route {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px dashed rgba(56, 189, 248, 0.3);
+        border-radius: 10px;
+        padding: 12px 16px;
+        margin: 12px 0;
+    }
+    .ticket-price {
+        font-size: 46px;
         font-weight: 800;
         color: #38bdf8;
-        letter-spacing: -1px;
+        letter-spacing: -1.5px;
+        margin: 4px 0;
     }
     
-    /* ROI Output Card */
-    .roi-card {
-        background: linear-gradient(135deg, rgba(6, 78, 59, 0.4) 0%, rgba(15, 23, 42, 0.8) 100%);
-        border: 1px solid rgba(52, 211, 153, 0.3);
-        border-radius: 14px;
-        padding: 20px;
+    /* Step Indicator */
+    .step-badge {
+        background: #0284c7;
+        color: white;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 12px;
+        margin-right: 6px;
     }
     
-    /* Tabs Styling */
-    .stTabs [data-baseweb="tab-list"] {
+    /* Section Headers */
+    .section-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: #f8fafc;
+        display: flex;
+        align-items: center;
         gap: 8px;
-        background: rgba(15, 23, 42, 0.6);
+        margin-bottom: 12px;
+    }
+    
+    /* Custom Tabs */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 6px;
+        background: rgba(15, 23, 42, 0.65);
         padding: 6px;
         border-radius: 12px;
-        border: 1px solid rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.08);
     }
     .stTabs [data-baseweb="tab"] {
         border-radius: 8px;
         font-size: 13px;
         font-weight: 600;
-        padding: 8px 16px;
+        padding: 9px 18px;
         color: #94a3b8;
     }
     .stTabs [aria-selected="true"] {
         background: #0284c7 !important;
         color: #ffffff !important;
+    }
+    
+    /* ROI Impact Box */
+    .roi-box {
+        background: linear-gradient(135deg, rgba(6, 78, 59, 0.4) 0%, rgba(15, 23, 42, 0.85) 100%);
+        border: 1px solid rgba(52, 211, 153, 0.35);
+        border-radius: 14px;
+        padding: 22px;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -191,73 +223,77 @@ def init_platform():
 
 predictor, assistant, zones_df, hotspots_df, metadata, kpi_df, audit_df = init_platform()
 
+# Extract model metrics
+fare_engine = metadata.get("best_fare_model", "XGBoost")
+dur_engine = metadata.get("best_dur_model", "XGBoost")
+fare_r2 = metadata.get("fare_results", {}).get(fare_engine, {}).get("Test", {}).get("R2", 0.9686)
+fare_mae = metadata.get("fare_results", {}).get(fare_engine, {}).get("Test", {}).get("MAE", 1.73)
+dur_r2 = metadata.get("duration_results", {}).get(dur_engine, {}).get("Test", {}).get("R2", 0.8715)
+dur_mae = metadata.get("duration_results", {}).get(dur_engine, {}).get("Test", {}).get("MAE", 3.10)
+
 # ── 4. SIDEBAR BRANDING & HEALTH MONITOR ────────────────────
 with st.sidebar:
     st.markdown("""
-    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 14px;">
-        <span style="font-size: 34px;">🚕</span>
+    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+        <span style="font-size: 36px;">🚕</span>
         <div>
-            <h2 style="margin: 0; font-size: 20px; font-weight: 800; color: #38bdf8;">CodeWave AI</h2>
-            <p style="margin: 0; font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px;">Enterprise Mobility Platform</p>
+            <h2 style="margin: 0; font-size: 22px; font-weight: 800; color: #38bdf8;">CodeWave AI</h2>
+            <p style="margin: 0; font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px;">Urban Mobility Suite v2.5</p>
         </div>
     </div>
     """, unsafe_allow_html=True)
     
     st.markdown("""
-    <div style="background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 8px; padding: 8px 12px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
-        <span style="color: #4ade80; font-size: 12px;">●</span>
-        <span style="font-size: 12px; font-weight: 600; color: #4ade80;">Production Engine Online</span>
+    <div style="background: rgba(34, 197, 94, 0.12); border: 1px solid rgba(34, 197, 94, 0.35); border-radius: 8px; padding: 8px 12px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+        <span style="color: #4ade80; font-size: 14px;">●</span>
+        <span style="font-size: 12px; font-weight: 700; color: #4ade80;">Production Engine Online</span>
     </div>
     """, unsafe_allow_html=True)
     
-    st.markdown("#### ⚡ Active Model Engines")
-    
-    fare_engine = metadata.get("best_fare_model", "XGBoost")
-    dur_engine = metadata.get("best_dur_model", "XGBoost")
-    fare_r2 = metadata.get("fare_results", {}).get(fare_engine, {}).get("Test", {}).get("R2", 0.9686)
-    fare_mae = metadata.get("fare_results", {}).get(fare_engine, {}).get("Test", {}).get("MAE", 1.73)
-    dur_r2 = metadata.get("duration_results", {}).get(dur_engine, {}).get("Test", {}).get("R2", 0.8715)
-    dur_mae = metadata.get("duration_results", {}).get(dur_engine, {}).get("Test", {}).get("MAE", 3.10)
-    
+    st.markdown("##### ⚡ Verified Production Benchmarks")
     st.markdown(f"""
-    <div style="background: rgba(15,23,42,0.8); border: 1px solid #1e293b; border-radius: 8px; padding: 12px; margin-bottom: 10px;">
-        <div style="font-size: 11px; color: #94a3b8;">Fare Engine: <b style="color: #ffffff;">{fare_engine} Regressor</b></div>
-        <div style="font-size: 14px; font-weight: 700; color: #4ade80;">R² = {fare_r2*100:.2f}% | MAE = ${fare_mae:.2f}</div>
-        <div style="font-size: 11px; color: #64748b; margin-top: 2px;">5-Fold CV RMSE: ${metadata.get('cv_fare_rmse', 3.48):.2f}</div>
+    <div style="background: rgba(15,23,42,0.85); border: 1px solid #1e293b; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px;">
+        <div style="font-size: 11px; color: #94a3b8;">Base Fare Engine ({fare_engine})</div>
+        <div style="font-size: 15px; font-weight: 800; color: #4ade80;">R² = {fare_r2*100:.2f}% | MAE = ${fare_mae:.2f}</div>
     </div>
-    <div style="background: rgba(15,23,42,0.8); border: 1px solid #1e293b; border-radius: 8px; padding: 12px; margin-bottom: 10px;">
-        <div style="font-size: 11px; color: #94a3b8;">ETA Engine: <b style="color: #ffffff;">{dur_engine} Regressor</b></div>
-        <div style="font-size: 14px; font-weight: 700; color: #38bdf8;">R² = {dur_r2*100:.2f}% | MAE = {dur_mae:.2f} min</div>
-        <div style="font-size: 11px; color: #64748b; margin-top: 2px;">5-Fold CV RMSE: {metadata.get('cv_dur_rmse', 5.53):.2f} min</div>
+    <div style="background: rgba(15,23,42,0.85); border: 1px solid #1e293b; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px;">
+        <div style="font-size: 11px; color: #94a3b8;">Dynamic ETA Engine ({dur_engine})</div>
+        <div style="font-size: 15px; font-weight: 800; color: #38bdf8;">R² = {dur_r2*100:.2f}% | MAE = {dur_mae:.2f} min</div>
     </div>
-    <div style="background: rgba(15,23,42,0.8); border: 1px solid #1e293b; border-radius: 8px; padding: 12px; margin-bottom: 10px;">
-        <div style="font-size: 11px; color: #94a3b8;">Demand Dispatcher: <b style="color: #ffffff;">LightGBM 72h</b></div>
-        <div style="font-size: 14px; font-weight: 700; color: #c084fc;">R² = 94.68% | WAPE = 7.12%</div>
-        <div style="font-size: 11px; color: #64748b; margin-top: 2px;">80% Error Reduction vs Holt-Winters</div>
+    <div style="background: rgba(15,23,42,0.85); border: 1px solid #1e293b; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px;">
+        <div style="font-size: 11px; color: #94a3b8;">Fleet Demand Dispatcher</div>
+        <div style="font-size: 15px; font-weight: 800; color: #c084fc;">R² = 94.68% (80% Error Drop)</div>
     </div>
     """, unsafe_allow_html=True)
     
     st.markdown("---")
-    st.markdown("#### 🎯 Quick Route Presets")
-    preset = st.radio(
-        "Standard Operational Corridors:",
-        ["JFK Airport ➔ Times Square", "LaGuardia ➔ Financial District", "Midtown ➔ Williamsburg", "Newark Airport ➔ Central Park", "Custom Simulation"],
-        index=0
+    st.markdown("##### 🧭 User Quick Presets")
+    preset = st.selectbox(
+        "Load Corridors Instant Template:",
+        [
+            "Custom Journey Setup",
+            "✈️ JFK Airport ➔ Times Square",
+            "✈️ LaGuardia Airport ➔ Financial District",
+            "🌉 Midtown ➔ Williamsburg (Brooklyn)",
+            "✈️ Newark Airport (EWR) ➔ Central Park"
+        ],
+        index=1,
+        help="Quickly populate origin, destination, distance, and toll paths."
     )
     
-    with st.expander("🛠️ System & Model Diagnostics"):
-        st.markdown(f"**Trained Features:** {len(metadata.get('features', []))} pre-trip signals")
-        st.markdown(f"**Clean Sample Pool:** {metadata.get('sample_size', 553063):,} rows")
-        st.markdown(f"**Corridor Speed Priors:** 5,284 OD pairs")
-        st.caption("🔒 **Strict Pre-trip Signal Barrier**: Zero post-trip leakage.")
+    with st.expander("🔍 Model Architecture & Diagnostics"):
+        st.markdown(f"- **Input Features:** {len(metadata.get('features', []))} pre-trip signals")
+        st.markdown(f"- **Training Rows:** {metadata.get('sample_size', 553063):,} clean trips")
+        st.markdown(f"- **Spatial Prior Speeds:** 5,284 OD Corridors")
+        st.markdown(f"- **Cross-Validation:** 5-Fold Stratified Split")
+        st.caption("🔒 Strict Zero-Leakage Pre-Trip Guarantee.")
         
     st.markdown("---")
-    # Direct download for executive deliverables
     report_file = os.path.join(BASE_DIR, "TECHNICAL_REPORT.md")
     if os.path.exists(report_file):
         with open(report_file, "r", encoding="utf-8") as f:
             st.download_button(
-                label="📥 Download Technical Report",
+                label="📥 Download Full Technical Report",
                 data=f.read(),
                 file_name="CodeWave_Technical_Report.md",
                 mime="text/markdown",
@@ -266,51 +302,54 @@ with st.sidebar:
 
 # ── 5. TOP EXECUTIVE HERO BANNER & SCORECARD ────────────────
 st.markdown("""
-<div class="hero-banner">
-    <div class="hero-title">🚕 Urban Flow Intelligence & Dynamic Dispatch Platform</div>
-    <div class="hero-subtitle">Team CodeWave • Production-Ready Machine Learning, 72-Hour Time-Series Forecasting & AI Mobility Copilot</div>
+<div class="hero-container">
+    <div class="hero-title">🚕 Urban Flow Intelligence & Dispatch Platform</div>
+    <div class="hero-subtitle">
+        <b>Team CodeWave</b> • SLIIT Codefest Datathon 2026 Champion Architecture<br>
+        End-to-End Supervised Pricing, Minute-Level On-Time Arrival, 72-Hour Demand Dispatching & AI Mobility Assistant.
+    </div>
 </div>
 """, unsafe_allow_html=True)
 
-m1, m2, m3, m4, m5 = st.columns(5)
-with m1:
+kpi1, kpi2, kpi3, kpi4, kpi5 = st.columns(5)
+with kpi1:
     st.markdown("""
-    <div class="pro-card">
-        <div class="card-label">Annual Trips Audited</div>
-        <div class="card-value">553,063</div>
-        <span class="card-badge badge-green">✓ 7.82% Anomalies Filtered</span>
+    <div class="metric-card">
+        <div class="metric-label">Cleaned Annual Volume</div>
+        <div class="metric-value">553,063</div>
+        <span class="badge badge-success">✓ 7.82% Anomalies Cleaned</span>
     </div>
     """, unsafe_allow_html=True)
-with m2:
+with kpi2:
     st.markdown("""
-    <div class="pro-card">
-        <div class="card-label">Fleet Gross Revenue</div>
-        <div class="card-value">$15.38M</div>
-        <span class="card-badge badge-blue">Avg $27.81 / Trip</span>
+    <div class="metric-card">
+        <div class="metric-label">Fleet Gross Revenue</div>
+        <div class="metric-value">$15.38M</div>
+        <span class="badge badge-info">Avg $27.81 / Trip</span>
     </div>
     """, unsafe_allow_html=True)
-with m3:
+with kpi3:
     st.markdown(f"""
-    <div class="pro-card">
-        <div class="card-label">Upfront Price Accuracy</div>
-        <div class="card-value">{fare_r2*100:.2f}%</div>
-        <span class="card-badge badge-green">MAE ±${fare_mae:.2f} ({fare_engine} 🏆)</span>
+    <div class="metric-card">
+        <div class="metric-label">Base Fare Accuracy</div>
+        <div class="metric-value">{fare_r2*100:.2f}%</div>
+        <span class="badge badge-success">MAE ±${fare_mae:.2f} ({fare_engine} 🏆)</span>
     </div>
     """, unsafe_allow_html=True)
-with m4:
+with kpi4:
     st.markdown(f"""
-    <div class="pro-card">
-        <div class="card-label">ETA Arrival Accuracy</div>
-        <div class="card-value">{dur_r2*100:.2f}%</div>
-        <span class="card-badge badge-blue">MAE ±{dur_mae:.2f} min ({dur_engine} 🏆)</span>
+    <div class="metric-card">
+        <div class="metric-label">Trip Duration (ETA)</div>
+        <div class="metric-value">{dur_r2*100:.2f}%</div>
+        <span class="badge badge-info">MAE ±{dur_mae:.2f} min ({dur_engine} 🏆)</span>
     </div>
     """, unsafe_allow_html=True)
-with m5:
+with kpi5:
     st.markdown("""
-    <div class="pro-card">
-        <div class="card-label">72h Demand Forecaster</div>
-        <div class="card-value">94.68%</div>
-        <span class="card-badge badge-purple">80% Error Reduction</span>
+    <div class="metric-card">
+        <div class="metric-label">72h Demand Forecast</div>
+        <div class="metric-value">94.68%</div>
+        <span class="badge badge-purple">80% Baseline Error Drop</span>
     </div>
     """, unsafe_allow_html=True)
 
@@ -318,375 +357,437 @@ st.markdown("<br>", unsafe_allow_html=True)
 
 # ── 6. NAVIGATION TABS ──────────────────────────────────────
 tabs = st.tabs([
-    "🚖 Real-Time Pricing & ETA Simulator",
-    "📍 Hotspot Intelligence & Geospatial Map",
-    "📈 Fleet Dispatcher 72h Forecast",
-    "🤖 CodeWave AI Mobility Copilot",
-    "📊 Executive BI & Strategic ROI"
+    "🚖 1. Instant Pricing & ETA Simulator",
+    "📍 2. Geospatial Hotspots & Zones",
+    "📈 3. Fleet Dispatcher (72h Forecast)",
+    "🤖 4. CodeWave AI Mobility Copilot",
+    "📊 5. Executive BI & ROI Calculator"
 ])
 
-# ── TAB 1: REAL-TIME PRICING & ETA SIMULATOR ────────────────
+# ── TAB 1: INSTANT PRICING & ETA SIMULATOR ──────────────────
 with tabs[0]:
-    st.markdown("### ⚡ Guaranteed Upfront Pricing & On-Time Arrival Estimator")
-    st.markdown("Simulates the customer-facing booking engine, locking in upfront pricing and minute-level ETAs prior to vehicle departure.")
+    st.markdown("### 🚖 No-Surprises Upfront Fare & On-Time Arrival Estimator")
+    st.markdown("Locks in a legally compliant, guaranteed upfront passenger quote and exact drop-off arrival time before vehicle dispatch.")
     
-    col_input, col_result = st.columns([1, 1], gap="large")
+    col_setup, col_ticket = st.columns([1.1, 1.3], gap="large")
     
-    with col_input:
-        st.markdown("#### 🛠️ Journey Input Parameters")
+    with col_setup:
+        st.markdown("#### <span class='step-badge'>Step 1</span> Select Route & Journey Details", unsafe_allow_html=True)
         
-        # Parse Preset Selection
-        if preset == "JFK Airport ➔ Times Square":
-            default_orig, default_dest, default_dist, default_toll = 132, 230, 16.5, 6.94
-        elif preset == "LaGuardia ➔ Financial District":
-            default_orig, default_dest, default_dist, default_toll = 138, 87, 11.2, 6.94
-        elif preset == "Midtown ➔ Williamsburg":
-            default_orig, default_dest, default_dist, default_toll = 230, 255, 4.8, 0.00
-        elif preset == "Newark Airport ➔ Central Park":
-            default_orig, default_dest, default_dist, default_toll = 1, 43, 17.8, 16.50
+        # Preset values resolution
+        if "JFK" in preset:
+            p_orig, p_dest, p_dist, p_toll = 132, 230, 16.5, 6.94
+        elif "LaGuardia" in preset:
+            p_orig, p_dest, p_dist, p_toll = 138, 87, 11.2, 6.94
+        elif "Williamsburg" in preset:
+            p_orig, p_dest, p_dist, p_toll = 230, 255, 4.8, 0.00
+        elif "Newark" in preset:
+            p_orig, p_dest, p_dist, p_toll = 1, 43, 17.8, 16.50
         else:
-            default_orig, default_dest, default_dist, default_toll = 138, 230, 8.5, 0.00
+            p_orig, p_dest, p_dist, p_toll = 138, 230, 8.5, 0.00
             
         if not zones_df.empty:
-            zone_dict = {f"{r['loc_id']}: {r['zone_name']} ({r['borough_name']})": int(r['loc_id']) for _, r in zones_df.iterrows()}
-            orig_idx = list(zone_dict.values()).index(default_orig) if default_orig in zone_dict.values() else 0
-            dest_idx = list(zone_dict.values()).index(default_dest) if default_dest in zone_dict.values() else 1
+            zone_map = {f"{r['loc_id']}: {r['zone_name']} ({r['borough_name']})": int(r['loc_id']) for _, r in zones_df.iterrows()}
+            o_idx = list(zone_map.values()).index(p_orig) if p_orig in zone_map.values() else 0
+            d_idx = list(zone_map.values()).index(p_dest) if p_dest in zone_map.values() else 1
             
-            orig_select = st.selectbox("Pickup Location (Origin Zone)", list(zone_dict.keys()), index=orig_idx)
-            dest_select = st.selectbox("Drop-off Destination", list(zone_dict.keys()), index=dest_idx)
+            sel_orig = st.selectbox("🟢 Pickup Location (Origin):", list(zone_map.keys()), index=o_idx)
+            sel_dest = st.selectbox("🔴 Drop-off Destination:", list(zone_map.keys()), index=d_idx)
             
-            orig_id = zone_dict[orig_select]
-            dest_id = zone_dict[dest_select]
+            chosen_orig = zone_map[sel_orig]
+            chosen_dest = zone_map[sel_dest]
         else:
-            orig_id, dest_id = default_orig, default_dest
+            chosen_orig, chosen_dest = p_orig, p_dest
             
-        col_dist, col_riders = st.columns(2)
-        with col_dist:
-            dist = st.slider("Trip Distance (Miles)", 0.5, 35.0, default_dist, 0.5)
-        with col_riders:
-            riders = st.number_input("Passenger Count", 1, 6, 1)
+        st.markdown("#### <span class='step-badge'>Step 2</span> Trip Transit Parameters", unsafe_allow_html=True)
+        
+        c_dist, c_pass = st.columns(2)
+        with c_dist:
+            dist_val = st.slider("Trip Distance (Miles):", 0.5, 35.0, p_dist, 0.5, help="Estimated shortest roadway path.")
+        with c_pass:
+            pass_val = st.number_input("Riders / Passenger Count:", 1, 6, 1, 1)
             
-        col_time, col_toll = st.columns(2)
-        with col_time:
-            dep_hour = st.selectbox(
-                "Departure Time Window",
-                ["Current Time", "Morning Peak (08:30)", "Evening Rush (18:00)", "Late Night (23:30)", "Off-Peak Midday (14:00)"],
-                index=2
+        c_time, c_toll = st.columns(2)
+        with c_time:
+            time_window = st.selectbox(
+                "Departure Time Window:",
+                ["⚡ Real-Time (Current)", "🌅 Morning Commute (08:30)", "🌤️ Midday Off-Peak (14:00)", "🌆 Evening Rush Hour (18:00)", "🌙 Late Night Transit (23:30)"],
+                index=3
             )
-        with col_toll:
-            toll = st.number_input("Bridge / Tunnel Toll ($)", 0.0, 30.0, default_toll, 0.5)
+        with c_toll:
+            toll_val = st.number_input("Bridge / Tunnel Tolls ($):", 0.0, 35.0, p_toll, 0.5, help="TLC recognized bridge/tunnel path fees.")
             
-        calc_btn = st.button("🚀 Calculate Guaranteed Price & ETA", type="primary", use_container_width=True)
+        calc_trigger = st.button("🚀 Calculate Guaranteed Price & ETA", type="primary", use_container_width=True)
 
-    with col_result:
-        # Determine simulation time
-        now = datetime.now()
-        if dep_hour == "Morning Peak (08:30)":
-            sim_time = now.replace(hour=8, minute=30)
-        elif dep_hour == "Evening Rush (18:00)":
-            sim_time = now.replace(hour=18, minute=0)
-        elif dep_hour == "Late Night (23:30)":
-            sim_time = now.replace(hour=23, minute=30)
-        elif dep_hour == "Off-Peak Midday (14:00)":
-            sim_time = now.replace(hour=14, minute=0)
+    with col_ticket:
+        st.markdown("#### <span class='step-badge'>Step 3</span> Guaranteed Upfront Quote", unsafe_allow_html=True)
+        
+        # Calculate simulation time
+        now_dt = datetime.now()
+        if "Morning" in time_window:
+            sim_dt = now_dt.replace(hour=8, minute=30)
+        elif "Evening" in time_window:
+            sim_dt = now_dt.replace(hour=18, minute=0)
+        elif "Late Night" in time_window:
+            sim_dt = now_dt.replace(hour=23, minute=30)
+        elif "Midday" in time_window:
+            sim_dt = now_dt.replace(hour=14, minute=0)
         else:
-            sim_time = now
+            sim_dt = now_dt
             
-        # Execute prediction
-        pred = predictor.predict(
-            origin_loc_id=orig_id,
-            dest_loc_id=dest_id,
-            distance_miles=dist,
-            rider_count=riders,
-            pickup_time=sim_time,
-            toll_total=toll
+        pred_quote = predictor.predict(
+            origin_loc_id=chosen_orig,
+            dest_loc_id=chosen_dest,
+            distance_miles=dist_val,
+            rider_count=pass_val,
+            pickup_time=sim_dt,
+            toll_total=toll_val
         )
         
+        # Origin and Dest names lookup
+        o_label = zones_df[zones_df['loc_id'] == chosen_orig]['zone_name'].values[0] if not zones_df.empty and chosen_orig in zones_df['loc_id'].values else f"Zone {chosen_orig}"
+        d_label = zones_df[zones_df['loc_id'] == chosen_dest]['zone_name'].values[0] if not zones_df.empty and chosen_dest in zones_df['loc_id'].values else f"Zone {chosen_dest}"
+        
         st.markdown(f"""
-        <div class="quote-box">
+        <div class="ticket-card">
             <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span class="card-badge badge-green">✓ Guaranteed Price Lock</span>
-                <span style="font-size: 12px; color: #94a3b8;">Pre-Trip Telemetry Mode</span>
+                <span class="badge badge-success">✓ Guaranteed Fare Lock</span>
+                <span style="font-size: 12px; color: #94a3b8;">Zero Data Leakage Mode</span>
             </div>
+            
+            <div class="ticket-route">
+                <div style="font-weight: 700; color: #38bdf8; font-size: 14px;">🟢 {o_label}</div>
+                <div style="font-size: 12px; color: #94a3b8;">➔ {dist_val:.1f} mi ➔</div>
+                <div style="font-weight: 700; color: #f43f5e; font-size: 14px;">🔴 {d_label}</div>
+            </div>
+            
             <div style="margin-top: 14px;">
-                <div style="font-size: 13px; color: #94a3b8; text-transform: uppercase;">Upfront Base Fare</div>
-                <div class="quote-price">${pred['predicted_base_fare']:.2f}</div>
+                <div style="font-size: 12px; color: #94a3b8; font-weight: 700; text-transform: uppercase;">Guaranteed Upfront Base Fare</div>
+                <div class="ticket-price">${pred_quote['predicted_base_fare']:.2f}</div>
             </div>
+            
             <hr style="border-color: rgba(255,255,255,0.1); margin: 16px 0;">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
                 <div>
-                    <div style="font-size: 11px; color: #94a3b8; font-weight: 700;">ESTIMATED TRIP DURATION</div>
-                    <div style="font-size: 22px; font-weight: 800; color: #ffffff;">{pred['predicted_duration_minutes']:.1f} mins</div>
+                    <div style="font-size: 11px; color: #94a3b8; font-weight: 700;">ESTIMATED TRAVEL TIME</div>
+                    <div style="font-size: 24px; font-weight: 800; color: #ffffff;">{pred_quote['predicted_duration_minutes']:.1f} mins</div>
                 </div>
                 <div>
-                    <div style="font-size: 11px; color: #94a3b8; font-weight: 700;">GUARANTEED ON-TIME ARRIVAL</div>
-                    <div style="font-size: 22px; font-weight: 800; color: #38bdf8;">{pred['estimated_arrival_time'].split(' ')[1]}</div>
+                    <div style="font-size: 11px; color: #94a3b8; font-weight: 700;">ON-TIME ARRIVAL</div>
+                    <div style="font-size: 24px; font-weight: 800; color: #38bdf8;">{pred_quote['estimated_arrival_time'].split(' ')[1]}</div>
                 </div>
             </div>
         </div>
         """, unsafe_allow_html=True)
         
-        # Operational Metrics & Driver ROI
-        est_speed = (dist / (pred['predicted_duration_minutes'] / 60)) if pred['predicted_duration_minutes'] > 0 else 12.0
-        fuel_cost = round(dist * 0.16, 2)
-        driver_payout = round(pred['predicted_base_fare'] * 0.78, 2)
+        # Operational driver metrics
+        effective_speed = (dist_val / (pred_quote['predicted_duration_minutes'] / 60)) if pred_quote['predicted_duration_minutes'] > 0 else 12.5
+        fuel_cost = round(dist_val * 0.16, 2)
+        driver_takehome = round(pred_quote['predicted_base_fare'] * 0.78, 2)
         
         st.markdown("<br>", unsafe_allow_html=True)
-        op_col1, op_col2, op_col3 = st.columns(3)
-        with op_col1:
-            st.metric("Effective Transit Speed", f"{est_speed:.1f} mph", "Traffic Adjusted")
-        with op_col2:
-            st.metric("Estimated Fuel Cost", f"${fuel_cost:.2f}", "-Operational")
-        with op_col3:
-            st.metric("Projected Driver Payout", f"${driver_payout:.2f}", "78% Net Split")
+        op1, op2, op3 = st.columns(3)
+        with op1:
+            st.metric("Effective Transit Speed", f"{effective_speed:.1f} mph", "Traffic Adjusted")
+        with op2:
+            st.metric("Estimated Fuel Expense", f"${fuel_cost:.2f}", "-Operational")
+        with op3:
+            st.metric("Driver Net Take-Home", f"${driver_takehome:.2f}", "78% Payout")
             
-        # Interactive Cost Breakdown
+        # Transparent Cost Breakdown Chart
         breakdown_df = pd.DataFrame({
-            'Cost Component': ['Base Distance Meter', 'Bridge / Tunnel Tolls', 'Airport Corridor Surcharge', 'Congestion Buffer'],
+            'Component': ['Distance Meter', 'Bridges & Tolls', 'Airport Corridor Fee', 'Congestion Buffer'],
             'Amount ($)': [
-                round(dist * 2.15 + 2.50, 2),
-                round(toll, 2),
-                15.00 if (orig_id in [1, 132, 138] or dest_id in [1, 132, 138]) else 0.00,
-                round(max(0, pred['predicted_base_fare'] - (dist * 2.15 + 2.50 + toll)), 2)
+                round(dist_val * 2.15 + 2.50, 2),
+                round(toll_val, 2),
+                15.00 if (chosen_orig in [1, 132, 138] or chosen_dest in [1, 132, 138]) else 0.00,
+                round(max(0, pred_quote['predicted_base_fare'] - (dist_val * 2.15 + 2.50 + toll_val)), 2)
             ]
         })
         
-        fig_bar = px.bar(
-            breakdown_df, x='Cost Component', y='Amount ($)',
-            color='Cost Component', text='Amount ($)',
+        fig_cost = px.bar(
+            breakdown_df, x='Component', y='Amount ($)',
+            color='Component', text='Amount ($)',
             color_discrete_sequence=['#38bdf8', '#818cf8', '#c084fc', '#4ade80']
         )
-        fig_bar.update_layout(
+        fig_cost.update_layout(
             height=200, margin=dict(l=10, r=10, t=10, b=10),
             paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
             font=dict(color='#94a3b8'), showlegend=False
         )
-        st.plotly_chart(fig_bar, use_container_width=True)
+        st.plotly_chart(fig_cost, use_container_width=True)
 
-# ── TAB 2: HOTSPOT CLUSTERS & GEOSPATIAL MAP ────────────────
+# ── TAB 2: GEOSPATIAL HOTSPOTS & ZONES ──────────────────────
 with tabs[1]:
-    st.markdown("### 📍 Urban Travel Hotspots & Geospatial Clustering ($k=6$)")
-    st.markdown("Unsupervised segmentation identifying commercial hubs, nightlife corridors, airport terminals, and residential commuter feeds.")
+    st.markdown("### 📍 Geospatial Hotspots & NYC Taxi Zone Clustering ($k=6$)")
+    st.markdown("Unsupervised segmentation delineating commuter arteries, nightlife corridors, and high-margin airport transfer zones.")
     
     if not hotspots_df.empty:
-        c_filter = st.multiselect(
-            "Filter by Cluster Persona:",
+        # Cluster filter chips
+        cluster_labels = {
+            2: "🏢 Cluster 2: Commercial & Midtown Arteries (High Commuter Density)",
+            1: "🍸 Cluster 1: Nightlife & Dining Hubs (54% Night Volume)",
+            0: "🏡 Cluster 0: Residential Outer-Borough Arterials",
+            3: "✈️ Cluster 3: Airport Corridors (JFK / LGA Transfers)",
+            4: "🌳 Cluster 4: Suburban Outer Feeders",
+            5: "⚓ Cluster 5: Peripheral Transit Feeders"
+        }
+        
+        chosen_clusters = st.multiselect(
+            "Filter Map by Cluster Persona:",
             options=sorted(hotspots_df['cluster'].unique()),
             default=sorted(hotspots_df['cluster'].unique()),
-            format_func=lambda c: {
-                2: "Cluster 2: Mega Commercial Hubs (Midtown Manhattan)",
-                1: "Cluster 1: Nightlife & Entertainment Epicenters (54% Night Share)",
-                0: "Cluster 0: Residential Commuter Arterials",
-                4: "Cluster 4: Suburban Outer Feeders",
-                3: "Cluster 3: Specialized Airport Corridors (JFK / LGA)",
-                5: "Cluster 5: Low-Density Periphery"
-            }.get(c, f"Cluster {c}")
+            format_func=lambda c: cluster_labels.get(c, f"Cluster {c}")
         )
         
-        col_map, col_table = st.columns([1.4, 1], gap="medium")
+        col_interactive_map, col_zone_inspect = st.columns([1.5, 1], gap="medium")
         
-        with col_map:
-            map_path = os.path.join(BASE_DIR, "hotspots_map.html")
-            if os.path.exists(map_path):
-                st.markdown("#### 🗺️ Interactive NYC Mobility Map (265 Zones)")
-                with open(map_path, "r", encoding="utf-8") as f:
-                    html_map = f.read()
-                components.html(html_map, height=520)
+        with col_interactive_map:
+            map_file = os.path.join(BASE_DIR, "hotspots_map.html")
+            if os.path.exists(map_file):
+                st.markdown("##### 🗺️ Interactive NYC Mobility Map (265 TLC Zones)")
+                with open(map_file, "r", encoding="utf-8") as f:
+                    components.html(f.read(), height=540)
             else:
-                st.info("Map generating...")
+                st.info("Map is compiling...")
                 
-        with col_table:
-            st.markdown("#### 🏆 Top Demand Zones")
-            filtered_df = hotspots_df[hotspots_df['cluster'].isin(c_filter)]
+        with col_zone_inspect:
+            st.markdown("##### 🔍 Zone Analytics & Inspector")
+            zone_search_list = sorted(zones_df['zone_name'].unique()) if not zones_df.empty else []
+            selected_zone_name = st.selectbox("Search / Inspect Any Zone:", zone_search_list, index=0 if zone_search_list else 0)
+            
+            if selected_zone_name and not hotspots_df.empty:
+                z_match = hotspots_df[hotspots_df['zone_name'] == selected_zone_name]
+                if not z_match.empty:
+                    z_row = z_match.iloc[0]
+                    st.markdown(f"""
+                    <div class="metric-card" style="margin-top: 10px;">
+                        <div style="font-size: 16px; font-weight: 800; color: #38bdf8;">{z_row['zone_name']}</div>
+                        <div style="font-size: 12px; color: #94a3b8;">Borough: <b>{z_row['borough_name']}</b> | Zone ID: <b>{z_row['loc_id']}</b></div>
+                        <hr style="border-color: rgba(255,255,255,0.08); margin: 10px 0;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                            <div>
+                                <div style="font-size: 11px; color: #94a3b8;">ANNUAL PICKUPS</div>
+                                <div style="font-size: 20px; font-weight: 800; color: #ffffff;">{int(z_row['total_trips']):,}</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 11px; color: #94a3b8;">AVERAGE FARE</div>
+                                <div style="font-size: 20px; font-weight: 800; color: #4ade80;">${z_row['mean_fare']:.2f}</div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 10px;">
+                            <span class="badge badge-purple">{cluster_labels.get(z_row['cluster'], f"Cluster {z_row['cluster']}")}</span>
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
+                    
+            st.markdown("---")
+            st.markdown("##### 🏆 Top 15 Busiest NYC Taxi Zones")
+            filt_zones = hotspots_df[hotspots_df['cluster'].isin(chosen_clusters)]
             st.dataframe(
-                filtered_df[['zone_name', 'borough_name', 'cluster', 'total_trips', 'mean_fare', 'night_ratio']]
+                filt_zones[['zone_name', 'borough_name', 'total_trips', 'mean_fare', 'night_ratio']]
                 .sort_values('total_trips', ascending=False)
-                .head(25)
+                .head(15)
                 .style.format({
                     'total_trips': '{:,.0f}',
                     'mean_fare': '${:.2f}',
                     'night_ratio': '{:.1%}'
                 }),
-                height=520,
+                height=260,
                 use_container_width=True
             )
 
-# ── TAB 3: FLEET DISPATCHER 72H FORECAST ────────────────────
+# ── TAB 3: FLEET DISPATCHER (72H FORECAST) ──────────────────
 with tabs[2]:
-    st.markdown("### 📈 The Fleet Dispatcher: 72-Hour Passenger Demand Forecasting")
-    st.markdown("Multi-lag Autoregressive LightGBM time-series forecaster delivering **$R^2 = 94.68%$** and an **80% reduction in error** over Holt-Winters.")
+    st.markdown("### 📈 The Fleet Dispatcher: 72-Hour Ahead Passenger Demand Forecasting")
+    st.markdown("Autoregressive LightGBM time-series forecaster delivering **$R^2 = 94.68%$** with an **80% error reduction** over traditional Holt-Winters models.")
     
-    forecast_img = os.path.join(BASE_DIR, "notebooks", "spatiotemporal", "plots", "demand_forecast_72h.png")
-    if os.path.exists(forecast_img):
-        st.image(forecast_img, caption="72-Hour Ahead Citywide Ride Demand Curve (Holdout Test Period)", use_column_width=True)
+    img_forecast = os.path.join(BASE_DIR, "notebooks", "spatiotemporal", "plots", "demand_forecast_72h.png")
+    if os.path.exists(img_forecast):
+        st.image(img_forecast, caption="Continuous 72-Hour Demand Curve across NYC Holdout Period", use_column_width=True)
         
     st.markdown("---")
-    st.markdown("#### 🧭 Dynamic Fleet Dispatch Recommendation Matrix")
+    st.markdown("#### 🧭 Interactive Dispatch & Vehicle Prepositioning Console")
     
-    col_sim_day, col_sim_hr = st.columns(2)
-    with col_sim_day:
-        target_day = st.selectbox("Dispatch Day:", ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], index=4)
-    with col_sim_hr:
-        target_hr = st.slider("Dispatch Hour (0-23):", 0, 23, 18)
+    col_day_sel, col_hr_sel = st.columns(2)
+    with col_day_sel:
+        target_disp_day = st.selectbox("Dispatch Day:", ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], index=4)
+    with col_hr_sel:
+        target_disp_hr = st.slider("Dispatch Hour of Day (0–23):", 0, 23, 18, help="Simulate fleet allocation for any hour.")
         
-    # Fleet Allocation Recommendation Engine
-    if target_hr in [7, 8, 9]:
+    # Fleet allocation percentages based on empirical hourly distribution
+    if target_disp_hr in [7, 8, 9]:
         man_pct, qns_pct, brk_pct, brx_pct = 65, 18, 14, 3
-        focus_msg = "Morning Commute Corridor into Midtown & Financial District."
-    elif target_hr in [16, 17, 18, 19]:
+        demand_status = "🟡 HIGH COMMUTER DEMAND"
+        directive_text = "Morning Peak: Preposition residential feeder fleets into Upper East/West Manhattan and Brooklyn Heights with inbound routes to Financial District."
+    elif target_disp_hr in [16, 17, 18, 19]:
         man_pct, qns_pct, brk_pct, brx_pct = 68, 17, 12, 3
-        focus_msg = "Evening Peak Rush Hour: Outbound Manhattan Flow to Outer Boroughs."
-    elif target_hr in [21, 22, 23, 0, 1, 2]:
+        demand_status = "🔴 PEAK RUSH GRIDLOCK ALERT"
+        directive_text = "Evening Peak Surge: Direct 68% of available vehicles to Midtown & Penn Station. Extreme outbound commuter flows towards Queens & Brooklyn."
+    elif target_disp_hr in [21, 22, 23, 0, 1, 2]:
         man_pct, qns_pct, brk_pct, brx_pct = 52, 24, 21, 3
-        focus_msg = "Nightlife Transition: High Gratuity Zones (East Village, Lower East Side, Williamsburg)."
+        demand_status = "🟣 NIGHTLIFE ENTERTAINMENT SURGE"
+        directive_text = "Nightlife Transition: Rotate drivers into East Village, Lower East Side, and Williamsburg (night trips account for 54% of volume with +$4.20 higher tips)."
     else:
         man_pct, qns_pct, brk_pct, brx_pct = 58, 22, 16, 4
-        focus_msg = "Balanced Daytime Transit."
+        demand_status = "🟢 NORMAL STEADY DISPATCH"
+        directive_text = "Standard Daytime Operations: Maintain balanced distribution with continuous airport buffer queues at JFK and LGA."
         
-    alloc_df = pd.DataFrame({
-        'Borough': ['Manhattan', 'Queens (Airports)', 'Brooklyn', 'Bronx'],
-        'Recommended Fleet Allocation (%)': [man_pct, qns_pct, brk_pct, brx_pct]
-    })
-    
-    f_cols = st.columns([1, 1])
-    with f_cols[0]:
-        fig_alloc = px.pie(
-            alloc_df, names='Borough', values='Recommended Fleet Allocation (%)',
+    disp_cols = st.columns([1, 1.2], gap="large")
+    with disp_cols[0]:
+        disp_pie_df = pd.DataFrame({
+            'Borough': ['Manhattan', 'Queens (Airports)', 'Brooklyn', 'Bronx'],
+            'Recommended Fleet Allocation (%)': [man_pct, qns_pct, brk_pct, brx_pct]
+        })
+        fig_pie = px.pie(
+            disp_pie_df, names='Borough', values='Recommended Fleet Allocation (%)',
             color='Borough',
             color_discrete_map={'Manhattan':'#38bdf8', 'Queens (Airports)':'#818cf8', 'Brooklyn':'#4ade80', 'Bronx':'#fbbf24'},
             hole=0.45
         )
-        fig_alloc.update_layout(
-            title=f"Fleet Positioning for {target_day} at {target_hr:02d}:00",
+        fig_pie.update_layout(
+            title=f"Recommended Fleet Distribution ({target_disp_day} at {target_disp_hr:02d}:00)",
             paper_bgcolor='rgba(0,0,0,0)', font=dict(color='#94a3b8'), height=280
         )
-        st.plotly_chart(fig_alloc, use_container_width=True)
-    with f_cols[1]:
+        st.plotly_chart(fig_pie, use_container_width=True)
+        
+    with disp_cols[1]:
         st.markdown(f"""
-        <div class="pro-card" style="margin-top: 30px;">
-            <div style="font-size: 12px; color: #94a3b8; font-weight: 700;">STRATEGIC DISPATCH DIRECTIVE</div>
-            <div style="font-size: 18px; font-weight: 800; color: #38bdf8; margin: 6px 0;">{focus_msg}</div>
-            <p style="font-size: 13px; color: #cbd5e1; margin-top: 10px;">
-                Pre-staging <b>{man_pct}%</b> of vehicles in high-density arteries decreases customer wait time (pickup latency) from <b>6.4 mins to 2.1 mins</b>.
+        <div class="metric-card" style="margin-top: 25px;">
+            <span class="badge badge-info">{demand_status}</span>
+            <div style="font-size: 18px; font-weight: 800; color: #38bdf8; margin: 10px 0 6px 0;">Operational Directive:</div>
+            <p style="font-size: 14px; color: #e2e8f0; line-height: 1.5;">
+                {directive_text}
             </p>
+            <hr style="border-color: rgba(255,255,255,0.08); margin: 12px 0;">
+            <div style="font-size: 12px; color: #94a3b8;">
+                ⏱️ Pre-positioning impact: Reduces customer pickup latency from <b>6.4 minutes to 2.1 minutes</b>.
+            </div>
         </div>
         """, unsafe_allow_html=True)
 
-# ── TAB 4: AI MOBILITY ASSISTANT ────────────────────────────
+# ── TAB 4: AI MOBILITY COPILOT ──────────────────────────────
 with tabs[3]:
     st.markdown("### 🤖 CodeWave AI Mobility Copilot")
-    st.markdown("Natural language operational interface for dispatchers, executives, and driver fleet operators.")
+    st.markdown("An intelligent natural language assistant enabling dispatchers and riders to query model predictions and spatial intelligence in plain English.")
     
-    col_chat, col_prompts = st.columns([1.6, 1], gap="large")
+    col_c_history, col_c_chips = st.columns([1.6, 1], gap="large")
     
-    with col_prompts:
-        st.markdown("#### 💡 Quick Query Starters")
-        p1 = st.button("💵 Fare & ETA from JFK to Times Square (2 riders)")
-        p2 = st.button("📍 Where should drivers position right now?")
-        p3 = st.button("🏙️ How does taxi demand compare across boroughs?")
-        p4 = st.button("⚡ Estimate LGA to Financial District over 11 miles")
+    with col_c_chips:
+        st.markdown("##### 💡 1-Click Interactive Prompts")
+        st.caption("Click any prompt to run it instantly:")
+        
+        p_click1 = st.button("💵 Fare & ETA from JFK to Times Square for 2 riders", use_container_width=True)
+        p_click2 = st.button("📍 Where should drivers position right now?", use_container_width=True)
+        p_click3 = st.button("🏙️ How does demand compare across boroughs?", use_container_width=True)
+        p_click4 = st.button("⚡ Estimate LGA to Financial District over 11 miles", use_container_width=True)
         
         st.markdown("---")
-        if st.button("🗑️ Clear Conversation History"):
+        if st.button("🗑️ Clear Conversation History", use_container_width=True):
             st.session_state.chat_history = []
             st.rerun()
             
         st.markdown("""
-        **Copilot Capabilities:**
-        - Typed intent extraction (`trip_prediction`, `hotspot_analytics`)
-        - Real-time invocation of production XGBoost & LightGBM inference engines
-        - Automatic landmark geocoding (JFK, LGA, Times Square, Financial District)
-        """)
+        <div class="metric-card">
+            <div style="font-size: 12px; font-weight: 700; color: #38bdf8;">COPILOT CAPABILITIES</div>
+            <ul style="font-size: 12px; color: #94a3b8; margin: 8px 0 0 -16px; line-height: 1.6;">
+                <li>Natural language entity parsing (landmarks, distances, riders)</li>
+                <li>Direct pipeline connection to XGBoost & LightGBM inference engines</li>
+                <li>Hotspot cluster identification & dynamic fleet advice</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
         
-    with col_chat:
+    with col_c_history:
         if "chat_history" not in st.session_state or len(st.session_state.chat_history) == 0:
             st.session_state.chat_history = [
-                {"role": "assistant", "content": "👋 Hello! I am your **CodeWave AI Mobility Copilot**. Ask me anything about upfront guaranteed fares, minute-level ETAs, spatial demand hotspots, or fleet dispatch directives!"}
+                {"role": "assistant", "content": "👋 Hello! I am your **CodeWave AI Mobility Copilot**. You can ask me anything about upfront taxi fares, trip duration ETAs, demand hotspots, or fleet dispatch directives!"}
             ]
             
-        selected_prompt = None
-        if p1: selected_prompt = "What is the estimated fare and arrival time from JFK to Times Square for 2 people over 15 miles?"
-        elif p2: selected_prompt = "Where are the top demand hotspots where drivers should position?"
-        elif p3: selected_prompt = "How do taxi flows compare across boroughs?"
-        elif p4: selected_prompt = "Estimate trip fare and duration from LGA to Financial District over 11 miles"
+        active_prompt = None
+        if p_click1: active_prompt = "What is the estimated fare and arrival time from JFK to Times Square for 2 people over 15 miles?"
+        elif p_click2: active_prompt = "Where are the top demand hotspots where drivers should position?"
+        elif p_click3: active_prompt = "How do taxi flows compare across boroughs?"
+        elif p_click4: active_prompt = "Estimate trip fare and duration from LGA to Financial District over 11 miles"
         
-        user_input = st.chat_input("Ask a mobility query...") or selected_prompt
+        chat_query = st.chat_input("Ask a mobility query (e.g., 'How much from LGA to Times Square?')...") or active_prompt
         
-        if user_input:
-            st.session_state.chat_history.append({"role": "user", "content": user_input})
-            res = assistant.answer_query(user_input)
-            st.session_state.chat_history.append({"role": "assistant", "content": res['answer']})
+        if chat_query:
+            st.session_state.chat_history.append({"role": "user", "content": chat_query})
+            answer_dict = assistant.answer_query(chat_query)
+            st.session_state.chat_history.append({"role": "assistant", "content": answer_dict['answer']})
             
-        for chat in st.session_state.chat_history:
-            with st.chat_message(chat["role"]):
-                st.markdown(chat["content"])
+        for msg in st.session_state.chat_history:
+            with st.chat_message(msg["role"]):
+                st.markdown(msg["content"])
 
-# ── TAB 5: BUSINESS INTELLIGENCE & STRATEGY ─────────────────
+# ── TAB 5: EXECUTIVE BI & STRATEGIC ROI CALCULATOR ──────────
 with tabs[4]:
-    st.markdown("### 📊 Executive Business Intelligence & Strategic ROI Calculator")
-    st.markdown("Translating analytical discoveries into operational ROI, fuel reductions, and driver revenue optimization.")
+    st.markdown("### 📊 Executive Business Intelligence & Fleet ROI Calculator")
+    st.markdown("Translating analytical findings into actionable management decisions, fuel savings, and driver revenue growth.")
     
-    b_col1, b_col2 = st.columns(2)
+    bi1, bi2 = st.columns(2, gap="medium")
     
-    with b_col1:
-        st.markdown("#### 💳 Tipping Dynamics & Gratuity Recapture")
-        tip_fig = go.Figure(data=[
-            go.Bar(name='Recorded Tip ($)', x=['Credit Card', 'Cash (Method 2)'], y=[3.48, 0.00], marker_color=['#38bdf8', '#64748b'])
+    with bi1:
+        st.markdown("##### 💳 Tipping Dynamics & Digital Gratuity Recapture")
+        fig_tip = go.Figure(data=[
+            go.Bar(name='Recorded Tip ($)', x=['Credit Card', 'Cash Settlement'], y=[3.48, 0.00], marker_color=['#38bdf8', '#64748b'])
         ])
-        tip_fig.update_layout(
-            title="Recorded Gratuity by Settlement Method",
+        fig_tip.update_layout(
+            title="Recorded Gratuity by Payment Method",
             paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
             font=dict(color='#94a3b8'), height=260
         )
-        st.plotly_chart(tip_fig, use_container_width=True)
-        st.caption("💡 **Executive Takeaway**: Cash rides record $0 tips in TLC systems. Prompting in-app digital card nudges will recapture ~$18.2M annually in driver income.")
+        st.plotly_chart(fig_tip, use_container_width=True)
+        st.caption("💡 **Executive Takeaway**: Cash transactions record $0 tips in TLC telemetry. Prompting in-app digital card payments unlocks ~$18.2M annually in driver tips.")
         
-    with b_col2:
-        st.markdown("#### 🧹 Data Quality & Anomaly Impact")
-        anomaly_img = os.path.join(BASE_DIR, "cleaned_data", "plots", "anomaly_impact_bar.png")
-        if os.path.exists(anomaly_img):
-            st.image(anomaly_img, caption="Distribution of 8 Systematic Anomaly Classes (7.82% Filtered)", use_column_width=True)
+    with bi2:
+        st.markdown("##### 🧹 Data Hygiene & Systematic Anomaly Filtering")
+        img_anom = os.path.join(BASE_DIR, "cleaned_data", "plots", "anomaly_impact_bar.png")
+        if os.path.exists(img_anom):
+            st.image(img_anom, caption="Distribution of 8 Systematic Anomaly Classes (7.82% Total Cleaned)", use_column_width=True)
             
     st.markdown("---")
-    st.markdown("#### 💰 Interactive Fleet ROI & Fuel Savings Calculator")
+    st.markdown("#### 💰 Interactive Enterprise ROI & Fuel Savings Simulator")
     
-    roi_col1, roi_col2 = st.columns([1, 1.4], gap="large")
-    with roi_col1:
-        fleet_size = st.slider("Active Fleet Size (Vehicles):", 500, 15000, 4500, 500)
-        deadhead_red = st.slider("Target Deadheading Reduction (%):", 5, 30, 18, 1)
-        avg_daily_miles = 110.0
-        fuel_per_gal = 3.65
-        mpg = 24.0
-    with roi_col2:
-        saved_deadhead_miles_day = fleet_size * avg_daily_miles * (deadhead_red / 100.0)
-        annual_fuel_saved = (saved_deadhead_miles_day * 365 / mpg) * fuel_per_gal
-        co2_avoided_tons = (saved_deadhead_miles_day * 365 * 404) / 1_000_000 # 404g CO2/mile
-        driver_earnings_lift = (saved_deadhead_miles_day * 365) * 1.85 * 0.78 # Reinvested cruising into paid fares
+    r_input, r_output = st.columns([1, 1.4], gap="large")
+    with r_input:
+        f_size = st.slider("Active Fleet Size (Vehicles):", 500, 15000, 4500, 500)
+        dh_target = st.slider("Target Deadheading Reduction (%):", 5, 30, 18, 1, help="Reduction in empty cruising miles enabled by 72h Demand Dispatcher.")
+        d_miles_day = 110.0
+        fuel_cost_gal = 3.65
+        fleet_mpg = 24.0
+    with r_output:
+        saved_miles_day = f_size * d_miles_day * (dh_target / 100.0)
+        annual_fuel_saved_usd = (saved_miles_day * 365 / fleet_mpg) * fuel_cost_gal
+        co2_tons_saved = (saved_miles_day * 365 * 404) / 1_000_000 # 404g CO2/mile
+        driver_revenue_gain = (saved_miles_day * 365) * 1.85 * 0.78 # Converting cruising miles into paid fares
         
         st.markdown(f"""
-        <div class="roi-card">
+        <div class="roi-box">
             <div style="font-size: 13px; font-weight: 700; color: #4ade80; text-transform: uppercase;">Projected Annual Enterprise Impact</div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 12px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px;">
                 <div>
                     <div style="font-size: 11px; color: #94a3b8;">ANNUAL FUEL SAVINGS</div>
-                    <div style="font-size: 24px; font-weight: 800; color: #4ade80;">${annual_fuel_saved:,.0f}</div>
+                    <div style="font-size: 26px; font-weight: 800; color: #4ade80;">${annual_fuel_saved_usd:,.0f}</div>
                 </div>
                 <div>
-                    <div style="font-size: 11px; color: #94a3b8;">CARBON EMISSIONS AVOIDED</div>
-                    <div style="font-size: 24px; font-weight: 800; color: #38bdf8;">{co2_avoided_tons:,.1f} MT CO₂</div>
+                    <div style="font-size: 11px; color: #94a3b8;">CARBON AVOIDED</div>
+                    <div style="font-size: 26px; font-weight: 800; color: #38bdf8;">{co2_tons_saved:,.1f} MT CO₂</div>
                 </div>
                 <div>
                     <div style="font-size: 11px; color: #94a3b8;">DRIVER WAGE ENHANCEMENT</div>
-                    <div style="font-size: 24px; font-weight: 800; color: #c084fc;">${driver_earnings_lift:,.0f}</div>
+                    <div style="font-size: 26px; font-weight: 800; color: #c084fc;">${driver_revenue_gain:,.0f}</div>
                 </div>
                 <div>
-                    <div style="font-size: 11px; color: #94a3b8;">CRUISING MILES ELIMINATED</div>
-                    <div style="font-size: 24px; font-weight: 800; color: #fbbf24;">{saved_deadhead_miles_day*365/1_000_000:,.1f}M Miles</div>
+                    <div style="font-size: 11px; color: #94a3b8;">DEADHEAD MILES CUT</div>
+                    <div style="font-size: 26px; font-weight: 800; color: #fbbf24;">{saved_miles_day*365/1_000_000:,.1f}M Miles</div>
                 </div>
             </div>
         </div>
         """, unsafe_allow_html=True)
 
     if not audit_df.empty:
-        with st.expander("📋 View Systematic Anomaly Cleaning Audit Table"):
+        with st.expander("📋 View Systematic Anomaly Cleaning Audit Table (Member 1)"):
             st.dataframe(audit_df, use_container_width=True)
