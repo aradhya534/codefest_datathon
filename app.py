@@ -113,59 +113,36 @@ st.markdown("""
     
     /* Executive Upfront Quote Box */
     .quote-box {
-        background: linear-gradient(140deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.88) 100%);
-        border: 1px solid rgba(56, 189, 248, 0.3);
+        background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.85) 100%);
+        border: 1px solid rgba(56, 189, 248, 0.25);
         border-radius: 16px;
-        padding: 24px 26px;
-        box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45);
+        padding: 24px 28px;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
         transition: border-color 0.2s ease;
     }
     .quote-box:hover {
-        border-color: rgba(56, 189, 248, 0.5);
-    }
-    .quote-route-banner {
-        background: rgba(15, 23, 42, 0.7);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 12px;
-        padding: 14px 18px;
-        margin: 14px 0;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+        border-color: rgba(56, 189, 248, 0.45);
     }
     .quote-price {
-        font-size: 48px;
+        font-size: 50px;
         font-weight: 800;
         color: #38bdf8;
         letter-spacing: -1.5px;
-        line-height: 1.05;
-        margin: 6px 0 2px 0;
+        line-height: 1.1;
+        margin: 4px 0;
     }
-    .quote-stats-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 10px;
-        background: rgba(15, 23, 42, 0.55);
-        border: 1px solid rgba(255, 255, 255, 0.06);
-        border-radius: 12px;
-        padding: 14px;
-        margin-top: 16px;
-    }
-    .quote-stat-item {
-        text-align: center;
-    }
-    .quote-stat-label {
-        font-size: 10px;
-        font-weight: 700;
-        color: #94a3b8;
-        text-transform: uppercase;
-        letter-spacing: 0.6px;
-    }
-    .quote-stat-value {
-        font-size: 18px;
-        font-weight: 800;
-        color: #ffffff;
-        margin-top: 3px;
+    .route-pill {
+        background: rgba(15, 23, 42, 0.65);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 10px;
+        padding: 10px 14px;
+        margin: 14px 0 16px 0;
+        font-size: 13px;
+        color: #e2e8f0;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
     }
     
     /* Step Indicator */
@@ -514,60 +491,46 @@ with tabs[0]:
         arrival_str = pred_quote['estimated_arrival_time'].split(' ')[1]
         speed_mph = (dist_val / (dur_mins / 60)) if dur_mins > 0 else 12.5
         
-        # Premium Upfront Quote Card
+        # Clean Executive Upfront Quote Card
         st.markdown(f"""
         <div class="quote-box">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                <span class="badge badge-success">✓ Guaranteed Fare Protection</span>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span class="badge badge-success">✓ Guaranteed Fare Lock</span>
                 <span class="badge {traffic_badge}">{traffic_advisory}</span>
             </div>
             
-            <div class="quote-route-banner">
-                <div style="text-align: left; max-width: 42%;">
-                    <div style="font-size: 11px; font-weight: 700; color: #4ade80; text-transform: uppercase;">🟢 PICKUP</div>
-                    <div style="font-size: 15px; font-weight: 800; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{o_name}</div>
-                    <div style="font-size: 11px; color: #94a3b8;">{o_boro}</div>
+            <div style="margin: 18px 0 10px 0;">
+                <div style="font-size: 12px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;">
+                    Upfront Passenger Fare ({tier_label})
                 </div>
-                <div style="text-align: center; color: #94a3b8; font-size: 12px; padding: 0 8px;">
-                    <span style="color: #38bdf8; font-size: 14px;">➔</span><br>
-                    <span style="font-weight: 700; color: #cbd5e1;">{dist_val:.1f} mi</span>
-                </div>
-                <div style="text-align: right; max-width: 42%;">
-                    <div style="font-size: 11px; font-weight: 700; color: #f43f5e; text-transform: uppercase;">🔴 DROPOFF</div>
-                    <div style="font-size: 15px; font-weight: 800; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{d_name}</div>
-                    <div style="font-size: 11px; color: #94a3b8;">{d_boro}</div>
+                <div class="quote-price">${final_fare:.2f}</div>
+                <div style="font-size: 12px; color: #4ade80; font-weight: 500; margin-top: 4px;">
+                    ✓ Fixed Price Guarantee • Zero Surge Surprises at Drop-off
                 </div>
             </div>
             
-            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 14px;">
+            <div class="route-pill">
+                <span>🚕</span>
+                <span><b>{o_name}</b> <span style="color: #94a3b8;">({o_boro})</span></span>
+                <span style="color: #38bdf8; font-weight: 700; margin: 0 4px;">➔</span>
+                <span><b>{d_name}</b> <span style="color: #94a3b8;">({d_boro})</span></span>
+                <span style="margin-left: auto; color: #38bdf8; font-weight: 700;">{dist_val:.1f} mi</span>
+            </div>
+            
+            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.08); margin: 16px 0;">
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
                 <div>
-                    <div style="font-size: 11px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;">
-                        Guaranteed Upfront Fare ({tier_label})
+                    <div style="font-size: 11px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">ESTIMATED TRIP DURATION</div>
+                    <div style="font-size: 26px; font-weight: 800; color: #ffffff; margin-top: 2px;">
+                        {dur_mins:.1f} <span style="font-size: 14px; font-weight: 500; color: #94a3b8;">mins</span>
                     </div>
-                    <div class="quote-price">${final_fare:.2f}</div>
-                    <div style="font-size: 11px; color: #4ade80;">✓ Rate Locked • Zero surge surprise at destination</div>
                 </div>
-                <div style="text-align: right;">
-                    <span class="badge badge-info">Engine: {fare_engine} 🏆</span>
-                </div>
-            </div>
-            
-            <div class="quote-stats-grid">
-                <div class="quote-stat-item">
-                    <div class="quote-stat-label">Estimated Travel</div>
-                    <div class="quote-stat-value">{dur_mins:.1f} <span style="font-size: 12px; font-weight: 500; color: #94a3b8;">mins</span></div>
-                </div>
-                <div class="quote-stat-item">
-                    <div class="quote-stat-label">On-Time Dropoff</div>
-                    <div class="quote-stat-value" style="color: #38bdf8;">{arrival_str}</div>
-                </div>
-                <div class="quote-stat-item">
-                    <div class="quote-stat-label">Shortest Corridor</div>
-                    <div class="quote-stat-value">{dist_val:.1f} <span style="font-size: 12px; font-weight: 500; color: #94a3b8;">mi</span></div>
-                </div>
-                <div class="quote-stat-item">
-                    <div class="quote-stat-label">Corridor Velocity</div>
-                    <div class="quote-stat-value" style="color: #4ade80;">{speed_mph:.1f} <span style="font-size: 12px; font-weight: 500; color: #94a3b8;">mph</span></div>
+                <div>
+                    <div style="font-size: 11px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">GUARANTEED ARRIVAL TIME</div>
+                    <div style="font-size: 26px; font-weight: 800; color: #38bdf8; margin-top: 2px;">
+                        {arrival_str}
+                    </div>
                 </div>
             </div>
         </div>
@@ -580,13 +543,15 @@ with tabs[0]:
         taxes_surcharges = round(final_fare - (driver_payout + platform_fee), 2)
         
         st.markdown("<br>", unsafe_allow_html=True)
-        op1, op2, op3 = st.columns(3)
+        op1, op2, op3, op4 = st.columns(4)
         with op1:
-            st.metric("Driver Net Take-Home", f"${driver_payout:.2f}", "78% Payout")
+            st.metric("Effective Velocity", f"{speed_mph:.1f} mph", "Traffic Adjusted")
         with op2:
-            st.metric("Estimated Fuel & Opex", f"${fuel_cost:.2f}", "-Operational")
+            st.metric("Driver Net Payout", f"${driver_payout:.2f}", "78% Net")
         with op3:
-            st.metric("Platform & City Fees", f"${platform_fee + taxes_surcharges:.2f}", "TLC / Regulatory")
+            st.metric("Estimated Fuel", f"${fuel_cost:.2f}", "-Opex")
+        with op4:
+            st.metric("TLC / City Fees", f"${platform_fee + taxes_surcharges:.2f}", "Regulatory")
             
         with st.expander("🧾 Itemized TLC Transparent Fare Breakdown"):
             st.markdown(f"""
