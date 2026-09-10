@@ -27,11 +27,29 @@ class UrbanFlowPredictor:
         self.dur_model_name = self.metadata["best_dur_model"].lower()
         
         fare_model_file = os.path.join(models_dir, f"fare_model_{self.fare_model_name}.pkl")
+        # Fallback if specific algorithm file is missing
+        if not os.path.exists(fare_model_file):
+            fare_model_file = os.path.join(models_dir, "fare_model_xgboost.pkl")
+            if not os.path.exists(fare_model_file):
+                fare_model_file = os.path.join(models_dir, "fare_model_lightgbm.pkl")
+
         dur_model_file = os.path.join(models_dir, f"duration_model_{self.dur_model_name}.pkl")
-        
+        if not os.path.exists(dur_model_file):
+            dur_model_file = os.path.join(models_dir, "duration_model_xgboost.pkl")
+            if not os.path.exists(dur_model_file):
+                dur_model_file = os.path.join(models_dir, "duration_model_lightgbm.pkl")
+
         self.fare_model = joblib.load(fare_model_file)
         self.dur_model = joblib.load(dur_model_file)
         self.features = self.metadata["features"]
+
+        # Load corridor prior speeds
+        prior_file = os.path.join(models_dir, "corridor_speed_priors.json")
+        if os.path.exists(prior_file):
+            with open(prior_file, "r") as pf:
+                self.priors = json.load(pf)
+        else:
+            self.priors = {"global_median_speed": 12.8, "od_speeds": {}, "bb_speeds": {}}
         
         # Load zone data for borough lookup
         if os.path.exists(zone_file):
@@ -53,12 +71,20 @@ class UrbanFlowPredictor:
         is_weekend = int(pickup_dayofweek >= 5)
         is_rush_hour = int(pickup_hour in [7, 8, 9, 17, 18, 19])
         is_night = int((pickup_hour >= 22) or (pickup_hour < 6))
+
+        sin_hour = float(np.sin(2 * np.pi * pickup_hour / 24.0))
+        cos_hour = float(np.cos(2 * np.pi * pickup_hour / 24.0))
+        sin_dayofweek = float(np.sin(2 * np.pi * pickup_dayofweek / 7.0))
+        cos_dayofweek = float(np.cos(2 * np.pi * pickup_dayofweek / 7.0))
         
         AIRPORT_ZONES = {132, 138, 1}
         is_airport_pickup = int(origin_loc_id in AIRPORT_ZONES)
         is_airport_dropoff = int(dest_loc_id in AIRPORT_ZONES)
+        is_airport_trip = int(is_airport_pickup or is_airport_dropoff)
         
         # Lookup boroughs if available
+        pickup_borough = "Unknown"
+        dropoff_borough = "Unknown"
         pickup_borough_enc = 0
         dropoff_borough_enc = 0
         pickup_service_zone_enc = 0
@@ -66,11 +92,23 @@ class UrbanFlowPredictor:
         inter_borough = 0
         
         if self.zones is not None:
-            o_info = self.zones.loc[origin_loc_id] if origin_loc_id in self.zones.index else None
-            d_info = self.zones.loc[dest_loc_id] if dest_loc_id in self.zones.index else None
-            
-            if o_info is not None and d_info is not None:
-                inter_borough = int(o_info["borough_name"] != d_info["borough_name"])
+            if origin_loc_id in self.zones.index:
+                pickup_borough = str(self.zones.loc[origin_loc_id, "borough_name"])
+            if dest_loc_id in self.zones.index:
+                dropoff_borough = str(self.zones.loc[dest_loc_id, "borough_name"])
+            inter_borough = int(pickup_borough != dropoff_borough)
+
+        dist_rush = float(distance_miles) * is_rush_hour
+        dist_airport = float(distance_miles) * is_airport_trip
+
+        # Corridor Speed Prior
+        od_key = f"{origin_loc_id}_{dest_loc_id}"
+        bb_key = f"{pickup_borough}_{dropoff_borough}_{is_rush_hour}"
+        od_speed_prior = self.priors.get("od_speeds", {}).get(od_key)
+        if od_speed_prior is None:
+            od_speed_prior = self.priors.get("bb_speeds", {}).get(bb_key, self.priors.get("global_median_speed", 12.8))
+        od_speed_prior = float(od_speed_prior)
+        expected_travel_time_min = float(distance_miles) / max(min(od_speed_prior, 65.0), 4.0) * 60.0
                 
         feature_dict = {
             'distance_miles': float(distance_miles),
@@ -84,17 +122,27 @@ class UrbanFlowPredictor:
             'is_weekend': int(is_weekend),
             'is_rush_hour': int(is_rush_hour),
             'is_night': int(is_night),
+            'sin_hour': sin_hour,
+            'cos_hour': cos_hour,
+            'sin_dayofweek': sin_dayofweek,
+            'cos_dayofweek': cos_dayofweek,
             'is_airport_pickup': int(is_airport_pickup),
             'is_airport_dropoff': int(is_airport_dropoff),
+            'is_airport_trip': int(is_airport_trip),
             'inter_borough': int(inter_borough),
             'pickup_borough_enc': int(pickup_borough_enc),
             'dropoff_borough_enc': int(dropoff_borough_enc),
             'pickup_service_zone_enc': int(pickup_service_zone_enc),
             'dropoff_service_zone_enc': int(dropoff_service_zone_enc),
+            'dist_rush': float(dist_rush),
+            'dist_airport': float(dist_airport),
+            'od_speed_prior': float(od_speed_prior),
+            'expected_travel_time_min': float(expected_travel_time_min),
             'toll_total': float(toll_total)
         }
         
-        df_feats = pd.DataFrame([feature_dict])[self.features]
+        available_cols = [c for c in self.features if c in feature_dict]
+        df_feats = pd.DataFrame([feature_dict])[available_cols]
         return df_feats, pickup_time
 
     def predict(self, origin_loc_id, dest_loc_id, distance_miles, rider_count=1,

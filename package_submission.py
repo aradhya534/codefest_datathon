@@ -17,7 +17,7 @@ import shutil
 if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
 
-def make_submission_zip(team_name="TeamName"):
+def make_submission_zip(team_name="CodeWave"):
     base_dir = os.path.dirname(os.path.abspath(__file__))
     zip_filename = f"{team_name}_CodefestDatathon2026.zip"
     zip_filepath = os.path.join(base_dir, zip_filename)
@@ -27,7 +27,7 @@ def make_submission_zip(team_name="TeamName"):
     
     # Official final notebook name requirement: TeamName_FinalNotebook.ipynb
     official_nb_name = f"{team_name}_FinalNotebook.ipynb"
-    src_master_nb = os.path.join(base_dir, "notebooks", "TeamName_FinalNotebook.ipynb")
+    src_master_nb = os.path.join(base_dir, "notebooks", "CodeWave_FinalNotebook.ipynb")
     dst_team_nb = os.path.join(base_dir, "notebooks", official_nb_name)
     
     if os.path.exists(src_master_nb) and src_master_nb != dst_team_nb:
@@ -61,10 +61,10 @@ def make_submission_zip(team_name="TeamName"):
         ("notebooks", [f for f in notebook_files if os.path.exists(os.path.join(base_dir, "notebooks", f))]),
         ("cleaned_data", ["urban_flow_cleaned.csv", "powerbi_kpi_summary.csv", "anomaly_cleaning_audit.csv"]),
         ("cleaned_data/plots", os.listdir(os.path.join(base_dir, "cleaned_data", "plots")) if os.path.exists(os.path.join(base_dir, "cleaned_data", "plots")) else []),
-        ("notebooks/models", ["fare_model_lightgbm.pkl", "duration_model_xgboost.pkl", "model_metadata.json", "cleaning_log.json"]),
+        ("notebooks/models", [f for f in ["fare_model_xgboost.pkl", "fare_model_lightgbm.pkl", "duration_model_xgboost.pkl", "corridor_speed_priors.json", "model_metadata.json", "cleaning_log.json"] if os.path.exists(os.path.join(base_dir, "notebooks", "models", f))]),
         ("notebooks/models/plots", os.listdir(os.path.join(base_dir, "notebooks", "models", "plots")) if os.path.exists(os.path.join(base_dir, "notebooks", "models", "plots")) else []),
         ("notebooks/models/splits", os.listdir(os.path.join(base_dir, "notebooks", "models", "splits")) if os.path.exists(os.path.join(base_dir, "notebooks", "models", "splits")) else []),
-        ("notebooks/spatiotemporal", ["demand_forecast_lgb.pkl", "hotspot_kmeans_model.pkl", "member3_metrics.json", "zone_hotspot_clusters.csv"]),
+        ("notebooks/spatiotemporal", [f for f in ["demand_forecast_lgb.pkl", "hotspot_kmeans_model.pkl", "member3_metrics.json", "zone_hotspot_clusters.csv", "forecast_72h_series.csv"] if os.path.exists(os.path.join(base_dir, "notebooks", "spatiotemporal", f))]),
         ("notebooks/spatiotemporal/plots", os.listdir(os.path.join(base_dir, "notebooks", "spatiotemporal", "plots")) if os.path.exists(os.path.join(base_dir, "notebooks", "spatiotemporal", "plots")) else [])
     ]
     
@@ -98,5 +98,5 @@ def make_submission_zip(team_name="TeamName"):
     print("=" * 55)
 
 if __name__ == "__main__":
-    tname = sys.argv[1] if len(sys.argv) > 1 else "TeamName"
+    tname = sys.argv[1] if len(sys.argv) > 1 else "CodeWave"
     make_submission_zip(tname)

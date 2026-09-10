@@ -1,4 +1,5 @@
 {
+  "team_name": "CodeWave",
   "features": [
     "distance_miles",
     "rider_count",
@@ -11,96 +12,105 @@
     "is_weekend",
     "is_rush_hour",
     "is_night",
+    "sin_hour",
+    "cos_hour",
+    "sin_dayofweek",
+    "cos_dayofweek",
     "is_airport_pickup",
     "is_airport_dropoff",
+    "is_airport_trip",
     "inter_borough",
     "pickup_borough_enc",
     "dropoff_borough_enc",
     "pickup_service_zone_enc",
     "dropoff_service_zone_enc",
+    "dist_rush",
+    "dist_airport",
+    "od_speed_prior",
+    "expected_travel_time_min",
     "toll_total"
   ],
   "fare_target": "base_fare",
   "duration_target": "trip_duration_min",
-  "best_fare_model": "LightGBM",
+  "best_fare_model": "XGBoost",
   "best_dur_model": "XGBoost",
   "fare_results": {
     "LinearRegression": {
       "Val": {
-        "RMSE": 6.8071,
-        "MAE": 3.5459,
-        "R2": 0.8626
+        "RMSE": 6.7151,
+        "MAE": 3.3511,
+        "R2": 0.8717
       },
       "Test": {
-        "RMSE": 6.8268,
-        "MAE": 3.5342,
-        "R2": 0.8623
-      }
-    },
-    "XGBoost": {
-      "Val": {
-        "RMSE": 3.6949,
-        "MAE": 1.8905,
-        "R2": 0.9595
-      },
-      "Test": {
-        "RMSE": 3.6973,
-        "MAE": 1.8887,
-        "R2": 0.9596
+        "RMSE": 6.6149,
+        "MAE": 3.3206,
+        "R2": 0.8725
       }
     },
     "LightGBM": {
       "Val": {
-        "RMSE": 3.5426,
-        "MAE": 1.8808,
-        "R2": 0.9628
+        "RMSE": 3.361,
+        "MAE": 1.753,
+        "R2": 0.9679
       },
       "Test": {
-        "RMSE": 3.5882,
-        "MAE": 1.8773,
-        "R2": 0.962
+        "RMSE": 3.3093,
+        "MAE": 1.7566,
+        "R2": 0.9681
+      }
+    },
+    "XGBoost": {
+      "Val": {
+        "RMSE": 3.3471,
+        "MAE": 1.7296,
+        "R2": 0.9681
+      },
+      "Test": {
+        "RMSE": 3.2829,
+        "MAE": 1.7269,
+        "R2": 0.9686
       }
     }
   },
   "duration_results": {
     "LinearRegression": {
       "Val": {
-        "RMSE": 7.7067,
-        "MAE": 5.1393,
-        "R2": 0.7009
+        "RMSE": 7.0649,
+        "MAE": 4.4159,
+        "R2": 0.7611
       },
       "Test": {
-        "RMSE": 7.6562,
-        "MAE": 5.1278,
-        "R2": 0.7012
+        "RMSE": 7.2037,
+        "MAE": 4.4277,
+        "R2": 0.7529
       }
     },
     "XGBoost": {
       "Val": {
-        "RMSE": 5.3,
-        "MAE": 3.2084,
-        "R2": 0.8585
+        "RMSE": 5.1522,
+        "MAE": 3.0726,
+        "R2": 0.8729
       },
       "Test": {
-        "RMSE": 5.2491,
-        "MAE": 3.1961,
-        "R2": 0.8596
+        "RMSE": 5.1956,
+        "MAE": 3.0963,
+        "R2": 0.8715
       }
     },
     "LightGBM": {
       "Val": {
-        "RMSE": 5.4273,
-        "MAE": 3.3129,
-        "R2": 0.8516
+        "RMSE": 5.2145,
+        "MAE": 3.1346,
+        "R2": 0.8698
       },
       "Test": {
-        "RMSE": 5.3755,
-        "MAE": 3.2999,
-        "R2": 0.8527
+        "RMSE": 5.2655,
+        "MAE": 3.1583,
+        "R2": 0.868
       }
     }
   },
-  "sample_size": 500000,
-  "cv_fare_rmse": 3.5206,
-  "cv_dur_rmse": 5.3618
+  "sample_size": 553063,
+  "cv_fare_rmse": 3.4762,
+  "cv_dur_rmse": 5.5334
 }
