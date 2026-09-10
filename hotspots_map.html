@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_89ecd3f50f68e32990b4d01d53b7b253 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_89ecd3f50f68e32990b4d01d53b7b253" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_89ecd3f50f68e32990b4d01d53b7b253 = L.map(
+                "map_89ecd3f50f68e32990b4d01d53b7b253",
+                {
+                    center: [40.73061, -73.935242],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 11,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_ff8dc070d200c26b6c2f2581047eeb99 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_ff8dc070d200c26b6c2f2581047eeb99.addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+            var circle_marker_8839dffc00c0895485a810eddff410d6 = L.circleMarker(
+                [40.7506723119034, -73.80440843665446],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16.59466666666667, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_dd170cd716b0aed1b8f277c547b84f23 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_5bab8a8a03fdf284543b5f957d1193a9 = $(`<div id="html_5bab8a8a03fdf284543b5f957d1193a9" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">JFK Airport</h4>             <b>Borough:</b> Queens<br>             <b>Classification:</b> Cluster 2: Mega Commercial Hub (High Daytime Density)<br>             <b>Pickup Trips:</b> 31,784<br>             <b>Avg Base Fare:</b> $60.85<br>             <b>Nightlife Share:</b> 22.9%<br>         </div>         </div>`)[0];
+                popup_dd170cd716b0aed1b8f277c547b84f23.setContent(html_5bab8a8a03fdf284543b5f957d1193a9);
+            
+        
+
+        circle_marker_8839dffc00c0895485a810eddff410d6.bindPopup(popup_dd170cd716b0aed1b8f277c547b84f23)
+        ;
+
+        
+    
+    
+            var circle_marker_a7e92e7b240346af9db9083f6bfb05ca = L.circleMarker(
+                [40.82212469256015, -73.99210246517302],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15.556666666666667, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_3f872fb5c411b5b2a1d560338edff6bf = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_9d33d155d39a627e4e5be710e72d9506 = $(`<div id="html_9d33d155d39a627e4e5be710e72d9506" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Upper East Side South</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 2: Mega Commercial Hub (High Daytime Density)<br>             <b>Pickup Trips:</b> 28,670<br>             <b>Avg Base Fare:</b> $12.68<br>             <b>Nightlife Share:</b> 6.6%<br>         </div>         </div>`)[0];
+                popup_3f872fb5c411b5b2a1d560338edff6bf.setContent(html_9d33d155d39a627e4e5be710e72d9506);
+            
+        
+
+        circle_marker_a7e92e7b240346af9db9083f6bfb05ca.bindPopup(popup_3f872fb5c411b5b2a1d560338edff6bf)
+        ;
+
+        
+    
+    
+            var circle_marker_d445e205a64caf18c2763052f83b2b67 = L.circleMarker(
+                [40.74932926520402, -73.94634245184601],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15.142666666666667, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_d750da06f5509c54d43520fa16b50258 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_5a04235e1fa12fc8c45dfca753050e37 = $(`<div id="html_5a04235e1fa12fc8c45dfca753050e37" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Upper East Side North</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 2: Mega Commercial Hub (High Daytime Density)<br>             <b>Pickup Trips:</b> 27,428<br>             <b>Avg Base Fare:</b> $13.17<br>             <b>Nightlife Share:</b> 3.4%<br>         </div>         </div>`)[0];
+                popup_d750da06f5509c54d43520fa16b50258.setContent(html_5a04235e1fa12fc8c45dfca753050e37);
+            
+        
+
+        circle_marker_d445e205a64caf18c2763052f83b2b67.bindPopup(popup_d750da06f5509c54d43520fa16b50258)
+        ;
+
+        
+    
+    
+            var circle_marker_7f73e9bcb0ab9366f8586595606960f7 = L.circleMarker(
+                [40.786515892750586, -73.95716142101247],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14.075, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_c0f2ae3100aed4f9f77a655791ad2e45 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_845b186e2956be0c8046b6204e40640f = $(`<div id="html_845b186e2956be0c8046b6204e40640f" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Penn Station/Madison Sq West</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 2: Mega Commercial Hub (High Daytime Density)<br>             <b>Pickup Trips:</b> 24,225<br>             <b>Avg Base Fare:</b> $16.47<br>             <b>Nightlife Share:</b> 14.3%<br>         </div>         </div>`)[0];
+                popup_c0f2ae3100aed4f9f77a655791ad2e45.setContent(html_845b186e2956be0c8046b6204e40640f);
+            
+        
+
+        circle_marker_7f73e9bcb0ab9366f8586595606960f7.bindPopup(popup_c0f2ae3100aed4f9f77a655791ad2e45)
+        ;
+
+        
+    
+    
+            var circle_marker_5c773defb3fd6033b35387ac9bd7d69a = L.circleMarker(
+                [40.81835388845473, -73.98310334259831],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 13.577333333333334, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_17ae5698e8e76fd4d1e4f957c4e62855 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_32820e598301a36b674381ca03c2e0de = $(`<div id="html_32820e598301a36b674381ca03c2e0de" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Midtown Center</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 2: Mega Commercial Hub (High Daytime Density)<br>             <b>Pickup Trips:</b> 22,732<br>             <b>Avg Base Fare:</b> $17.75<br>             <b>Nightlife Share:</b> 8.9%<br>         </div>         </div>`)[0];
+                popup_17ae5698e8e76fd4d1e4f957c4e62855.setContent(html_32820e598301a36b674381ca03c2e0de);
+            
+        
+
+        circle_marker_5c773defb3fd6033b35387ac9bd7d69a.bindPopup(popup_17ae5698e8e76fd4d1e4f957c4e62855)
+        ;
+
+        
+    
+    
+            var circle_marker_c4384d135b9a905de6aba8e86f650ec8 = L.circleMarker(
+                [40.74814738090549, -73.77848159107889],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 13.040333333333333, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_4f79ee56a867c3e92e6900913737b13e = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_dca7c02d26bfaeefce32ffddaf9fd840 = $(`<div id="html_dca7c02d26bfaeefce32ffddaf9fd840" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">LaGuardia Airport</h4>             <b>Borough:</b> Queens<br>             <b>Classification:</b> Cluster 2: Mega Commercial Hub (High Daytime Density)<br>             <b>Pickup Trips:</b> 21,121<br>             <b>Avg Base Fare:</b> $44.71<br>             <b>Nightlife Share:</b> 14.3%<br>         </div>         </div>`)[0];
+                popup_4f79ee56a867c3e92e6900913737b13e.setContent(html_dca7c02d26bfaeefce32ffddaf9fd840);
+            
+        
+
+        circle_marker_c4384d135b9a905de6aba8e86f650ec8.bindPopup(popup_4f79ee56a867c3e92e6900913737b13e)
+        ;
+
+        
+    
+    
+            var circle_marker_8411eb1d1c7eb26162982731d4aa5f4c = L.circleMarker(
+                [40.768780006600736, -73.95073958552139],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.353333333333333, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_fd9d3c8a42cc1754830d3637eb25b552 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_0ee73d5c23e9ed6431177b8f62f5441c = $(`<div id="html_0ee73d5c23e9ed6431177b8f62f5441c" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Midtown East</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 2: Mega Commercial Hub (High Daytime Density)<br>             <b>Pickup Trips:</b> 19,060<br>             <b>Avg Base Fare:</b> $16.24<br>             <b>Nightlife Share:</b> 9.2%<br>         </div>         </div>`)[0];
+                popup_fd9d3c8a42cc1754830d3637eb25b552.setContent(html_0ee73d5c23e9ed6431177b8f62f5441c);
+            
+        
+
+        circle_marker_8411eb1d1c7eb26162982731d4aa5f4c.bindPopup(popup_fd9d3c8a42cc1754830d3637eb25b552)
+        ;
+
+        
+    
+    
+            var circle_marker_1f15c3d265a0d2072b9b2834a430a36b = L.circleMarker(
+                [40.76788649946608, -74.00081568116538],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.636333333333333, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_568a2a4a4be44d0164decfc073b02be4 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_8e5385045f30e1e8d88d217c61d08eb9 = $(`<div id="html_8e5385045f30e1e8d88d217c61d08eb9" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Upper West Side South</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 2: Mega Commercial Hub (High Daytime Density)<br>             <b>Pickup Trips:</b> 16,909<br>             <b>Avg Base Fare:</b> $14.17<br>             <b>Nightlife Share:</b> 8.7%<br>         </div>         </div>`)[0];
+                popup_568a2a4a4be44d0164decfc073b02be4.setContent(html_8e5385045f30e1e8d88d217c61d08eb9);
+            
+        
+
+        circle_marker_1f15c3d265a0d2072b9b2834a430a36b.bindPopup(popup_568a2a4a4be44d0164decfc073b02be4)
+        ;
+
+        
+    
+    
+            var circle_marker_eb5145a56b255fb11ce5f30053118d6e = L.circleMarker(
+                [40.79357999860846, -73.94061565441712],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.558333333333334, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_4b2152ff237dd170afd1f3a0ae452c5b = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_8a1694b241f05c0b4516b2468c1bdc29 = $(`<div id="html_8a1694b241f05c0b4516b2468c1bdc29" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Times Sq/Theatre District</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 2: Mega Commercial Hub (High Daytime Density)<br>             <b>Pickup Trips:</b> 16,675<br>             <b>Avg Base Fare:</b> $22.65<br>             <b>Nightlife Share:</b> 17.6%<br>         </div>         </div>`)[0];
+                popup_4b2152ff237dd170afd1f3a0ae452c5b.setContent(html_8a1694b241f05c0b4516b2468c1bdc29);
+            
+        
+
+        circle_marker_eb5145a56b255fb11ce5f30053118d6e.bindPopup(popup_4b2152ff237dd170afd1f3a0ae452c5b)
+        ;
+
+        
+    
+    
+            var circle_marker_1e96fa296566ee7ef61e04f58ddafea5 = L.circleMarker(
+                [40.815264921985, -73.9665753971371],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.442666666666668, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_473ed23a61c8bb82200e57d80c3027a9 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_1264781854e17265fd5929f30f91fd2a = $(`<div id="html_1264781854e17265fd5929f30f91fd2a" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Lincoln Square East</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 2: Mega Commercial Hub (High Daytime Density)<br>             <b>Pickup Trips:</b> 16,328<br>             <b>Avg Base Fare:</b> $14.05<br>             <b>Nightlife Share:</b> 10.4%<br>         </div>         </div>`)[0];
+                popup_473ed23a61c8bb82200e57d80c3027a9.setContent(html_1264781854e17265fd5929f30f91fd2a);
+            
+        
+
+        circle_marker_1e96fa296566ee7ef61e04f58ddafea5.bindPopup(popup_473ed23a61c8bb82200e57d80c3027a9)
+        ;
+
+        
+    
+    
+            var circle_marker_c37a2743600e2a96a23adc0b0bd5be6c = L.circleMarker(
+                [40.74731163340782, -73.99305105739322],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.401666666666667, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_54526033e5bf4cf08208543b1c095ed4 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_74fe80f6a186df98633c3012ef256ca4 = $(`<div id="html_74fe80f6a186df98633c3012ef256ca4" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Murray Hill</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 2: Mega Commercial Hub (High Daytime Density)<br>             <b>Pickup Trips:</b> 16,205<br>             <b>Avg Base Fare:</b> $15.96<br>             <b>Nightlife Share:</b> 13.9%<br>         </div>         </div>`)[0];
+                popup_54526033e5bf4cf08208543b1c095ed4.setContent(html_74fe80f6a186df98633c3012ef256ca4);
+            
+        
+
+        circle_marker_c37a2743600e2a96a23adc0b0bd5be6c.bindPopup(popup_54526033e5bf4cf08208543b1c095ed4)
+        ;
+
+        
+    
+    
+            var circle_marker_351a301dfbc8f893965cb86fecb9b6e8 = L.circleMarker(
+                [40.763849717595875, -74.00773111590705],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.116, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_6ecfda16f205b7db8972042cd2a2412c = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_ae873bc9232018123a0f07d896ee0dda = $(`<div id="html_ae873bc9232018123a0f07d896ee0dda" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">East Chelsea</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 2: Mega Commercial Hub (High Daytime Density)<br>             <b>Pickup Trips:</b> 15,348<br>             <b>Avg Base Fare:</b> $17.86<br>             <b>Nightlife Share:</b> 20.2%<br>         </div>         </div>`)[0];
+                popup_6ecfda16f205b7db8972042cd2a2412c.setContent(html_ae873bc9232018123a0f07d896ee0dda);
+            
+        
+
+        circle_marker_351a301dfbc8f893965cb86fecb9b6e8.bindPopup(popup_6ecfda16f205b7db8972042cd2a2412c)
+        ;
+
+        
+    
+    
+            var circle_marker_16bb45b7cf7b6449308063f61f32725a = L.circleMarker(
+                [40.78315345010723, -73.97375460592414],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "purple", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.021333333333335, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_4e2f1df5c415e38451e2702b7a15e60f = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_35f3294240c28636ef7d98d17523f2aa = $(`<div id="html_35f3294240c28636ef7d98d17523f2aa" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">East Village</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 1: Nightlife & Entertainment District<br>             <b>Pickup Trips:</b> 15,064<br>             <b>Avg Base Fare:</b> $15.21<br>             <b>Nightlife Share:</b> 62.8%<br>         </div>         </div>`)[0];
+                popup_4e2f1df5c415e38451e2702b7a15e60f.setContent(html_35f3294240c28636ef7d98d17523f2aa);
+            
+        
+
+        circle_marker_16bb45b7cf7b6449308063f61f32725a.bindPopup(popup_4e2f1df5c415e38451e2702b7a15e60f)
+        ;
+
+        
+    
+    
+            var circle_marker_1aab082d2f15f27d4eb8fc2571208ee0 = L.circleMarker(
+                [40.81649083871613, -73.96940840818915],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.975999999999999, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_d446c562666d5675b19a3db3090ea3d7 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_ffce55d33d7ce9a866b911407abb82ce = $(`<div id="html_ffce55d33d7ce9a866b911407abb82ce" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Lenox Hill West</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 2: Mega Commercial Hub (High Daytime Density)<br>             <b>Pickup Trips:</b> 14,928<br>             <b>Avg Base Fare:</b> $13.00<br>             <b>Nightlife Share:</b> 13.8%<br>         </div>         </div>`)[0];
+                popup_d446c562666d5675b19a3db3090ea3d7.setContent(html_ffce55d33d7ce9a866b911407abb82ce);
+            
+        
+
+        circle_marker_1aab082d2f15f27d4eb8fc2571208ee0.bindPopup(popup_d446c562666d5675b19a3db3090ea3d7)
+        ;
+
+        
+    
+    
+            var circle_marker_d1656ba628926d48f0e816556e1ce895 = L.circleMarker(
+                [40.79821710838885, -73.97327282711493],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.894333333333332, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_27e207c216aae57ae3a3647314892d90 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_d00fecfdc233472b36d9f4ba9883436a = $(`<div id="html_d00fecfdc233472b36d9f4ba9883436a" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Midtown North</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 2: Mega Commercial Hub (High Daytime Density)<br>             <b>Pickup Trips:</b> 14,683<br>             <b>Avg Base Fare:</b> $17.85<br>             <b>Nightlife Share:</b> 10.4%<br>         </div>         </div>`)[0];
+                popup_27e207c216aae57ae3a3647314892d90.setContent(html_d00fecfdc233472b36d9f4ba9883436a);
+            
+        
+
+        circle_marker_d1656ba628926d48f0e816556e1ce895.bindPopup(popup_27e207c216aae57ae3a3647314892d90)
+        ;
+
+        
+    
+    
+            var circle_marker_2ad801c7510dd414fe901025ddfc855a = L.circleMarker(
+                [40.74449922167449, -73.93987413862557],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.752666666666666, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_f0815ffb857b070fc41afa0033122bb0 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_333646d0d365b0037c90c236c628c6d8 = $(`<div id="html_333646d0d365b0037c90c236c628c6d8" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Clinton East</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 2: Mega Commercial Hub (High Daytime Density)<br>             <b>Pickup Trips:</b> 14,258<br>             <b>Avg Base Fare:</b> $16.38<br>             <b>Nightlife Share:</b> 33.3%<br>         </div>         </div>`)[0];
+                popup_f0815ffb857b070fc41afa0033122bb0.setContent(html_333646d0d365b0037c90c236c628c6d8);
+            
+        
+
+        circle_marker_2ad801c7510dd414fe901025ddfc855a.bindPopup(popup_f0815ffb857b070fc41afa0033122bb0)
+        ;
+
+        
+    
+    
+            var circle_marker_9bc30c854931bf8226fba26ddbc5baf1 = L.circleMarker(
+                [40.745577387477596, -73.99085743414126],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.552, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_5ef6d770a394baa4595243db2c6ec118 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_7207e9e3a6501450656acbcdd50e5178 = $(`<div id="html_7207e9e3a6501450656acbcdd50e5178" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Union Sq</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 2: Mega Commercial Hub (High Daytime Density)<br>             <b>Pickup Trips:</b> 13,656<br>             <b>Avg Base Fare:</b> $14.86<br>             <b>Nightlife Share:</b> 22.2%<br>         </div>         </div>`)[0];
+                popup_5ef6d770a394baa4595243db2c6ec118.setContent(html_7207e9e3a6501450656acbcdd50e5178);
+            
+        
+
+        circle_marker_9bc30c854931bf8226fba26ddbc5baf1.bindPopup(popup_5ef6d770a394baa4595243db2c6ec118)
+        ;
+
+        
+    
+    
+            var circle_marker_63c6510183c5a3e9b3a76ff4ce876964 = L.circleMarker(
+                [40.7889627028697, -73.95057075021388],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.192333333333334, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_4809fcec86e1d5ac56691b4b5f967328 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_0d23d5e398a11abdb0365a2d48204fb2 = $(`<div id="html_0d23d5e398a11abdb0365a2d48204fb2" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Yorkville West</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 2: Mega Commercial Hub (High Daytime Density)<br>             <b>Pickup Trips:</b> 12,577<br>             <b>Avg Base Fare:</b> $13.24<br>             <b>Nightlife Share:</b> 19.3%<br>         </div>         </div>`)[0];
+                popup_4809fcec86e1d5ac56691b4b5f967328.setContent(html_0d23d5e398a11abdb0365a2d48204fb2);
+            
+        
+
+        circle_marker_63c6510183c5a3e9b3a76ff4ce876964.bindPopup(popup_4809fcec86e1d5ac56691b4b5f967328)
+        ;
+
+        
+    
+    
+            var circle_marker_f39d10ece7d60d3573f68ee4d7ec45ef = L.circleMarker(
+                [40.802932441319705, -74.00250141440793],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.090333333333334, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_31038b064ecec788b69ac4b1a066567e = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_8091be7e3bbac0641e0bfa1aa50953ab = $(`<div id="html_8091be7e3bbac0641e0bfa1aa50953ab" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Lenox Hill East</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 2: Mega Commercial Hub (High Daytime Density)<br>             <b>Pickup Trips:</b> 12,271<br>             <b>Avg Base Fare:</b> $15.34<br>             <b>Nightlife Share:</b> 6.0%<br>         </div>         </div>`)[0];
+                popup_31038b064ecec788b69ac4b1a066567e.setContent(html_8091be7e3bbac0641e0bfa1aa50953ab);
+            
+        
+
+        circle_marker_f39d10ece7d60d3573f68ee4d7ec45ef.bindPopup(popup_31038b064ecec788b69ac4b1a066567e)
+        ;
+
+        
+    
+    
+            var circle_marker_e43c12f8b7833d5d50859af2ea803131 = L.circleMarker(
+                [40.74832708026382, -73.98997848266846],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.083333333333332, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_36adc4b75b026a6ce1e1b347f18ef82d = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_e841dc0d44bef5dce7d268cc5e75a052 = $(`<div id="html_e841dc0d44bef5dce7d268cc5e75a052" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Upper West Side North</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 2: Mega Commercial Hub (High Daytime Density)<br>             <b>Pickup Trips:</b> 12,250<br>             <b>Avg Base Fare:</b> $14.07<br>             <b>Nightlife Share:</b> 6.8%<br>         </div>         </div>`)[0];
+                popup_36adc4b75b026a6ce1e1b347f18ef82d.setContent(html_e841dc0d44bef5dce7d268cc5e75a052);
+            
+        
+
+        circle_marker_e43c12f8b7833d5d50859af2ea803131.bindPopup(popup_36adc4b75b026a6ce1e1b347f18ef82d)
+        ;
+
+        
+    
+    
+            var circle_marker_9ee23d49ca3bcaa2863e7a3101639cd6 = L.circleMarker(
+                [40.78445492804226, -73.94724608638654],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "purple", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.966666666666667, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_61995f12cb0fa2f64081380dfe80acc5 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_624292fffdbe1c44b3ee9f648009866f = $(`<div id="html_624292fffdbe1c44b3ee9f648009866f" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">West Village</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 1: Nightlife & Entertainment District<br>             <b>Pickup Trips:</b> 11,900<br>             <b>Avg Base Fare:</b> $15.24<br>             <b>Nightlife Share:</b> 50.6%<br>         </div>         </div>`)[0];
+                popup_61995f12cb0fa2f64081380dfe80acc5.setContent(html_624292fffdbe1c44b3ee9f648009866f);
+            
+        
+
+        circle_marker_9ee23d49ca3bcaa2863e7a3101639cd6.bindPopup(popup_61995f12cb0fa2f64081380dfe80acc5)
+        ;
+
+        
+    
+    
+            var circle_marker_b8836db03e86ec75790b32945830a3a3 = L.circleMarker(
+                [40.75611639675561, -73.95081752978788],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.914333333333333, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_d0325d5704fd411b813fcabc05ad8f94 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_ff1852357126f57da851b59cdea596a4 = $(`<div id="html_ff1852357126f57da851b59cdea596a4" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Gramercy</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 2: Mega Commercial Hub (High Daytime Density)<br>             <b>Pickup Trips:</b> 11,743<br>             <b>Avg Base Fare:</b> $14.80<br>             <b>Nightlife Share:</b> 27.9%<br>         </div>         </div>`)[0];
+                popup_d0325d5704fd411b813fcabc05ad8f94.setContent(html_ff1852357126f57da851b59cdea596a4);
+            
+        
+
+        circle_marker_b8836db03e86ec75790b32945830a3a3.bindPopup(popup_d0325d5704fd411b813fcabc05ad8f94)
+        ;
+
+        
+    
+    
+            var circle_marker_24fedf19ace1641a30e5697e6461a113 = L.circleMarker(
+                [40.77165861854, -73.98666381349119],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.838333333333333, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_1e37aecde118603d99f64bf37447aa31 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_b2dd58f77af17d6c7e4a2fc1e457e36e = $(`<div id="html_b2dd58f77af17d6c7e4a2fc1e457e36e" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Midtown South</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 2: Mega Commercial Hub (High Daytime Density)<br>             <b>Pickup Trips:</b> 11,515<br>             <b>Avg Base Fare:</b> $16.90<br>             <b>Nightlife Share:</b> 23.4%<br>         </div>         </div>`)[0];
+                popup_1e37aecde118603d99f64bf37447aa31.setContent(html_b2dd58f77af17d6c7e4a2fc1e457e36e);
+            
+        
+
+        circle_marker_24fedf19ace1641a30e5697e6461a113.bindPopup(popup_1e37aecde118603d99f64bf37447aa31)
+        ;
+
+        
+    
+    
+            var circle_marker_8c1229597c17fd21a2f61c84f0080060 = L.circleMarker(
+                [40.75086199995997, -73.9521154234375],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.493666666666666, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_6e159e7d23de4207de4a70cbb2b0c357 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_8537e7346faaf1524eb7f279008de7a2 = $(`<div id="html_8537e7346faaf1524eb7f279008de7a2" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Sutton Place/Turtle Bay North</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 2: Mega Commercial Hub (High Daytime Density)<br>             <b>Pickup Trips:</b> 10,481<br>             <b>Avg Base Fare:</b> $14.53<br>             <b>Nightlife Share:</b> 14.2%<br>         </div>         </div>`)[0];
+                popup_6e159e7d23de4207de4a70cbb2b0c357.setContent(html_8537e7346faaf1524eb7f279008de7a2);
+            
+        
+
+        circle_marker_8c1229597c17fd21a2f61c84f0080060.bindPopup(popup_6e159e7d23de4207de4a70cbb2b0c357)
+        ;
+
+        
+    
+    
+            var circle_marker_10cdefaaa7bc927004a92bd665e51ab0 = L.circleMarker(
+                [40.7814719430747, -73.93820268463146],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.328, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_08bc77b6835deaa408114d8dce71ecad = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_e1dce6936d78871222c16fd67a53413c = $(`<div id="html_e1dce6936d78871222c16fd67a53413c" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">West Chelsea/Hudson Yards</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 2: Mega Commercial Hub (High Daytime Density)<br>             <b>Pickup Trips:</b> 9,984<br>             <b>Avg Base Fare:</b> $16.83<br>             <b>Nightlife Share:</b> 23.1%<br>         </div>         </div>`)[0];
+                popup_08bc77b6835deaa408114d8dce71ecad.setContent(html_e1dce6936d78871222c16fd67a53413c);
+            
+        
+
+        circle_marker_10cdefaaa7bc927004a92bd665e51ab0.bindPopup(popup_08bc77b6835deaa408114d8dce71ecad)
+        ;
+
+        
+    
+    
+            var circle_marker_f47c0b54fae7e17929d3146ef6bc0ace = L.circleMarker(
+                [40.77447223606724, -73.95355140681572],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.078, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_e06ceaf4425c1a0103c6332c8b0479cc = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_036671082d8e742c7c0bcae6d8980bf8 = $(`<div id="html_036671082d8e742c7c0bcae6d8980bf8" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Yorkville East</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 2: Mega Commercial Hub (High Daytime Density)<br>             <b>Pickup Trips:</b> 9,234<br>             <b>Avg Base Fare:</b> $14.48<br>             <b>Nightlife Share:</b> 5.5%<br>         </div>         </div>`)[0];
+                popup_e06ceaf4425c1a0103c6332c8b0479cc.setContent(html_036671082d8e742c7c0bcae6d8980bf8);
+            
+        
+
+        circle_marker_f47c0b54fae7e17929d3146ef6bc0ace.bindPopup(popup_e06ceaf4425c1a0103c6332c8b0479cc)
+        ;
+
+        
+    
+    
+            var circle_marker_6ba5006313bd2cfa330a8ab5f63cfa2e = L.circleMarker(
+                [40.75230436531118, -73.96247467685764],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.068, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_020e4412a99b7ddc5486465b2adcf734 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_c2fdccf054742b0a7aebe8d11d443248 = $(`<div id="html_c2fdccf054742b0a7aebe8d11d443248" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Central Park</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 2: Mega Commercial Hub (High Daytime Density)<br>             <b>Pickup Trips:</b> 9,204<br>             <b>Avg Base Fare:</b> $15.15<br>             <b>Nightlife Share:</b> 5.4%<br>         </div>         </div>`)[0];
+                popup_020e4412a99b7ddc5486465b2adcf734.setContent(html_c2fdccf054742b0a7aebe8d11d443248);
+            
+        
+
+        circle_marker_6ba5006313bd2cfa330a8ab5f63cfa2e.bindPopup(popup_020e4412a99b7ddc5486465b2adcf734)
+        ;
+
+        
+    
+    
+            var circle_marker_9b468e59a4ada8ad451c01ec85415a31 = L.circleMarker(
+                [40.75534433590129, -73.99858514711924],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.046, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_cefc410d1dda193032573663bfd1dda7 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_0b7a9f836a8d133ee2d3f372e256da8d = $(`<div id="html_0b7a9f836a8d133ee2d3f372e256da8d" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Flatiron</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 2: Mega Commercial Hub (High Daytime Density)<br>             <b>Pickup Trips:</b> 9,138<br>             <b>Avg Base Fare:</b> $14.52<br>             <b>Nightlife Share:</b> 28.0%<br>         </div>         </div>`)[0];
+                popup_cefc410d1dda193032573663bfd1dda7.setContent(html_0b7a9f836a8d133ee2d3f372e256da8d);
+            
+        
+
+        circle_marker_9b468e59a4ada8ad451c01ec85415a31.bindPopup(popup_cefc410d1dda193032573663bfd1dda7)
+        ;
+
+        
+    
+    
+            var circle_marker_b948c5e0eac39bb0429b975b97ef140d = L.circleMarker(
+                [40.78657239534328, -73.9889304491925],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.993666666666666, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_4c1eeafd3032c8f02c755c60738c998f = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_b588b58eb0f9d73c7a438a9ec72658c8 = $(`<div id="html_b588b58eb0f9d73c7a438a9ec72658c8" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Garment District</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 2: Mega Commercial Hub (High Daytime Density)<br>             <b>Pickup Trips:</b> 8,981<br>             <b>Avg Base Fare:</b> $17.11<br>             <b>Nightlife Share:</b> 20.6%<br>         </div>         </div>`)[0];
+                popup_4c1eeafd3032c8f02c755c60738c998f.setContent(html_b588b58eb0f9d73c7a438a9ec72658c8);
+            
+        
+
+        circle_marker_b948c5e0eac39bb0429b975b97ef140d.bindPopup(popup_4c1eeafd3032c8f02c755c60738c998f)
+        ;
+
+        
+    
+    
+            var circle_marker_fcb5f2d3cf01b27f343257724f9be5dc = L.circleMarker(
+                [40.81125883941841, -74.00528771209261],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.544333333333334, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_64c69cd14825735d6a73a1da38fa023a = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_2e92fe4ba30035f9292986bcf7fd7cc6 = $(`<div id="html_2e92fe4ba30035f9292986bcf7fd7cc6" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Greenwich Village North</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 2: Mega Commercial Hub (High Daytime Density)<br>             <b>Pickup Trips:</b> 7,633<br>             <b>Avg Base Fare:</b> $14.67<br>             <b>Nightlife Share:</b> 28.0%<br>         </div>         </div>`)[0];
+                popup_64c69cd14825735d6a73a1da38fa023a.setContent(html_2e92fe4ba30035f9292986bcf7fd7cc6);
+            
+        
+
+        circle_marker_fcb5f2d3cf01b27f343257724f9be5dc.bindPopup(popup_64c69cd14825735d6a73a1da38fa023a)
+        ;
+
+        
+    
+    
+            var circle_marker_25ca4460f0657c9fa52e79f45f425126 = L.circleMarker(
+                [40.755230557374006, -73.94170037754068],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "purple", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.481, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_6fbfa8bfad75a39a96b0e07416733fa1 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_75ee84b67439efca26bf2f668fe8fa68 = $(`<div id="html_75ee84b67439efca26bf2f668fe8fa68" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Greenwich Village South</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 1: Nightlife & Entertainment District<br>             <b>Pickup Trips:</b> 7,443<br>             <b>Avg Base Fare:</b> $14.98<br>             <b>Nightlife Share:</b> 60.5%<br>         </div>         </div>`)[0];
+                popup_6fbfa8bfad75a39a96b0e07416733fa1.setContent(html_75ee84b67439efca26bf2f668fe8fa68);
+            
+        
+
+        circle_marker_25ca4460f0657c9fa52e79f45f425126.bindPopup(popup_6fbfa8bfad75a39a96b0e07416733fa1)
+        ;
+
+        
+    
+    
+            var circle_marker_a3d91fa85c727e38555cd66672d6527c = L.circleMarker(
+                [40.789132468178494, -73.99997532741979],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "purple", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.356333333333334, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_8ce0f996c3e1886e0cb5f48b919ced5b = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_56f2abcc2d9a230fbe10c6d1d32e8944 = $(`<div id="html_56f2abcc2d9a230fbe10c6d1d32e8944" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Lower East Side</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 1: Nightlife & Entertainment District<br>             <b>Pickup Trips:</b> 7,069<br>             <b>Avg Base Fare:</b> $17.84<br>             <b>Nightlife Share:</b> 71.6%<br>         </div>         </div>`)[0];
+                popup_8ce0f996c3e1886e0cb5f48b919ced5b.setContent(html_56f2abcc2d9a230fbe10c6d1d32e8944);
+            
+        
+
+        circle_marker_a3d91fa85c727e38555cd66672d6527c.bindPopup(popup_8ce0f996c3e1886e0cb5f48b919ced5b)
+        ;
+
+        
+    
+    
+            var circle_marker_3c978669357acc0edff0941a84a6fe3b = L.circleMarker(
+                [40.8056195232663, -73.96446327071315],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.305666666666667, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_8c6a0019f111df9b5d2e9a1d24083de5 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_162ac3820916f9667b257b3512aeba66 = $(`<div id="html_162ac3820916f9667b257b3512aeba66" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">TriBeCa/Civic Center</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 2: Mega Commercial Hub (High Daytime Density)<br>             <b>Pickup Trips:</b> 6,917<br>             <b>Avg Base Fare:</b> $18.78<br>             <b>Nightlife Share:</b> 26.7%<br>         </div>         </div>`)[0];
+                popup_8c6a0019f111df9b5d2e9a1d24083de5.setContent(html_162ac3820916f9667b257b3512aeba66);
+            
+        
+
+        circle_marker_3c978669357acc0edff0941a84a6fe3b.bindPopup(popup_8c6a0019f111df9b5d2e9a1d24083de5)
+        ;
+
+        
+    
+    
+            var circle_marker_15fafdfd80604ca555757c577917ce41 = L.circleMarker(
+                [40.80212039693205, -73.98400362074615],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.146666666666667, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_603740355d6ba232eb1ca219ef1c1a0d = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_b9c64d59bb82bdf166c9dd92f271851c = $(`<div id="html_b9c64d59bb82bdf166c9dd92f271851c" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Lincoln Square West</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 0: Residential Commuter Spine<br>             <b>Pickup Trips:</b> 6,440<br>             <b>Avg Base Fare:</b> $13.81<br>             <b>Nightlife Share:</b> 6.5%<br>         </div>         </div>`)[0];
+                popup_603740355d6ba232eb1ca219ef1c1a0d.setContent(html_b9c64d59bb82bdf166c9dd92f271851c);
+            
+        
+
+        circle_marker_15fafdfd80604ca555757c577917ce41.bindPopup(popup_603740355d6ba232eb1ca219ef1c1a0d)
+        ;
+
+        
+    
+    
+            var circle_marker_5aa5f89da99cfcb6926abc35bae159fb = L.circleMarker(
+                [40.7550575306705, -73.93982275211889],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.117, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_77dff72335723c8d437892269775e47b = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_dd932ded09b0b9c1ab1b79f6fbc93a5d = $(`<div id="html_dd932ded09b0b9c1ab1b79f6fbc93a5d" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">UN/Turtle Bay South</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 0: Residential Commuter Spine<br>             <b>Pickup Trips:</b> 6,351<br>             <b>Avg Base Fare:</b> $17.56<br>             <b>Nightlife Share:</b> 11.0%<br>         </div>         </div>`)[0];
+                popup_77dff72335723c8d437892269775e47b.setContent(html_dd932ded09b0b9c1ab1b79f6fbc93a5d);
+            
+        
+
+        circle_marker_5aa5f89da99cfcb6926abc35bae159fb.bindPopup(popup_77dff72335723c8d437892269775e47b)
+        ;
+
+        
+    
+    
+            var circle_marker_7ff759582f85122bce548705eb02ec10 = L.circleMarker(
+                [40.81860801664957, -74.00411647774692],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.105333333333334, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_d146a5e9c2097fb0c69a24a5a4ac3bb8 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_a85912c3f160e3c40e8883532e4846dd = $(`<div id="html_a85912c3f160e3c40e8883532e4846dd" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Kips Bay</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 2: Mega Commercial Hub (High Daytime Density)<br>             <b>Pickup Trips:</b> 6,316<br>             <b>Avg Base Fare:</b> $14.91<br>             <b>Nightlife Share:</b> 27.5%<br>         </div>         </div>`)[0];
+                popup_d146a5e9c2097fb0c69a24a5a4ac3bb8.setContent(html_a85912c3f160e3c40e8883532e4846dd);
+            
+        
+
+        circle_marker_7ff759582f85122bce548705eb02ec10.bindPopup(popup_d146a5e9c2097fb0c69a24a5a4ac3bb8)
+        ;
+
+        
+    
+    
+            var circle_marker_3179af44d6890c8c5617ed24297afc56 = L.circleMarker(
+                [40.7505675246384, -73.93992455892415],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "purple", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.89, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_d8e35f1a5329e2c2747f03910f1b0fa1 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_14b3a378107a5e8be149020e67fcc4b0 = $(`<div id="html_14b3a378107a5e8be149020e67fcc4b0" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Little Italy/NoLiTa</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 1: Nightlife & Entertainment District<br>             <b>Pickup Trips:</b> 5,670<br>             <b>Avg Base Fare:</b> $16.52<br>             <b>Nightlife Share:</b> 48.2%<br>         </div>         </div>`)[0];
+                popup_d8e35f1a5329e2c2747f03910f1b0fa1.setContent(html_14b3a378107a5e8be149020e67fcc4b0);
+            
+        
+
+        circle_marker_3179af44d6890c8c5617ed24297afc56.bindPopup(popup_d8e35f1a5329e2c2747f03910f1b0fa1)
+        ;
+
+        
+    
+    
+            var circle_marker_01d119acefd1710bd95eedbc88b5a447 = L.circleMarker(
+                [40.80468354531179, -73.99705426391209],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.705666666666667, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_739757f1d786cfaea9aa9bdfd26b86c2 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_a4ca6cb4976462b33cf66155d8ef5be0 = $(`<div id="html_a4ca6cb4976462b33cf66155d8ef5be0" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Manhattan Valley</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 0: Residential Commuter Spine<br>             <b>Pickup Trips:</b> 5,117<br>             <b>Avg Base Fare:</b> $14.64<br>             <b>Nightlife Share:</b> 6.2%<br>         </div>         </div>`)[0];
+                popup_739757f1d786cfaea9aa9bdfd26b86c2.setContent(html_a4ca6cb4976462b33cf66155d8ef5be0);
+            
+        
+
+        circle_marker_01d119acefd1710bd95eedbc88b5a447.bindPopup(popup_739757f1d786cfaea9aa9bdfd26b86c2)
+        ;
+
+        
+    
+    
+            var circle_marker_241ce5d54d9327cd210dba714e2b6fac = L.circleMarker(
+                [40.75080154726641, -73.99879946120353],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "purple", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.613666666666667, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_e9ad1c112169de75c186455bb352ffc2 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_d7021ba2291e274a0154a0f631c22a5f = $(`<div id="html_d7021ba2291e274a0154a0f631c22a5f" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Meatpacking/West Village West</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 1: Nightlife & Entertainment District<br>             <b>Pickup Trips:</b> 4,841<br>             <b>Avg Base Fare:</b> $17.75<br>             <b>Nightlife Share:</b> 42.4%<br>         </div>         </div>`)[0];
+                popup_e9ad1c112169de75c186455bb352ffc2.setContent(html_d7021ba2291e274a0154a0f631c22a5f);
+            
+        
+
+        circle_marker_241ce5d54d9327cd210dba714e2b6fac.bindPopup(popup_e9ad1c112169de75c186455bb352ffc2)
+        ;
+
+        
+    
+    
+            var circle_marker_b845fee4ec8f1c6ed494df7b8d84802c = L.circleMarker(
+                [40.80560944622224, -73.955773691152],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "purple", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.330333333333334, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_2415db040eb31e7b7199d91937ab1a27 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_4d9eecb65e5d41d90eb92647bdb12062 = $(`<div id="html_4d9eecb65e5d41d90eb92647bdb12062" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">SoHo</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 1: Nightlife & Entertainment District<br>             <b>Pickup Trips:</b> 3,991<br>             <b>Avg Base Fare:</b> $16.72<br>             <b>Nightlife Share:</b> 31.6%<br>         </div>         </div>`)[0];
+                popup_2415db040eb31e7b7199d91937ab1a27.setContent(html_4d9eecb65e5d41d90eb92647bdb12062);
+            
+        
+
+        circle_marker_b845fee4ec8f1c6ed494df7b8d84802c.bindPopup(popup_2415db040eb31e7b7199d91937ab1a27)
+        ;
+
+        
+    
+    
+            var circle_marker_03c7b0f86453bab66caf4b704b2acfbf = L.circleMarker(
+                [40.78861521760954, -74.00592286179284],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.3149999999999995, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_ff72b6d7c1a0bc2f807ab513420b73c8 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_e532fd27b67014d514d78905a6fda2c0 = $(`<div id="html_e532fd27b67014d514d78905a6fda2c0" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">East Harlem South</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 0: Residential Commuter Spine<br>             <b>Pickup Trips:</b> 3,945<br>             <b>Avg Base Fare:</b> $16.33<br>             <b>Nightlife Share:</b> 8.5%<br>         </div>         </div>`)[0];
+                popup_ff72b6d7c1a0bc2f807ab513420b73c8.setContent(html_e532fd27b67014d514d78905a6fda2c0);
+            
+        
+
+        circle_marker_03c7b0f86453bab66caf4b704b2acfbf.bindPopup(popup_ff72b6d7c1a0bc2f807ab513420b73c8)
+        ;
+
+        
+    
+    
+            var circle_marker_dbfcfbd547c1ca9dc0f22391abf9815e = L.circleMarker(
+                [40.78266813164304, -73.99295335164405],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.209666666666667, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_492fbeb277d476203095496040c8e053 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_8b24795b0ba272be85aa4c24c9e73cb4 = $(`<div id="html_8b24795b0ba272be85aa4c24c9e73cb4" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Clinton West</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 0: Residential Commuter Spine<br>             <b>Pickup Trips:</b> 3,629<br>             <b>Avg Base Fare:</b> $16.98<br>             <b>Nightlife Share:</b> 21.8%<br>         </div>         </div>`)[0];
+                popup_492fbeb277d476203095496040c8e053.setContent(html_8b24795b0ba272be85aa4c24c9e73cb4);
+            
+        
+
+        circle_marker_dbfcfbd547c1ca9dc0f22391abf9815e.bindPopup(popup_492fbeb277d476203095496040c8e053)
+        ;
+
+        
+    
+    
+            var circle_marker_d11a4c24314e1a75187358fb6eebf148 = L.circleMarker(
+                [40.8053161928459, -73.99219670239721],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.011, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_14cff4b0bbe84d517eb402899fb1c4ed = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_3f13246594ddb66d4e0cfbf3a31f24e8 = $(`<div id="html_3f13246594ddb66d4e0cfbf3a31f24e8" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Battery Park City</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 0: Residential Commuter Spine<br>             <b>Pickup Trips:</b> 3,033<br>             <b>Avg Base Fare:</b> $24.24<br>             <b>Nightlife Share:</b> 3.5%<br>         </div>         </div>`)[0];
+                popup_14cff4b0bbe84d517eb402899fb1c4ed.setContent(html_3f13246594ddb66d4e0cfbf3a31f24e8);
+            
+        
+
+        circle_marker_d11a4c24314e1a75187358fb6eebf148.bindPopup(popup_14cff4b0bbe84d517eb402899fb1c4ed)
+        ;
+
+        
+    
+    
+            var circle_marker_a44bfa0dfbbf698b1455fd2f40746d81 = L.circleMarker(
+                [40.79560113481863, -73.93480788984694],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "purple", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.970666666666666, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_981ac0d41c4a7227c78c1855c9f91c3e = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_a90e83a44837e029a631601d1a4ac7a8 = $(`<div id="html_a90e83a44837e029a631601d1a4ac7a8" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Financial District North</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 1: Nightlife & Entertainment District<br>             <b>Pickup Trips:</b> 2,912<br>             <b>Avg Base Fare:</b> $23.40<br>             <b>Nightlife Share:</b> 35.3%<br>         </div>         </div>`)[0];
+                popup_981ac0d41c4a7227c78c1855c9f91c3e.setContent(html_a90e83a44837e029a631601d1a4ac7a8);
+            
+        
+
+        circle_marker_a44bfa0dfbbf698b1455fd2f40746d81.bindPopup(popup_981ac0d41c4a7227c78c1855c9f91c3e)
+        ;
+
+        
+    
+    
+            var circle_marker_16954f9e3fc8147489d4ec56cec0706b = L.circleMarker(
+                [40.80717487391212, -73.97233514447716],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.892333333333333, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_3e8314c53ac4f1b0331c0037e1d3a050 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_2a693a9209c82344bc6ff6d301d8b87e = $(`<div id="html_2a693a9209c82344bc6ff6d301d8b87e" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">World Trade Center</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 4: Suburban Outer Arterial<br>             <b>Pickup Trips:</b> 2,677<br>             <b>Avg Base Fare:</b> $24.48<br>             <b>Nightlife Share:</b> 10.7%<br>         </div>         </div>`)[0];
+                popup_3e8314c53ac4f1b0331c0037e1d3a050.setContent(html_2a693a9209c82344bc6ff6d301d8b87e);
+            
+        
+
+        circle_marker_16954f9e3fc8147489d4ec56cec0706b.bindPopup(popup_3e8314c53ac4f1b0331c0037e1d3a050)
+        ;
+
+        
+    
+    
+            var circle_marker_be77e1bbd25692b9b87465d259211d85 = L.circleMarker(
+                [40.783638080919964, -74.00659754438655],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.886666666666667, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_88ca2481933a9d7fabb9154ae58e8bf5 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_77c7c6001a10bf1784cae54049dfdf0b = $(`<div id="html_77c7c6001a10bf1784cae54049dfdf0b" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Hudson Sq</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 0: Residential Commuter Spine<br>             <b>Pickup Trips:</b> 2,660<br>             <b>Avg Base Fare:</b> $17.43<br>             <b>Nightlife Share:</b> 28.1%<br>         </div>         </div>`)[0];
+                popup_88ca2481933a9d7fabb9154ae58e8bf5.setContent(html_77c7c6001a10bf1784cae54049dfdf0b);
+            
+        
+
+        circle_marker_be77e1bbd25692b9b87465d259211d85.bindPopup(popup_88ca2481933a9d7fabb9154ae58e8bf5)
+        ;
+
+        
+    
+    
+            var circle_marker_e60eba6fe4eea317f58c03bc08e619d9 = L.circleMarker(
+                [40.76691912241678, -73.94501783346756],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.835, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_8f262728f9f3455b3057f2d4285d933a = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_9dbe2a239bb1699d568736cfbcdd2283 = $(`<div id="html_9dbe2a239bb1699d568736cfbcdd2283" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Morningside Heights</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 0: Residential Commuter Spine<br>             <b>Pickup Trips:</b> 2,505<br>             <b>Avg Base Fare:</b> $16.60<br>             <b>Nightlife Share:</b> 12.9%<br>         </div>         </div>`)[0];
+                popup_8f262728f9f3455b3057f2d4285d933a.setContent(html_9dbe2a239bb1699d568736cfbcdd2283);
+            
+        
+
+        circle_marker_e60eba6fe4eea317f58c03bc08e619d9.bindPopup(popup_8f262728f9f3455b3057f2d4285d933a)
+        ;
+
+        
+    
+    
+            var circle_marker_57e5b2ebb887a9bcd8594142d3b280c2 = L.circleMarker(
+                [40.762398443089516, -73.76510589644727],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.674666666666667, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_cfcb13ea8321ca08d74dc5f7019f6925 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_f98cab156cc2b8053dfacf09e89f19a4 = $(`<div id="html_f98cab156cc2b8053dfacf09e89f19a4" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">East Elmhurst</h4>             <b>Borough:</b> Queens<br>             <b>Classification:</b> Cluster 0: Residential Commuter Spine<br>             <b>Pickup Trips:</b> 2,024<br>             <b>Avg Base Fare:</b> $43.84<br>             <b>Nightlife Share:</b> 14.2%<br>         </div>         </div>`)[0];
+                popup_cfcb13ea8321ca08d74dc5f7019f6925.setContent(html_f98cab156cc2b8053dfacf09e89f19a4);
+            
+        
+
+        circle_marker_57e5b2ebb887a9bcd8594142d3b280c2.bindPopup(popup_cfcb13ea8321ca08d74dc5f7019f6925)
+        ;
+
+        
+    
+    
+            var circle_marker_c2f73b33164f178fc49f91f5f43ed521 = L.circleMarker(
+                [40.76317388989959, -74.00751233434619],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.555, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_a5bebfab6a050b4deb94edeee404e5f1 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_ca881f80b54ce67b994f519f23090584 = $(`<div id="html_ca881f80b54ce67b994f519f23090584" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Central Harlem</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 0: Residential Commuter Spine<br>             <b>Pickup Trips:</b> 1,665<br>             <b>Avg Base Fare:</b> $17.47<br>             <b>Nightlife Share:</b> 14.5%<br>         </div>         </div>`)[0];
+                popup_a5bebfab6a050b4deb94edeee404e5f1.setContent(html_ca881f80b54ce67b994f519f23090584);
+            
+        
+
+        circle_marker_c2f73b33164f178fc49f91f5f43ed521.bindPopup(popup_a5bebfab6a050b4deb94edeee404e5f1)
+        ;
+
+        
+    
+    
+            var circle_marker_2d848f5060ad5c383e2ec55296f90ca6 = L.circleMarker(
+                [40.81990138426687, -73.95523903600403],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.525, "stroke": true, "weight": 3}
+            ).addTo(map_89ecd3f50f68e32990b4d01d53b7b253);
+        
+    
+        var popup_24cf94e9ee256a6007d8f9b1abb30c78 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_32244e4ce5c41040ab90a4bbcc165e85 = $(`<div id="html_32244e4ce5c41040ab90a4bbcc165e85" style="width: 100.0%; height: 100.0%;">         <div style="font-family: sans-serif; width: 220px;">             <h4 style="margin: 0 0 6px 0; color: #0284c7;">Bloomingdale</h4>             <b>Borough:</b> Manhattan<br>             <b>Classification:</b> Cluster 0: Residential Commuter Spine<br>             <b>Pickup Trips:</b> 1,575<br>             <b>Avg Base Fare:</b> $15.48<br>             <b>Nightlife Share:</b> 10.3%<br>         </div>         </div>`)[0];
+                popup_24cf94e9ee256a6007d8f9b1abb30c78.setContent(html_32244e4ce5c41040ab90a4bbcc165e85);
+            
+        
+
+        circle_marker_2d848f5060ad5c383e2ec55296f90ca6.bindPopup(popup_24cf94e9ee256a6007d8f9b1abb30c78)
+        ;
+
+        
+    
+</script>
+</html>

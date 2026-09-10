@@ -40,7 +40,9 @@ def make_submission_zip(team_name="TeamName"):
         "TECHNICAL_REPORT.md",
         "MEMBER2_REPORT_SECTION.md",
         "DEMO_VIDEO_SCRIPT.md",
+        "app.py",
         "dashboard.html",
+        "hotspots_map.html",
         "readme.md",
         "requirements.txt",
         "setup.py"
