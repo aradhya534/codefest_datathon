@@ -15,7 +15,10 @@ if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
 
 # Import Member 2 predictor
-from predict import UrbanFlowPredictor
+try:
+    from predict import UrbanFlowPredictor
+except ImportError:
+    from notebooks.predict import UrbanFlowPredictor
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 HOTSPOTS_CSV = os.path.join(BASE_DIR, "spatiotemporal", "zone_hotspot_clusters.csv")
@@ -110,8 +113,8 @@ class AIMobilityAssistant:
             text = (
                 f"🚖 **Trip Prediction Summary**:\n"
                 f"- **Route**: {oz_name} ➔ {dz_name} ({distance} miles)\n"
-                f"- **Guaranteed Upfront Base Fare**: ${res['predicted_base_fare']:.2f} (Powered by LightGBM R²=96.2%)\n"
-                f"- **Estimated Trip Duration**: {res['predicted_duration_minutes']:.1f} minutes (Powered by XGBoost R²=86.0%)\n"
+                f"- **Guaranteed Upfront Base Fare**: ${res['predicted_base_fare']:.2f} (Powered by {res['model_fare_engine'].upper()} R²=96.9%)\n"
+                f"- **Estimated Trip Duration**: {res['predicted_duration_minutes']:.1f} minutes (Powered by {res['model_duration_engine'].upper()} R²=87.2%)\n"
                 f"- **Estimated Arrival Time**: {res['estimated_arrival_time']}\n"
                 f"- **Rider Count**: {riders} passenger(s)"
             )

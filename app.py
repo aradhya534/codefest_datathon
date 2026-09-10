@@ -188,14 +188,14 @@ with st.sidebar:
     
     st.markdown("""
     <div style="background: rgba(15,23,42,0.8); border: 1px solid #1e293b; border-radius: 8px; padding: 12px; margin-bottom: 12px;">
-        <div style="font-size: 12px; color: #94a3b8;">Fare Engine: <b>LightGBM Regressor</b></div>
-        <div style="font-size: 14px; font-weight: 700; color: #4ade80;">R² = 96.20% | MAE = $1.88</div>
-        <div style="font-size: 11px; color: #64748b; margin-top: 2px;">5-Fold CV: $3.52 ± 0.10</div>
+        <div style="font-size: 12px; color: #94a3b8;">Fare Engine: <b>XGBoost Regressor</b></div>
+        <div style="font-size: 14px; font-weight: 700; color: #4ade80;">R² = 96.86% | MAE = $1.73</div>
+        <div style="font-size: 11px; color: #64748b; margin-top: 2px;">5-Fold CV: $3.48 ± 0.08</div>
     </div>
     <div style="background: rgba(15,23,42,0.8); border: 1px solid #1e293b; border-radius: 8px; padding: 12px; margin-bottom: 12px;">
         <div style="font-size: 12px; color: #94a3b8;">ETA Engine: <b>XGBoost Regressor</b></div>
-        <div style="font-size: 14px; font-weight: 700; color: #38bdf8;">R² = 85.96% | MAE = 3.19 min</div>
-        <div style="font-size: 11px; color: #64748b; margin-top: 2px;">5-Fold CV: 5.36 ± 0.04 min</div>
+        <div style="font-size: 14px; font-weight: 700; color: #38bdf8;">R² = 87.15% | MAE = 3.10 min</div>
+        <div style="font-size: 11px; color: #64748b; margin-top: 2px;">5-Fold CV: 5.53 ± 0.05 min</div>
     </div>
     <div style="background: rgba(15,23,42,0.8); border: 1px solid #1e293b; border-radius: 8px; padding: 12px; margin-bottom: 12px;">
         <div style="font-size: 12px; color: #94a3b8;">Demand Dispatcher: <b>LightGBM 72h</b></div>

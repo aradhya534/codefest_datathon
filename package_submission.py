@@ -61,7 +61,7 @@ def make_submission_zip(team_name="CodeWave"):
         ("notebooks", [f for f in notebook_files if os.path.exists(os.path.join(base_dir, "notebooks", f))]),
         ("cleaned_data", ["urban_flow_cleaned.csv", "powerbi_kpi_summary.csv", "anomaly_cleaning_audit.csv"]),
         ("cleaned_data/plots", os.listdir(os.path.join(base_dir, "cleaned_data", "plots")) if os.path.exists(os.path.join(base_dir, "cleaned_data", "plots")) else []),
-        ("notebooks/models", ["fare_model_lightgbm.pkl", "duration_model_xgboost.pkl", "model_metadata.json", "cleaning_log.json"]),
+        ("notebooks/models", [f for f in ["fare_model_xgboost.pkl", "fare_model_lightgbm.pkl", "duration_model_xgboost.pkl", "corridor_speed_priors.json", "model_metadata.json", "cleaning_log.json"] if os.path.exists(os.path.join(base_dir, "notebooks", "models", f))]),
         ("notebooks/models/plots", os.listdir(os.path.join(base_dir, "notebooks", "models", "plots")) if os.path.exists(os.path.join(base_dir, "notebooks", "models", "plots")) else []),
         ("notebooks/models/splits", os.listdir(os.path.join(base_dir, "notebooks", "models", "splits")) if os.path.exists(os.path.join(base_dir, "notebooks", "models", "splits")) else []),
         ("notebooks/spatiotemporal", ["demand_forecast_lgb.pkl", "hotspot_kmeans_model.pkl", "member3_metrics.json", "zone_hotspot_clusters.csv"]),

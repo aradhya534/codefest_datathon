@@ -23,8 +23,8 @@
 Urban mobility networks generate vast volumes of continuous transactional data, offering unprecedented potential for operational optimization. However, raw transit logs present severe challenges: sensor dropouts, data corruption, and extreme spatiotemporal volatility. 
 
 Our team designed, built, and validated an integrated end-to-end data intelligence and machine learning framework for the **Urban Flow Analytics Data Challenge**:
-1. **Upfront Fare Prediction Engine:** Powered by a tuned **LightGBM** regressor, explaining **96.20% ($R^2 = 0.9620$)** of fare variance with a Mean Absolute Error (MAE) of just **\$1.88**.
-2. **Dynamic Arrival Estimator (ETA):** Powered by **XGBoost**, achieving **85.96% ($R^2 = 0.8596$)** accuracy and predicting trip durations down to **$\pm 3.19$ minutes**.
+1. **Upfront Fare Prediction Engine:** Powered by a tuned **XGBoost** regressor, explaining **96.86% ($R^2 = 0.9686$)** of fare variance with a Mean Absolute Error (MAE) of just **\$1.73** (LightGBM achieving $R^2 = 0.9681$).
+2. **Dynamic Arrival Estimator (ETA):** Powered by **XGBoost**, achieving **87.15% ($R^2 = 0.8715$)** accuracy and predicting trip durations down to **$\pm 3.10$ minutes** (RMSE: 5.20 min).
 3. **Fleet Dispatcher 72-Hour Demand Forecasting:** A multi-lag autoregressive gradient-boosting model predicting citywide ride demand with **$R^2 = 0.9468$**, delivering an **80% reduction in forecasting error** over traditional Holt-Winters time-series baselines.
 4. **Spatial Hotspot Clustering:** Unsupervised $k$-means segmentation ($k=6$, Silhouette score = 0.449) delineating commuter arteries, airport transit corridors, and late-night entertainment districts.
 5. **AI Mobility Assistant:** A safe natural language agent translating plain English prompts into real-time model inference and fleet management recommendations.
@@ -43,14 +43,14 @@ graph TD
     end
 
     subgraph Feature Engineering
-        C --> D[Temporal Features: Diurnal Cycles & Rush Hours]
-        C --> E[Spatial Features: OD Pairs & Inter-Borough Flows]
-        C --> F[Tariff Modifiers: Airport Flags & Fixed Rates]
+        C --> D[Temporal Features: Diurnal Cycles & Cyclical Trigonometry]
+        C --> E[Spatial Corridor Priors: OD Speed Lookup Table]
+        C --> F[Tariff Modifiers: Airport Flags & Distance Interactions]
     end
 
     subgraph Machine Learning Engines
-        D & E & F --> G[Task 2.1: Upfront Fare Engine - LightGBM R2=96.2%]
-        D & E & F --> H[Task 2.2: Dynamic ETA Engine - XGBoost R2=86.0%]
+        D & E & F --> G[Task 2.1: Upfront Fare Engine - XGBoost R2=96.9%]
+        D & E & F --> H[Task 2.2: Dynamic ETA Engine - XGBoost R2=87.2%]
         C --> I[Task 3.1: 72h Demand Forecaster - LightGBM R2=94.7%]
         C --> J[Task 3.2: Hotspot Clustering - K-Means k=6]
     end
@@ -58,7 +58,7 @@ graph TD
     subgraph Application & Interface Layer
         G & H --> K[predict.py: Real-Time Inference API]
         I & J --> L[Fleet Dispatch & Heatmap Dashboard]
-        K & L --> M[AI Mobility Assistant: Natural Language Interface]
+        K & L --> M[Streamlit Pro Platform & AI Mobility Copilot]
     end
 ```
 
@@ -66,19 +66,19 @@ graph TD
 
 ## 3. Data Quality Assessment & Anomaly Quantification
 
-Operational transit logs contain critical anomalies that degrade model training if not isolated. Across ~500,000 trips spanning April 2025 to March 2026, anomalies were systematically filtered with empirical impact auditing:
+Data quality auditing was performed across 600,000 transactions. Eight systematic anomaly categories were isolated using sequential boundary masking:
 
-| Anomaly Class | Quantitative Condition | Methodological Rationale | Rows Impacted | % Total Raw |
+| Anomaly Category | Heuristic Definition | Domain Justification | Filtered Count | Impact (%) |
 |---|---|---|---|---|
-| **Temporal Inversion / Zero Duration** | $t_{\text{duration}} \le 0$ | Clock desynchronization or voided pick-ups. | 9,475 | 1.895% |
-| **Sub-Minimum / Negative Base Fare** | $\text{base\_fare} < \$2.50$ | NYC TLC minimum flag drop is \$2.50; negative values indicate chargebacks. | 9,995 | 1.999% |
-| **Extreme Non-Standard Fares** | $\text{base\_fare} > \$250.00$ | Exceptional charter/out-of-state runs unrepresentative of urban rides. | 149 | 0.030% |
-| **Zero Distance with Positive Fare** | $\text{dist} \le 0 \land \text{fare} > 0$ | Meter run while vehicle stationary (waiting/cancellation). | 6,852 | 1.370% |
-| **Zero or Negative Riders** | $\text{rider\_count} \le 0$ | Driver sensor errors. | 3,614 | 0.723% |
-| **Non-revenue Transactions** | $\text{settlement} \in \{3, 4, 6\}$ | Uncollected trips, disputes, and voided tickets. | 8,597 | 1.719% |
-| **Physical Speed Outliers** | $\text{speed} > 85\text{ mph} \lor < 1\text{ mph}$ | GPS jumps or gridlock sensor stalls. | 616 | 0.123% |
-| **Excessive Duration** | $t_{\text{duration}} > 180\text{ min}$ | Vehicle breakdown or forgotten meter stop. | 45 | 0.009% |
-| **Total Cleaned Operational Volume** | — | — | **460,649 clean rows** | **7.87% removed** |
+| **Negative/Zero Duration** | $t_{\text{dropoff}} \le t_{\text{pickup}}$ | Clock desynchronization or corrupted meters. | 11,322 | 1.887% |
+| **Sub-minimum Fare** | $\text{base\_fare} < \$2.50$ | Sub-initial flag drop rate (TLC regulatory minimum). | 12,002 | 2.000% |
+| **Extreme Outlier Fares** | $\text{base\_fare} > \$250.00$ | Manual override entry or multi-day reservations. | 180 | 0.030% |
+| **Zero Distance Revenue** | $\text{distance} \le 0 \land \text{fare} > 0$ | Canceled trips with cancellation fees billed as fare. | 8,016 | 1.336% |
+| **Invalid Passenger Count**| $\text{passengers} \le 0$ | Unregistered passenger count telemetry errors. | 4,276 | 0.713% |
+| **Disputed / Voided Trips** | $\text{payment\_type} \in \{3, 4, 6\}$ | Uncollected or disputed transactions. | 10,346 | 1.724% |
+| **Physically Impossible Speed** | $v > 85\text{ mph} \lor v < 1\text{ mph}$ | Unrealistic urban transit or GPS jump glitches. | 739 | 0.123% |
+| **Excessive Duration** | $t_{\text{duration}} > 180\text{ min}$ | Vehicle breakdown or forgotten meter stop. | 56 | 0.009% |
+| **Total Cleaned Operational Volume** | — | — | **553,063 clean rows** | **7.82% removed** |
 
 ---
 
@@ -92,16 +92,16 @@ Operational transit logs contain critical anomalies that degrade model training 
   - **$R^2$ Score:** Dimensionless benchmark capturing proportion of metered fare variance explained.
 
 ### 4.2 Benchmark Model Comparison
-Dataset split: 70% Train (322,453), 15% Validation (69,098), 15% Holdout Test (69,098). Random Seed = 42.
+Dataset split: 70% Train (387,143), 15% Validation (82,960), 15% Holdout Test (82,960). Random Seed = 42.
 
 | Model Architecture | Val RMSE (\$) | Val MAE (\$) | Val $R^2$ | Test RMSE (\$) | Test MAE (\$) | Test $R^2$ |
 |---|---|---|---|---|---|---|
-| **OLS Linear Regression (Baseline)** | 6.807 | 3.546 | 0.8626 | 6.827 | 3.534 | 0.8623 |
-| **XGBoost Regressor** | 3.695 | 1.891 | 0.9595 | 3.697 | 1.889 | 0.9596 |
-| **LightGBM Regressor (Champion 🏆)** | **3.543** | **1.881** | **0.9628** | **$3.588** | **$1.877** | **0.9620** |
+| **OLS Linear Regression (Baseline)** | 6.715 | 3.351 | 0.8717 | 6.615 | 3.321 | 0.8725 |
+| **LightGBM Regressor** | 3.361 | 1.753 | 0.9679 | 3.309 | 1.757 | 0.9681 |
+| **XGBoost Regressor (Champion 🏆)** | **3.347** | **1.730** | **0.9681** | **$3.283** | **$1.727** | **0.9686** |
 
-- **5-Fold Cross-Validation:** $\$3.5206 \pm 0.1032$.
-- **Key Hyperparameters:** `learning_rate=0.05`, `max_depth=8`, `n_estimators=400`, `subsample=0.8`, `colsample_bytree=0.8`.
+- **5-Fold Cross-Validation:** $\$3.4762 \pm 0.0812$.
+- **Key Hyperparameters:** `learning_rate=0.04`, `max_depth=8`, `n_estimators=600`, `subsample=0.85`, `colsample_bytree=0.85`.
 
 ---
 
@@ -115,12 +115,12 @@ Dataset split: 70% Train (322,453), 15% Validation (69,098), 15% Holdout Test (6
 
 | Model Architecture | Val RMSE (min) | Val MAE (min) | Val $R^2$ | Test RMSE (min) | Test MAE (min) | Test $R^2$ |
 |---|---|---|---|---|---|---|
-| **OLS Linear Regression (Baseline)** | 7.707 | 5.139 | 0.7009 | 7.656 | 5.128 | 0.7012 |
-| **LightGBM Regressor** | 5.427 | 3.313 | 0.8516 | 5.376 | 3.300 | 0.8527 |
-| **XGBoost Regressor (Champion 🏆)** | **5.300** | **3.208** | **0.8585** | **5.249 min** | **3.196 min** | **0.8596** |
+| **OLS Linear Regression (Baseline)** | 7.065 | 4.416 | 0.7611 | 7.204 | 4.428 | 0.7529 |
+| **LightGBM Regressor** | 5.215 | 3.135 | 0.8698 | 5.266 | 3.158 | 0.8680 |
+| **XGBoost Regressor (Champion 🏆)** | **5.152** | **3.073** | **0.8729** | **5.196 min** | **3.096 min** | **0.8715** |
 
-- **5-Fold Cross-Validation:** $5.3618 \pm 0.0401\text{ min}$.
-- **Accuracy Horizon:** Delivers ETA predictions accurate to within **3.2 minutes** on average.
+- **5-Fold Cross-Validation:** $5.5334 \pm 0.0512\text{ min}$.
+- **Accuracy Horizon:** Delivers ETA predictions accurate to within **3.10 minutes** on average.
 
 ---
 

@@ -65,13 +65,13 @@ Three distinct inductive learning paradigms were benchmarked:
 
 | Model Architecture | Val RMSE (\$) | Val MAE (\$) | Val $R^2$ | Test RMSE (\$) | Test MAE (\$) | Test $R^2$ |
 |---|---|---|---|---|---|---|
-| **Linear Regression (Baseline)** | 6.807 | 3.546 | 0.8626 | 6.827 | 3.534 | 0.8623 |
-| **XGBoost** | 3.695 | 1.891 | 0.9595 | 3.697 | 1.889 | 0.9596 |
-| **LightGBM (Winner 🏆)** | **3.543** | **1.881** | **0.9628** | **$3.588** | **$1.877** | **0.9620** |
+| **Linear Regression (Baseline)** | 6.715 | 3.351 | 0.8717 | 6.615 | 3.321 | 0.8725 |
+| **LightGBM** | 3.361 | 1.753 | 0.9679 | 3.309 | 1.757 | 0.9681 |
+| **XGBoost (Winner 🏆)** | **3.347** | **1.730** | **0.9681** | **$3.283** | **$1.727** | **0.9686** |
 
-- **Test $R^2$ Score:** **96.20%** of total fare variance explained!
-- **Mean Absolute Error (MAE):** **\$1.88** (on average, fare estimates are accurate within \$1.88).
-- **5-Fold Cross-Validation RMSE:** $\$3.5206 \pm 0.1032$.
+- **Test $R^2$ Score:** **96.86%** of total fare variance explained!
+- **Mean Absolute Error (MAE):** **\$1.73** (on average, fare estimates are accurate within \$1.73).
+- **5-Fold Cross-Validation RMSE:** $\$3.4762 \pm 0.0812$.
 
 ---
 
@@ -79,13 +79,13 @@ Three distinct inductive learning paradigms were benchmarked:
 
 | Model Architecture | Val RMSE (min) | Val MAE (min) | Val $R^2$ | Test RMSE (min) | Test MAE (min) | Test $R^2$ |
 |---|---|---|---|---|---|---|
-| **Linear Regression (Baseline)** | 7.707 | 5.139 | 0.7009 | 7.656 | 5.128 | 0.7012 |
-| **LightGBM** | 5.427 | 3.313 | 0.8516 | 5.376 | 3.300 | 0.8527 |
-| **XGBoost (Winner 🏆)** | **5.300** | **3.208** | **0.8585** | **5.249 min** | **3.196 min** | **0.8596** |
+| **Linear Regression (Baseline)** | 7.065 | 4.416 | 0.7611 | 7.204 | 4.428 | 0.7529 |
+| **LightGBM** | 5.215 | 3.135 | 0.8698 | 5.266 | 3.158 | 0.8680 |
+| **XGBoost (Winner 🏆)** | **5.152** | **3.073** | **0.8729** | **5.196 min** | **3.096 min** | **0.8715** |
 
-- **Test $R^2$ Score:** **85.96%** of trip duration variance explained!
-- **Mean Absolute Error (MAE):** **3.20 minutes** (ETA is accurate down to ~3 minutes).
-- **5-Fold Cross-Validation RMSE:** $5.3618 \pm 0.0401\text{ min}$.
+- **Test $R^2$ Score:** **87.15%** of trip duration variance explained!
+- **Mean Absolute Error (MAE):** **3.10 minutes** (ETA is accurate down to ~3 minutes).
+- **5-Fold Cross-Validation RMSE:** $5.5334 \pm 0.0512\text{ min}$.
 
 ---
 
@@ -98,27 +98,28 @@ As mandated by the evaluation rubrics, metric selection was governed by domain o
    - *Domain justification:* In passenger transportation, outlier errors (e.g., predicting an arrival time off by 25 minutes or a fare miscalculated by $30) cause catastrophic customer dissatisfaction and chargebacks. Because RMSE penalizes large residuals quadratically, models optimized on RMSE avoid severe over- or under-estimations.
 2. **Mean Absolute Error (MAE) — Operational Interpretability:**
    - *Mathematical formulation:* $\text{MAE} = \frac{1}{n}\sum_{i=1}^{n}|y_i - \hat{y}_i|$
-   - *Domain justification:* MAE provides direct real-world meaning for stakeholders and marketing: "On average, upfront base fares are within $\pm \$1.88$ of the true meter value, and trip ETA is accurate within $\pm 3.20$ minutes."
+   - *Domain justification:* MAE provides direct real-world meaning for stakeholders and marketing: "On average, upfront base fares are within $\pm \$1.73$ of the true meter value, and trip ETA is accurate within $\pm 3.10$ minutes."
 3. **Coefficient of Determination ($R^2$ Score) — Relative Variance Explained:**
    - *Mathematical formulation:* $R^2 = 1 - \frac{\sum (y_i - \hat{y}_i)^2}{\sum (y_i - \bar{y})^2}$
-   - *Domain justification:* Demonstrates that gradient boosting models account for over **86% of trip duration variability** and **96.2% of fare variance**, thoroughly outperforming standard linear approximations.
+   - *Domain justification:* Demonstrates that gradient boosting models account for over **87.15% of trip duration variability** and **96.86% of fare variance**, thoroughly outperforming standard linear approximations.
 
 ---
 
 ## 7. Feature Importance & Operational Insights
 
 Key drivers identified via Gini impurity / gain importance:
-1. **Trip Distance (`distance_miles`)**: Accounts for >72% of total split gain for fares and >60% for duration.
-2. **Rate Class ID (`rate_class_id`) & Airport Indicators**: Fixed rates for airport transfers (JFK Flat Rate, Newark surcharge) significantly perturb linear relationships.
-3. **Diurnal Time Features (`pickup_hour`, `is_rush_hour`)**: Exhibit massive impact on duration prediction due to peak-period arterial bottlenecks.
-4. **Origin & Destination Zone Locality**: Reflects dense urban grid speeds (Manhattan) versus expressway speeds (Queens / Brooklyn connectors).
+1. **Trip Distance (`distance_miles`)**: Accounts for >68% of total split gain for fares and >55% for duration.
+2. **Corridor Historical Speed Prior (`od_speed_prior` & `expected_travel_time_min`)**: Ingests route-specific traffic bottlenecks without data leakage, significantly lifting duration $R^2$.
+3. **Rate Class ID (`rate_class_id`) & Airport Indicators**: Fixed rates for airport transfers (JFK Flat Rate, Newark surcharge) significantly perturb linear relationships.
+4. **Diurnal Time Features (`sin_hour`, `cos_hour`, `is_rush_hour`)**: Exhibit massive impact on duration prediction due to peak-period arterial bottlenecks.
 
 ---
 
 ## 8. Exported Deliverables Summary
 
-- **Fare Model:** `fare_model_lightgbm.pkl` ($R^2 = 0.9620$)
-- **Duration Model:** `duration_model_xgboost.pkl` ($R^2 = 0.8596$)
+- **Fare Model:** `fare_model_xgboost.pkl` ($R^2 = 0.9686$) & `fare_model_lightgbm.pkl` ($R^2 = 0.9681$)
+- **Duration Model:** `duration_model_xgboost.pkl` ($R^2 = 0.8715$)
+- **Corridor Speed Priors:** `corridor_speed_priors.json`
 - **Model Metadata & Manifest:** `model_metadata.json`
 - **Reproducible Inference Engine:** `predict.py`
 - **Data Partitions:** `fare_train.csv`, `fare_val.csv`, `fare_test.csv`, `duration_train.csv`, `duration_val.csv`, `duration_test.csv`
