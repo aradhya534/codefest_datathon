@@ -17,7 +17,7 @@ import shutil
 if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
 
-def make_submission_zip(team_name="TeamName"):
+def make_submission_zip(team_name="CodeWave"):
     base_dir = os.path.dirname(os.path.abspath(__file__))
     zip_filename = f"{team_name}_CodefestDatathon2026.zip"
     zip_filepath = os.path.join(base_dir, zip_filename)
@@ -27,7 +27,7 @@ def make_submission_zip(team_name="TeamName"):
     
     # Official final notebook name requirement: TeamName_FinalNotebook.ipynb
     official_nb_name = f"{team_name}_FinalNotebook.ipynb"
-    src_master_nb = os.path.join(base_dir, "notebooks", "TeamName_FinalNotebook.ipynb")
+    src_master_nb = os.path.join(base_dir, "notebooks", "CodeWave_FinalNotebook.ipynb")
     dst_team_nb = os.path.join(base_dir, "notebooks", official_nb_name)
     
     if os.path.exists(src_master_nb) and src_master_nb != dst_team_nb:
@@ -98,5 +98,5 @@ def make_submission_zip(team_name="TeamName"):
     print("=" * 55)
 
 if __name__ == "__main__":
-    tname = sys.argv[1] if len(sys.argv) > 1 else "TeamName"
+    tname = sys.argv[1] if len(sys.argv) > 1 else "CodeWave"
     make_submission_zip(tname)

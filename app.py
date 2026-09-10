@@ -55,7 +55,7 @@ predictor, assistant, zones_df = load_system()
 # Sidebar
 st.sidebar.image("https://img.icons8.com/isometric/100/taxi.png", width=70)
 st.sidebar.title("Urban Flow AI")
-st.sidebar.caption("SLIIT Codefest Datathon 2026")
+st.sidebar.caption("Team CodeWave | SLIIT Codefest Datathon 2026")
 st.sidebar.markdown("---")
 st.sidebar.markdown("### 🏆 Production ML Engines")
 st.sidebar.markdown("- **Fare Prediction**: `LightGBM` (R² = **96.20%**, MAE = **$1.88**)")

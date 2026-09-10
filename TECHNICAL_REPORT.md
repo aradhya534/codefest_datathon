@@ -1,5 +1,6 @@
 # SLIIT Codefest Datathon 2026 — Comprehensive Technical Report
 ## Urban Flow Analytics: Predictive Modeling, Spatial-Temporal Demand Forecasting & AI Mobility Architecture
+### Team Name: CodeWave
 
 ---
 
@@ -213,7 +214,7 @@ To support diverse stakeholder workflows, our solution ships with three compleme
 ## 11. Submission Deliverables & Reproducibility Audit
 
 All competition requirements are strictly satisfied:
-- ✅ **Official Unified Master Notebook:** `notebooks/TeamName_FinalNotebook.ipynb` (Auto-renamed upon packaging)
+- ✅ **Official Unified Master Notebook:** `notebooks/CodeWave_FinalNotebook.ipynb`
 - ✅ **Member Notebooks:**
   - `notebooks/EDA_taxi_data.ipynb` (Member 1 EDA & Cleaning)
   - `notebooks/Member2_PredictiveModeling.ipynb` (Member 2 Fare & ETA ML)
@@ -225,4 +226,4 @@ All competition requirements are strictly satisfied:
   - `hotspot_kmeans_model.pkl` ($k=6$)
 - ✅ **Dataset Splits:** `fare_train.csv`, `fare_val.csv`, `fare_test.csv`, `duration_train.csv`, `duration_val.csv`, `duration_test.csv`
 - ✅ **Interactive Apps & Maps:** `app.py`, `dashboard.html`, `hotspots_map.html`
-- ✅ **Automated Packaging Script:** `package_submission.py` (`TeamName_CodefestDatathon2026.zip`)
+- ✅ **Automated Packaging Script:** `package_submission.py` (`CodeWave_CodefestDatathon2026.zip`)
