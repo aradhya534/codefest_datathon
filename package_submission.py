@@ -22,13 +22,17 @@ def make_submission_zip(team_name="TeamAlpha"):
     included_files = [
         "TECHNICAL_REPORT.md",
         "MEMBER2_REPORT_SECTION.md",
+        "DEMO_VIDEO_SCRIPT.md",
+        "dashboard.html",
         "readme.md",
         "requirements.txt",
         "setup.py"
     ]
     
     included_dirs = [
-        ("notebooks", ["Member2_PredictiveModeling.ipynb", "Member3_SpatialTemporal_Demand_AI.ipynb", "predict.py", "ai_mobility_assistant.py"]),
+        ("notebooks", ["EDA_taxi_data.ipynb", "Member2_PredictiveModeling.ipynb", "Member3_SpatialTemporal_Demand_AI.ipynb", "predict.py", "ai_mobility_assistant.py"]),
+        ("cleaned_data", ["urban_flow_cleaned.csv", "powerbi_kpi_summary.csv", "anomaly_cleaning_audit.csv"]),
+        ("cleaned_data/plots", os.listdir(os.path.join(base_dir, "cleaned_data", "plots")) if os.path.exists(os.path.join(base_dir, "cleaned_data", "plots")) else []),
         ("notebooks/models", ["fare_model_lightgbm.pkl", "duration_model_xgboost.pkl", "model_metadata.json", "cleaning_log.json"]),
         ("notebooks/models/plots", os.listdir(os.path.join(base_dir, "notebooks", "models", "plots")) if os.path.exists(os.path.join(base_dir, "notebooks", "models", "plots")) else []),
         ("notebooks/models/splits", os.listdir(os.path.join(base_dir, "notebooks", "models", "splits")) if os.path.exists(os.path.join(base_dir, "notebooks", "models", "splits")) else []),
