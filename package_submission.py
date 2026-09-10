@@ -1,6 +1,12 @@
 """
 Automated Submission Packager — SLIIT Codefest Datathon 2026
-Packages source code, trained models (.pkl), dataset splits, and technical report into TeamName_CodefestDatathon2026.zip
+Strictly complies with the official Datathon submission guidelines:
+1. Technical Report (PDF/MD)
+2. Source code including TeamName_FinalNotebook.ipynb
+3. Trained Models (.pkl)
+4. Clearly separated dataset splits (train/val/test)
+5. Demo Video Script & Links
+Output ZIP: TeamName_CodefestDatathon2026.zip
 """
 
 import os
@@ -11,7 +17,7 @@ import shutil
 if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
 
-def make_submission_zip(team_name="TeamAlpha"):
+def make_submission_zip(team_name="TeamName"):
     base_dir = os.path.dirname(os.path.abspath(__file__))
     zip_filename = f"{team_name}_CodefestDatathon2026.zip"
     zip_filepath = os.path.join(base_dir, zip_filename)
@@ -19,6 +25,17 @@ def make_submission_zip(team_name="TeamAlpha"):
     print(f"📦 Packaging submission for team: {team_name}...")
     print(f"Target file: {zip_filename}")
     
+    # Official final notebook name requirement: TeamName_FinalNotebook.ipynb
+    official_nb_name = f"{team_name}_FinalNotebook.ipynb"
+    src_master_nb = os.path.join(base_dir, "notebooks", "TeamName_FinalNotebook.ipynb")
+    dst_team_nb = os.path.join(base_dir, "notebooks", official_nb_name)
+    
+    if os.path.exists(src_master_nb) and src_master_nb != dst_team_nb:
+        shutil.copyfile(src_master_nb, dst_team_nb)
+        created_temp_nb = True
+    else:
+        created_temp_nb = False
+        
     included_files = [
         "TECHNICAL_REPORT.md",
         "MEMBER2_REPORT_SECTION.md",
@@ -29,8 +46,17 @@ def make_submission_zip(team_name="TeamAlpha"):
         "setup.py"
     ]
     
+    notebook_files = [
+        official_nb_name,
+        "EDA_taxi_data.ipynb",
+        "Member2_PredictiveModeling.ipynb",
+        "Member3_SpatialTemporal_Demand_AI.ipynb",
+        "predict.py",
+        "ai_mobility_assistant.py"
+    ]
+    
     included_dirs = [
-        ("notebooks", ["EDA_taxi_data.ipynb", "Member2_PredictiveModeling.ipynb", "Member3_SpatialTemporal_Demand_AI.ipynb", "predict.py", "ai_mobility_assistant.py"]),
+        ("notebooks", [f for f in notebook_files if os.path.exists(os.path.join(base_dir, "notebooks", f))]),
         ("cleaned_data", ["urban_flow_cleaned.csv", "powerbi_kpi_summary.csv", "anomaly_cleaning_audit.csv"]),
         ("cleaned_data/plots", os.listdir(os.path.join(base_dir, "cleaned_data", "plots")) if os.path.exists(os.path.join(base_dir, "cleaned_data", "plots")) else []),
         ("notebooks/models", ["fare_model_lightgbm.pkl", "duration_model_xgboost.pkl", "model_metadata.json", "cleaning_log.json"]),
@@ -58,12 +84,17 @@ def make_submission_zip(team_name="TeamAlpha"):
                     count += 1
                     print(f"  + {arc_path}")
                     
+    # Clean up temp notebook if copied
+    if created_temp_nb and os.path.exists(dst_team_nb):
+        os.remove(dst_team_nb)
+        
     size_mb = os.path.getsize(zip_filepath) / (1024 * 1024)
-    print("\n" + "=" * 50)
+    print("\n" + "=" * 55)
     print(f"✅ Created {zip_filename} ({size_mb:.2f} MB)")
     print(f"Total files packaged: {count}")
-    print("=" * 50)
+    print(f"Official notebook included: notebooks/{official_nb_name}")
+    print("=" * 55)
 
 if __name__ == "__main__":
-    tname = sys.argv[1] if len(sys.argv) > 1 else "TeamAlpha"
+    tname = sys.argv[1] if len(sys.argv) > 1 else "TeamName"
     make_submission_zip(tname)
