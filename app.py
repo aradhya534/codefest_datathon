@@ -198,11 +198,21 @@ def init_platform():
     zone_file = os.path.abspath(os.path.join(BASE_DIR, "..", "Urban_Flow_Analytics_Zone_Dataset.csv"))
     if not os.path.exists(zone_file):
         zone_file = os.path.join(BASE_DIR, "Urban_Flow_Analytics_Zone_Dataset.csv")
-    zones_df = pd.read_csv(zone_file) if os.path.exists(zone_file) else pd.DataFrame()
+    if os.path.exists(zone_file):
+        zones_df = pd.read_csv(zone_file, keep_default_na=False)
+        zones_df['zone_name'] = zones_df['zone_name'].replace('', 'Unknown Zone').astype(str)
+        zones_df['borough_name'] = zones_df['borough_name'].replace('', 'Unknown Borough').astype(str)
+    else:
+        zones_df = pd.DataFrame()
     
     # Load Hotspots Clusters
     hotspots_file = os.path.join(BASE_DIR, "notebooks", "spatiotemporal", "zone_hotspot_clusters.csv")
-    hotspots_df = pd.read_csv(hotspots_file) if os.path.exists(hotspots_file) else pd.DataFrame()
+    if os.path.exists(hotspots_file):
+        hotspots_df = pd.read_csv(hotspots_file, keep_default_na=False)
+        hotspots_df['zone_name'] = hotspots_df['zone_name'].replace('', 'Unknown Zone').astype(str)
+        hotspots_df['borough_name'] = hotspots_df['borough_name'].replace('', 'Unknown Borough').astype(str)
+    else:
+        hotspots_df = pd.DataFrame()
     
     # Load Metadata
     meta_path = os.path.join(BASE_DIR, "notebooks", "models", "model_metadata.json")
@@ -554,7 +564,7 @@ with tabs[1]:
                 
         with col_zone_inspect:
             st.markdown("##### 🔍 Zone Analytics & Inspector")
-            zone_search_list = sorted(zones_df['zone_name'].unique()) if not zones_df.empty else []
+            zone_search_list = sorted([str(z) for z in zones_df['zone_name'].dropna().unique() if str(z).strip()]) if not zones_df.empty else []
             selected_zone_name = st.selectbox("Search / Inspect Any Zone:", zone_search_list, index=0 if zone_search_list else 0)
             
             if selected_zone_name and not hotspots_df.empty:
