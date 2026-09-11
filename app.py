@@ -815,6 +815,7 @@ with tabs[4]:
     with bi2:
         st.markdown("##### 🧹 Data Hygiene & Systematic Anomaly Filtering")
         if not audit_df.empty:
+            hover_cols = [c for c in ['Impacted Rows (Full 48.6M Scale)', 'Impacted Rows', 'Methodological Justification'] if c in audit_df.columns]
             fig_anom = px.bar(
                 audit_df.sort_values('% Impact', ascending=True),
                 x='% Impact', y='Anomaly Class',
@@ -822,7 +823,7 @@ with tabs[4]:
                 text='% Impact',
                 color='% Impact',
                 color_continuous_scale='Reds',
-                hover_data=['Impacted Rows', 'Methodological Justification']
+                hover_data=hover_cols
             )
             fig_anom.update_traces(texttemplate='%{text:.2f}%', textposition='outside')
             fig_anom.update_layout(
