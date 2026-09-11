@@ -719,6 +719,7 @@ with t5:
     st.markdown("### 📊 Executive Business Intelligence & Fleet ROI Calculator")
     st.caption("Data-driven insights across 34 M cleaned trips — tipping behaviour, anomaly filtering, and enterprise ROI simulation.")
 
+
     # ── Borough 24-h Demand Curve ─────────────────────────────
     if not kpi_df.empty and 'pickup_borough' in kpi_df.columns:
         bh = kpi_df.groupby(['pickup_borough','pickup_hour'])['total_trips'].sum().reset_index()
