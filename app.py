@@ -15,7 +15,7 @@ import streamlit.components.v1 as components
 import plotly.express as px
 import plotly.graph_objects as go
 
-# Append notebooks path for predictor and assistant
+# ── 0. PATH RESOLUTION & ENGINE IMPORTS ──────────────────────
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(BASE_DIR, "notebooks"))
 from predict import UrbanFlowPredictor
@@ -29,90 +29,134 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# ── 2. GLOBAL CLEAN STYLING (CSS) ───────────────────────────
-st.markdown("""
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap');
-    
-    * {
-        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-    
-    .stApp {
-        background-color: #070b14;
-        color: #f8fafc;
-    }
-    
-    .block-container {
-        padding-top: 1.5rem !important;
-        padding-bottom: 2.5rem !important;
-        max-width: 1400px;
-    }
-    
-    /* Top Header */
-    .top-banner {
-        background: linear-gradient(135deg, #0e172a 0%, #152442 100%);
-        border: 1px solid rgba(56, 189, 248, 0.25);
-        border-radius: 16px;
-        padding: 20px 24px;
-        margin-bottom: 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 12px;
-    }
-    
-    .top-banner-title {
-        font-size: 26px;
-        font-weight: 800;
-        background: linear-gradient(90deg, #ffffff 0%, #38bdf8 60%, #c084fc 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin: 0;
-    }
-    
-    .top-banner-sub {
-        font-size: 13px;
-        color: #94a3b8;
-        margin: 3px 0 0 0;
-    }
-    
-    .live-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: rgba(16, 185, 129, 0.12);
-        border: 1px solid rgba(16, 185, 129, 0.35);
-        border-radius: 20px;
-        padding: 6px 14px;
-        font-size: 12px;
-        font-weight: 700;
-        color: #34d399;
-    }
-    
-    /* Route Connector Strip */
-    .route-box {
-        background: rgba(14, 23, 42, 0.7);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 12px;
-        padding: 14px 16px;
-        margin-bottom: 14px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    
-    .hero-fare-display {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 48px;
-        font-weight: 800;
-        color: #38bdf8;
-        line-height: 1.1;
-        margin: 4px 0;
-    }
-</style>
-""", unsafe_allow_html=True)
+# ── 2. ADVANCED ENTERPRISE CSS THEME ────────────────────────
+st.markdown("""<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+* {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Base background & typography */
+.stApp {
+    background: radial-gradient(circle at 10% 20%, #0d1527 0%, #060911 90%);
+    color: #f1f5f9;
+}
+
+.block-container {
+    padding-top: 1.2rem !important;
+    padding-bottom: 2.5rem !important;
+    max-width: 1440px;
+}
+
+/* Header Banner */
+.brand-banner {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 41, 59, 0.7) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    box-shadow: 0 10px 30px -10px rgba(2, 6, 23, 0.7), 0 0 20px rgba(56, 189, 248, 0.1);
+    border-radius: 18px;
+    padding: 22px 28px;
+    margin-bottom: 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.brand-title {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    background: linear-gradient(90deg, #ffffff 0%, #38bdf8 55%, #818cf8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand-sub {
+    font-size: 13.5px;
+    color: #94a3b8;
+    margin: 5px 0 0 0;
+    font-weight: 400;
+}
+
+.live-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    border-radius: 9999px;
+    padding: 7px 16px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #34d399;
+    letter-spacing: 0.04em;
+}
+
+.pulsing-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #34d399;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #34d399;
+}
+
+/* Custom Tabs Styling */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 8px;
+    background-color: rgba(15, 23, 42, 0.6);
+    padding: 6px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.stTabs [data-baseweb="tab"] {
+    height: 44px;
+    white-space: pre-wrap;
+    border-radius: 10px;
+    color: #94a3b8;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 0 18px;
+    transition: all 0.2s ease;
+}
+
+.stTabs [aria-selected="true"] {
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.18) 0%, rgba(99, 102, 241, 0.18) 100%) !important;
+    color: #38bdf8 !important;
+    border: 1px solid rgba(56, 189, 248, 0.35) !important;
+}
+
+/* Streamlit Button Styling */
+div.stButton > button:first-child {
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+div.stButton > button:first-child:hover {
+    border-color: #38bdf8;
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+}
+
+/* Price & Route Badges */
+.route-badge {
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13.5px;
+    color: #e2e8f0;
+    margin-bottom: 12px;
+}
+</style>""", unsafe_allow_html=True)
 
 # ── 3. DATA & CACHED INFERENCE ENGINE ───────────────────────
 @st.cache_resource
@@ -171,14 +215,14 @@ fare_mae = metadata.get("fare_results", {}).get(fare_engine, {}).get("Test", {})
 dur_r2 = metadata.get("duration_results", {}).get(dur_engine, {}).get("Test", {}).get("R2", 0.8715)
 dur_mae = metadata.get("duration_results", {}).get(dur_engine, {}).get("Test", {}).get("MAE", 3.10)
 
-# ── 4. SIDEBAR ──────────────────────────────────────────────
+# ── 4. SIDEBAR CONTROL PANEL ────────────────────────────────
 with st.sidebar:
     st.markdown("### 🚕 CodeWave AI")
     st.caption("SLIIT Codefest Datathon 2026 Champion Suite")
     
-    st.success("● Production Engines Online")
+    st.success("● Production Inference Engines Online")
     
-    st.markdown("##### ⚡ Model Accuracies")
+    st.markdown("##### ⚡ Benchmark Accuracies")
     with st.container(border=True):
         st.metric("Base Fare (XGBoost 🏆)", f"R² = {fare_r2*100:.2f}%", f"MAE ±${fare_mae:.2f}")
     with st.container(border=True):
@@ -204,14 +248,15 @@ with st.sidebar:
                 use_container_width=True
             )
 
-# ── 5. TOP HEADER BANNER ─────────────────────────────────────
-st.markdown("""<div class="top-banner">
+# ── 5. TOP HEADER HERO BANNER ────────────────────────────────
+st.markdown("""<div class="brand-banner">
 <div>
-<h1 class="top-banner-title">🚕 Urban Flow Intelligence Platform</h1>
-<p class="top-banner-sub">Team CodeWave • Guaranteed Upfront Pricing, On-Time ETA, 72h Continuous Dispatching & AI Copilot</p>
+<h1 class="brand-title">🚕 Urban Flow Intelligence Platform</h1>
+<p class="brand-sub">Team CodeWave • Guaranteed Upfront Pricing, On-Time ETA, 72h Continuous Dispatching & AI Copilot</p>
 </div>
-<div class="live-badge">
-<span>● PYSPARK 48.6M DATASET INGESTED</span>
+<div class="live-pill">
+<span class="pulsing-dot"></span>
+<span>PYSPARK 48.6M DATASET INGESTED</span>
 </div>
 </div>""", unsafe_allow_html=True)
 
@@ -256,7 +301,7 @@ tabs = st.tabs([
 
 # ── TAB 1: INSTANT PRICING & ETA SIMULATOR ──────────────────
 with tabs[0]:
-    st.markdown("#### ⚡ Rapid Corridor Presets:")
+    st.markdown("#### ⚡ Popular NYC Transit Corridors:")
     b1, b2, b3, b4, b5 = st.columns(5)
     
     if "p_choice" not in st.session_state:
@@ -286,7 +331,7 @@ with tabs[0]:
     else:
         p_orig, p_dest, p_dist, p_toll = 138, 230, 8.5, 0.00
 
-    col_input, col_output = st.columns([1, 1.2], gap="large")
+    col_input, col_output = st.columns([1, 1.25], gap="large")
     
     with col_input:
         with st.container(border=True):
@@ -322,7 +367,7 @@ with tabs[0]:
                 toll_val = st.number_input("Toll Charges ($):", 0.0, 35.0, p_toll, 0.5)
 
             service_tier = st.radio(
-                "Vehicle Tier:",
+                "Vehicle Tier Selection:",
                 ["🚕 Standard Yellow Cab", "🚙 Comfort XL SUV (+25%)", "⚡ Priority Green Eco (+8%)"],
                 index=0,
                 horizontal=True
@@ -336,23 +381,23 @@ with tabs[0]:
         now_dt = datetime.now()
         if "Morning" in time_window:
             sim_dt = now_dt.replace(hour=8, minute=30)
-            traffic_advisory = "⚠️ Morning Commute Congestion Active"
+            traffic_advisory = "⚠️ Morning Commute Congestion Active (Speed Buffer Applied)"
             traffic_type = "warning"
         elif "Evening" in time_window:
             sim_dt = now_dt.replace(hour=18, minute=0)
-            traffic_advisory = "🚨 Evening Rush Hour Gridlock Buffer"
+            traffic_advisory = "🚨 Evening Rush Hour Gridlock Buffer (+32% Travel Time)"
             traffic_type = "error"
         elif "Late Night" in time_window:
             sim_dt = now_dt.replace(hour=23, minute=30)
-            traffic_advisory = "🌙 Night-Owl Transit Flow Active"
+            traffic_advisory = "🌙 Night-Owl Transit Flow (Low Latency, Free Flow)"
             traffic_type = "info"
         elif "Midday" in time_window:
             sim_dt = now_dt.replace(hour=14, minute=0)
-            traffic_advisory = "🟢 Steady Off-Peak Flow"
+            traffic_advisory = "🟢 Steady Off-Peak Flow (Predictable Traffic)"
             traffic_type = "success"
         else:
             sim_dt = now_dt
-            traffic_advisory = "⚡ Real-Time Telemetry"
+            traffic_advisory = "⚡ Real-Time Telemetry Connection Active"
             traffic_type = "info"
             
         pred_quote = predictor.predict(
@@ -378,7 +423,7 @@ with tabs[0]:
         arrival_str = pred_quote['estimated_arrival_time'].split(' ')[1]
         speed_mph = (dist_val / (dur_mins / 60)) if dur_mins > 0 else 12.5
         
-        # Native Container Card (100% Reliable, Zero HTML Leaks)
+        # Enterprise Ride Ticket Container
         with st.container(border=True):
             if traffic_type == "error":
                 st.error(traffic_advisory)
@@ -389,22 +434,42 @@ with tabs[0]:
             else:
                 st.info(traffic_advisory)
                 
-            st.markdown(f"**Route:** 🟢 **{o_name}** ({o_boro}) ➔ 🔴 **{d_name}** ({d_boro}) • **{dist_val:.1f} mi**")
+            st.markdown(f"**Route Overview:** 🟢 **{o_name}** ({o_boro}) ➔ 🔴 **{d_name}** ({d_boro}) • **{dist_val:.1f} Miles**")
             
             st.divider()
             
             p_col, a_col = st.columns(2)
             with p_col:
-                st.caption(f"GUARANTEED UPFRONT FARE ({tier_label})")
-                st.markdown(f"<h2 style='font-family: JetBrains Mono, monospace; font-size: 40px; font-weight: 800; color: #38bdf8; margin: 2px 0;'>${final_fare:.2f}</h2>", unsafe_allow_html=True)
-                st.caption("✓ Price Locked • Zero Surprise Surcharges")
+                st.caption(f"GUARANTEED UPFRONT FARE ({tier_label.upper()})")
+                st.markdown(f"<h2 style='font-family: JetBrains Mono, monospace; font-size: 42px; font-weight: 800; color: #38bdf8; margin: 2px 0;'>${final_fare:.2f}</h2>", unsafe_allow_html=True)
+                st.caption("🔒 Price Locked • 100% Zero Surge Surprises")
             with a_col:
-                st.caption("ESTIMATED ARRIVAL TIME")
-                st.markdown(f"<h2 style='font-family: JetBrains Mono, monospace; font-size: 38px; font-weight: 800; color: #f8fafc; margin: 2px 0;'>⏱️ {arrival_str}</h2>", unsafe_allow_html=True)
-                st.caption(f"{dur_mins:.1f} mins duration • {speed_mph:.1f} mph avg")
+                st.caption("ESTIMATED DROP-OFF TIME (ETA)")
+                st.markdown(f"<h2 style='font-family: JetBrains Mono, monospace; font-size: 40px; font-weight: 800; color: #f8fafc; margin: 2px 0;'>⏱️ {arrival_str}</h2>", unsafe_allow_html=True)
+                st.caption(f"{dur_mins:.1f} mins transit duration • {speed_mph:.1f} mph avg")
                 
             st.divider()
             
+            st.caption("FLEET TIER COMPARISON")
+            tc1, tc2, tc3 = st.columns(3)
+            with tc1:
+                is_sel1 = " (Selected)" if tier_multiplier == 1.0 else ""
+                st.markdown(f"**🚕 Standard Cab{is_sel1}**")
+                st.markdown(f"**${raw_fare:.2f}**")
+                st.caption("1-4 Passengers")
+            with tc2:
+                is_sel2 = " (Selected)" if tier_multiplier == 1.25 else ""
+                st.markdown(f"**🚙 Comfort SUV{is_sel2}**")
+                st.markdown(f"**${raw_fare * 1.25:.2f}**")
+                st.caption("1-6 Passengers (XL)")
+            with tc3:
+                is_sel3 = " (Selected)" if tier_multiplier == 1.08 else ""
+                st.markdown(f"**⚡ Priority Eco{is_sel3}**")
+                st.markdown(f"**${raw_fare * 1.08:.2f}**")
+                st.caption("Hybrid / Clean Fleet")
+
+            st.divider()
+
             fuel_cost = round(dist_val * 0.16, 2)
             driver_payout = round(final_fare * 0.78, 2)
             platform_fee = round(final_fare * 0.12, 2)
@@ -412,13 +477,13 @@ with tabs[0]:
             
             m1, m2, m3, m4 = st.columns(4)
             with m1:
-                st.metric("Driver Net", f"${driver_payout:.2f}")
+                st.metric("Driver Net Pay", f"${driver_payout:.2f}")
             with m2:
                 st.metric("Estimated Fuel", f"${fuel_cost:.2f}")
             with m3:
-                st.metric("TLC Fees", f"${platform_fee + taxes_surcharges:.2f}")
+                st.metric("TLC/City Fees", f"${platform_fee + taxes_surcharges:.2f}")
             with m4:
-                st.metric("Speed", f"{speed_mph:.1f} mph")
+                st.metric("Corridor Speed", f"{speed_mph:.1f} mph")
                 
         with st.expander("🧾 View Itemized Regulatory Breakdown"):
             st.write(f"- **Base Flagdrop:** $3.00")
@@ -456,7 +521,7 @@ with tabs[1]:
             if os.path.exists(map_file):
                 st.markdown("##### 🗺️ Interactive NYC Mobility Map (263 TLC Zones)")
                 with open(map_file, "r", encoding="utf-8") as f:
-                    components.html(f.read(), height=560)
+                    components.html(f.read(), height=580)
             else:
                 st.info("Compiling GIS Map...")
                 
@@ -492,7 +557,7 @@ with tabs[1]:
                     'mean_fare': '${:.2f}',
                     'night_ratio': '{:.1%}'
                 }),
-                height=220,
+                height=240,
                 use_container_width=True
             )
 
@@ -505,7 +570,7 @@ with tabs[2]:
         fig_fc = go.Figure()
         fig_fc.add_trace(go.Scatter(
             x=forecast_df['timestamp'], y=forecast_df['actual_demand'],
-            mode='lines', name='Actual Demand',
+            mode='lines', name='Actual Ground Truth Demand',
             line=dict(color='#ffffff', width=2)
         ))
         fig_fc.add_trace(go.Scatter(
@@ -565,7 +630,7 @@ with tabs[2]:
             disp_pie_df, names='Borough', values='Recommended Fleet Allocation (%)',
             color='Borough',
             color_discrete_map={'Manhattan':'#38bdf8', 'Queens (Airports)':'#818cf8', 'Brooklyn':'#34d399', 'Bronx':'#fbbf24'},
-            hole=0.5
+            hole=0.55
         )
         fig_pie.update_layout(
             title=f"Fleet Allocation ({target_disp_day} at {target_disp_hr:02d}:00)",
