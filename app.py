@@ -29,33 +29,18 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# ── 2. EXECUTIVE LUXURY DESIGN SYSTEM (CSS) ─────────────────
+# ── 2. GLOBAL CLEAN STYLING (CSS) ───────────────────────────
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap');
     
-    :root {
-        --bg-main: #070b14;
-        --surface-glass: rgba(14, 23, 42, 0.85);
-        --surface-card: rgba(17, 27, 49, 0.90);
-        --border-subtle: rgba(255, 255, 255, 0.08);
-        --border-glow: rgba(56, 189, 248, 0.35);
-        --accent-cyan: #38bdf8;
-        --accent-emerald: #10b981;
-        --accent-purple: #a855f7;
-        --accent-amber: #f59e0b;
-        --accent-rose: #f43f5e;
-        --text-primary: #f8fafc;
-        --text-secondary: #94a3b8;
-    }
-    
     * {
-        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     }
     
     .stApp {
-        background: radial-gradient(circle at 50% 0%, #0d1a36 0%, #070b14 60%, #04070d 100%);
-        color: var(--text-primary);
+        background-color: #070b14;
+        color: #f8fafc;
     }
     
     .block-container {
@@ -64,229 +49,67 @@ st.markdown("""
         max-width: 1400px;
     }
     
-    /* Top Command Header */
-    .hero-header {
-        background: linear-gradient(135deg, rgba(14, 23, 42, 0.92) 0%, rgba(20, 35, 64, 0.88) 100%);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
+    /* Top Header */
+    .top-banner {
+        background: linear-gradient(135deg, #0e172a 0%, #152442 100%);
         border: 1px solid rgba(56, 189, 248, 0.25);
-        border-radius: 18px;
-        padding: 22px 28px;
-        margin-bottom: 22px;
-        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 20px 24px;
+        margin-bottom: 20px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
-        gap: 16px;
+        gap: 12px;
     }
     
-    .hero-title-box h1 {
-        font-size: 28px;
+    .top-banner-title {
+        font-size: 26px;
         font-weight: 800;
-        letter-spacing: -0.6px;
-        margin: 0;
-        background: linear-gradient(90deg, #ffffff 0%, #38bdf8 50%, #c084fc 100%);
+        background: linear-gradient(90deg, #ffffff 0%, #38bdf8 60%, #c084fc 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        display: flex;
-        align-items: center;
-        gap: 10px;
+        margin: 0;
     }
     
-    .hero-title-box p {
+    .top-banner-sub {
         font-size: 13px;
-        color: var(--text-secondary);
-        margin: 4px 0 0 0;
-        font-weight: 500;
-        line-height: 1.4;
+        color: #94a3b8;
+        margin: 3px 0 0 0;
     }
     
-    /* Live Status Beacon */
-    .status-beacon {
+    .live-badge {
         display: inline-flex;
         align-items: center;
         gap: 8px;
         background: rgba(16, 185, 129, 0.12);
         border: 1px solid rgba(16, 185, 129, 0.35);
-        border-radius: 30px;
+        border-radius: 20px;
         padding: 6px 14px;
         font-size: 12px;
         font-weight: 700;
         color: #34d399;
-        letter-spacing: 0.3px;
     }
     
-    .pulse-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background-color: #10b981;
-        box-shadow: 0 0 10px #10b981;
-        display: inline-block;
-        animation: pulse-ring 2s infinite;
-    }
-    
-    @keyframes pulse-ring {
-        0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-        70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
-        100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-    }
-    
-    /* Metric Scorecards */
-    .metric-card-glass {
-        background: linear-gradient(145deg, rgba(14, 23, 42, 0.85) 0%, rgba(19, 32, 58, 0.75) 100%);
-        backdrop-filter: blur(16px);
-        border: 1px solid var(--border-subtle);
-        border-radius: 16px;
-        padding: 18px 20px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .metric-card-glass:hover {
-        transform: translateY(-2px);
-        border-color: var(--border-glow);
-        box-shadow: 0 12px 32px rgba(56, 189, 248, 0.15);
-    }
-    
-    .metric-card-glass::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.5), transparent);
-    }
-    
-    .metric-title {
-        font-size: 11px;
-        font-weight: 700;
-        color: var(--text-secondary);
-        text-transform: uppercase;
-        letter-spacing: 0.8px;
-    }
-    
-    .metric-value-large {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 26px;
-        font-weight: 700;
-        color: #ffffff;
-        margin: 6px 0 4px 0;
-        letter-spacing: -0.5px;
-    }
-    
-    .status-pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        font-size: 11px;
-        font-weight: 700;
-        padding: 3px 9px;
-        border-radius: 6px;
-    }
-    
-    .pill-cyan   { background: rgba(56, 189, 248, 0.14); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
-    .pill-green  { background: rgba(16, 185, 129, 0.14); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
-    .pill-purple { background: rgba(168, 85, 247, 0.14); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
-    .pill-amber  { background: rgba(245, 158, 11, 0.14); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
-    .pill-rose   { background: rgba(244, 63, 94, 0.14); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.3); }
-    
-    /* Digital Boarding Pass Ticket */
-    .digital-ticket {
-        background: linear-gradient(135deg, rgba(15, 26, 48, 0.95) 0%, rgba(22, 38, 70, 0.90) 100%);
-        border: 1px solid rgba(56, 189, 248, 0.35);
-        border-radius: 18px;
-        padding: 24px;
-        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
-    }
-    
-    .ticket-top {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: 1px dashed rgba(255, 255, 255, 0.15);
-        padding-bottom: 14px;
-        margin-bottom: 18px;
-    }
-    
-    .route-strip {
-        background: rgba(9, 14, 26, 0.65);
+    /* Route Connector Strip */
+    .route-box {
+        background: rgba(14, 23, 42, 0.7);
         border: 1px solid rgba(255, 255, 255, 0.08);
         border-radius: 12px;
-        padding: 14px 18px;
+        padding: 14px 16px;
+        margin-bottom: 14px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-bottom: 18px;
     }
     
-    .route-point-title {
-        font-size: 10px;
-        font-weight: 700;
-        color: var(--text-secondary);
-        text-transform: uppercase;
-        letter-spacing: 0.8px;
-    }
-    
-    .route-point-name {
-        font-size: 15px;
-        font-weight: 800;
-        color: #ffffff;
-        margin-top: 2px;
-    }
-    
-    .hero-price {
+    .hero-fare-display {
         font-family: 'JetBrains Mono', monospace;
-        font-size: 50px;
+        font-size: 48px;
         font-weight: 800;
         color: #38bdf8;
-        letter-spacing: -1.5px;
-        line-height: 1.0;
-        text-shadow: 0 0 24px rgba(56, 189, 248, 0.35);
-    }
-    
-    /* Modern Card Container */
-    .modern-card {
-        background: rgba(14, 23, 42, 0.65);
-        border: 1px solid var(--border-subtle);
-        border-radius: 16px;
-        padding: 20px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-    }
-    
-    /* Streamlit Tab Overrides */
-    .stTabs [data-baseweb="tab-list"] {
-        background: rgba(14, 23, 42, 0.75) !important;
-        border: 1px solid var(--border-subtle);
-        border-radius: 14px;
-        padding: 6px;
-        gap: 6px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-    }
-    
-    .stTabs [data-baseweb="tab"] {
-        border-radius: 10px;
-        font-size: 13px;
-        font-weight: 700;
-        padding: 9px 18px;
-        color: var(--text-secondary);
-        transition: all 0.2s ease;
-        border: none !important;
-    }
-    
-    .stTabs [data-baseweb="tab"]:hover {
-        color: #ffffff;
-        background: rgba(255, 255, 255, 0.05);
-    }
-    
-    .stTabs [aria-selected="true"] {
-        background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
-        color: #ffffff !important;
-        box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);
+        line-height: 1.1;
+        margin: 4px 0;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -348,48 +171,28 @@ fare_mae = metadata.get("fare_results", {}).get(fare_engine, {}).get("Test", {})
 dur_r2 = metadata.get("duration_results", {}).get(dur_engine, {}).get("Test", {}).get("R2", 0.8715)
 dur_mae = metadata.get("duration_results", {}).get(dur_engine, {}).get("Test", {}).get("MAE", 3.10)
 
-# ── 4. SIDEBAR BRANDING & DOWNLOADS ─────────────────────────
+# ── 4. SIDEBAR ──────────────────────────────────────────────
 with st.sidebar:
-    st.markdown("""
-    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
-        <span style="font-size: 36px;">🚕</span>
-        <div>
-            <h2 style="margin: 0; font-size: 20px; font-weight: 800; color: #ffffff; letter-spacing: -0.5px;">CodeWave AI</h2>
-            <p style="margin: 0; font-size: 11px; color: #38bdf8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;">Mobility Platform v2.6</p>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown("### 🚕 CodeWave AI")
+    st.caption("SLIIT Codefest Datathon 2026 Champion Suite")
     
-    st.markdown("""
-    <div class="status-beacon" style="width: 100%; justify-content: center; margin-bottom: 16px;">
-        <span class="pulse-dot"></span>
-        <span>PRODUCTION ENGINES ACTIVE</span>
-    </div>
-    """, unsafe_allow_html=True)
+    st.success("● Production Engines Online")
     
-    st.markdown("##### ⚡ Verified Model Benchmarks")
-    st.markdown(f"""
-    <div style="background: rgba(14,23,42,0.85); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 12px; margin-bottom: 10px;">
-        <div style="font-size: 11px; color: #94a3b8; font-weight: 600;">Upfront Base Fare ({fare_engine})</div>
-        <div style="font-size: 15px; font-weight: 800; color: #34d399; margin-top: 2px;">R² = {fare_r2*100:.2f}% • MAE = ${fare_mae:.2f}</div>
-    </div>
-    <div style="background: rgba(14,23,42,0.85); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 12px; margin-bottom: 10px;">
-        <div style="font-size: 11px; color: #94a3b8; font-weight: 600;">Dynamic ETA Engine ({dur_engine})</div>
-        <div style="font-size: 15px; font-weight: 800; color: #38bdf8; margin-top: 2px;">R² = {dur_r2*100:.2f}% • MAE = {dur_mae:.2f} min</div>
-    </div>
-    <div style="background: rgba(14,23,42,0.85); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 12px; margin-bottom: 10px;">
-        <div style="font-size: 11px; color: #94a3b8; font-weight: 600;">Fleet Demand Dispatcher</div>
-        <div style="font-size: 15px; font-weight: 800; color: #c084fc; margin-top: 2px;">R² = 94.68% (79% Error Drop)</div>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    with st.expander("🔍 Enterprise Pipeline Architecture"):
-        st.markdown("- **Ingestion:** Apache Spark / PySpark (48.6M rows)")
-        st.markdown("- **Cleaned Parquet:** 34,197,136 production rides")
-        st.markdown("- **Corridors:** 5,284 OD Historical Speed Priors")
-        st.markdown("- **Zero-Leakage:** 100% Pre-Trip Signals Only")
+    st.markdown("##### ⚡ Model Accuracies")
+    with st.container(border=True):
+        st.metric("Base Fare (XGBoost 🏆)", f"R² = {fare_r2*100:.2f}%", f"MAE ±${fare_mae:.2f}")
+    with st.container(border=True):
+        st.metric("Trip Duration (XGBoost 🏆)", f"R² = {dur_r2*100:.2f}%", f"MAE ±{dur_mae:.2f} min")
+    with st.container(border=True):
+        st.metric("72h Dispatch (LightGBM 🏆)", "R² = 94.68%", "79% Error Drop")
         
-    st.markdown("---")
+    with st.expander("🔍 Architecture Info"):
+        st.write("**Dataset:** 48,601,782 records (PySpark)")
+        st.write("**Cleaned:** 34,197,136 records (Parquet)")
+        st.write("**Corridors:** 5,284 OD Speed Priors")
+        st.write("**Signals:** 100% Pre-Trip Zero Leakage")
+        
+    st.divider()
     report_file = os.path.join(BASE_DIR, "TECHNICAL_REPORT.md")
     if os.path.exists(report_file):
         with open(report_file, "r", encoding="utf-8") as f:
@@ -401,69 +204,48 @@ with st.sidebar:
                 use_container_width=True
             )
 
-# ── 5. TOP EXECUTIVE HERO BANNER & 5-SCORECARD GRID ──────────
-st.markdown("""
-<div class="hero-header">
-    <div class="hero-title-box">
-        <h1>🚕 Urban Flow Intelligence Platform</h1>
-        <p>
-            <b>Team CodeWave</b> • SLIIT Codefest Datathon 2026 Champion Architecture<br>
-            Supervised Guaranteed Pricing, Minute-Level Arrival Estimation, 72h Continuous Dispatching & AI Copilot.
-        </p>
-    </div>
-    <div class="status-beacon">
-        <span class="pulse-dot"></span>
-        <span>PYSPARK 48.6M INGESTED</span>
-    </div>
+# ── 5. TOP HEADER BANNER ─────────────────────────────────────
+st.markdown("""<div class="top-banner">
+<div>
+<h1 class="top-banner-title">🚕 Urban Flow Intelligence Platform</h1>
+<p class="top-banner-sub">Team CodeWave • Guaranteed Upfront Pricing, On-Time ETA, 72h Continuous Dispatching & AI Copilot</p>
 </div>
-""", unsafe_allow_html=True)
+<div class="live-badge">
+<span>● PYSPARK 48.6M DATASET INGESTED</span>
+</div>
+</div>""", unsafe_allow_html=True)
 
-# 5 Scorecards
-k1, k2, k3, k4, k5 = st.columns(5)
-with k1:
-    st.markdown("""
-    <div class="metric-card-glass">
-        <div class="metric-title">Cleaned Rides</div>
-        <div class="metric-value-large">34.20M</div>
-        <span class="status-pill pill-green">✓ 48.6M Ingested</span>
-    </div>
-    """, unsafe_allow_html=True)
-with k2:
-    st.markdown("""
-    <div class="metric-card-glass">
-        <div class="metric-title">Fleet Revenue</div>
-        <div class="metric-value-large">$950.8M</div>
-        <span class="status-pill pill-cyan">Avg $27.81 / Trip</span>
-    </div>
-    """, unsafe_allow_html=True)
-with k3:
-    st.markdown(f"""
-    <div class="metric-card-glass">
-        <div class="metric-title">Base Fare Engine</div>
-        <div class="metric-value-large">{fare_r2*100:.2f}%</div>
-        <span class="status-pill pill-green">MAE ±${fare_mae:.2f} (XGBoost 🏆)</span>
-    </div>
-    """, unsafe_allow_html=True)
-with k4:
-    st.markdown(f"""
-    <div class="metric-card-glass">
-        <div class="metric-title">Trip Duration ETA</div>
-        <div class="metric-value-large">{dur_r2*100:.2f}%</div>
-        <span class="status-pill pill-cyan">MAE ±{dur_mae:.2f}m (XGBoost 🏆)</span>
-    </div>
-    """, unsafe_allow_html=True)
-with k5:
-    st.markdown("""
-    <div class="metric-card-glass">
-        <div class="metric-title">72h Demand Forecast</div>
-        <div class="metric-value-large">94.68%</div>
-        <span class="status-pill pill-purple">79% Error Drop</span>
-    </div>
-    """, unsafe_allow_html=True)
+# 5 Sleek Scorecard Containers
+c1, c2, c3, c4, c5 = st.columns(5)
+with c1:
+    with st.container(border=True):
+        st.caption("📦 CLEANED DATASET")
+        st.subheader("34.20M")
+        st.caption("✓ 48.6M Raw Records")
+with c2:
+    with st.container(border=True):
+        st.caption("💵 FLEET GROSS REVENUE")
+        st.subheader("$950.8M")
+        st.caption("Avg $27.81 / Trip")
+with c3:
+    with st.container(border=True):
+        st.caption("🎯 UPFRONT BASE FARE")
+        st.subheader(f"{fare_r2*100:.2f}%")
+        st.caption(f"MAE ±${fare_mae:.2f} (XGBoost)")
+with c4:
+    with st.container(border=True):
+        st.caption("⏱️ TRIP DURATION ETA")
+        st.subheader(f"{dur_r2*100:.2f}%")
+        st.caption(f"MAE ±{dur_mae:.2f}m (XGBoost)")
+with c5:
+    with st.container(border=True):
+        st.caption("📈 72H DEMAND FORECAST")
+        st.subheader("94.68%")
+        st.caption("79% Error Drop vs Baseline")
 
-st.markdown("<br>", unsafe_allow_html=True)
+st.write("")
 
-# ── 6. MAIN APPLICATION TABS ────────────────────────────────
+# ── 6. APPLICATION TABS ─────────────────────────────────────
 tabs = st.tabs([
     "🚖 1. Instant Pricing & ETA Simulator",
     "📍 2. Geospatial Hotspots & GIS",
@@ -474,111 +256,104 @@ tabs = st.tabs([
 
 # ── TAB 1: INSTANT PRICING & ETA SIMULATOR ──────────────────
 with tabs[0]:
-    # Quick Scenario Preset Pills directly inside Tab 1
-    st.markdown("##### ⚡ 1-Click Corridor Scenarios:")
-    preset_col1, preset_col2, preset_col3, preset_col4, preset_col5 = st.columns(5)
+    st.markdown("#### ⚡ Rapid Corridor Presets:")
+    b1, b2, b3, b4, b5 = st.columns(5)
     
-    if "active_preset" not in st.session_state:
-        st.session_state.active_preset = "JFK"
+    if "p_choice" not in st.session_state:
+        st.session_state.p_choice = "JFK"
         
-    with preset_col1:
-        if st.button("✈️ JFK ➔ Times Sq", use_container_width=True):
-            st.session_state.active_preset = "JFK"
-    with preset_col2:
-        if st.button("✈️ LGA ➔ Wall St", use_container_width=True):
-            st.session_state.active_preset = "LGA"
-    with preset_col3:
-        if st.button("🌉 Midtown ➔ Brooklyn", use_container_width=True):
-            st.session_state.active_preset = "Brooklyn"
-    with preset_col4:
-        if st.button("✈️ Newark ➔ Central Pk", use_container_width=True):
-            st.session_state.active_preset = "Newark"
-    with preset_col5:
-        if st.button("✏️ Custom Setup", use_container_width=True):
-            st.session_state.active_preset = "Custom"
-            
+    if b1.button("✈️ JFK ➔ Times Sq", use_container_width=True):
+        st.session_state.p_choice = "JFK"
+    if b2.button("✈️ LGA ➔ Wall St", use_container_width=True):
+        st.session_state.p_choice = "LGA"
+    if b3.button("🌉 Midtown ➔ Brooklyn", use_container_width=True):
+        st.session_state.p_choice = "Brooklyn"
+    if b4.button("✈️ Newark ➔ Central Pk", use_container_width=True):
+        st.session_state.p_choice = "Newark"
+    if b5.button("✏️ Custom Setup", use_container_width=True):
+        st.session_state.p_choice = "Custom"
+        
     # Resolve preset parameters
-    cur_p = st.session_state.active_preset
-    if cur_p == "JFK":
+    cur_choice = st.session_state.p_choice
+    if cur_choice == "JFK":
         p_orig, p_dest, p_dist, p_toll = 132, 230, 16.5, 6.94
-    elif cur_p == "LGA":
+    elif cur_choice == "LGA":
         p_orig, p_dest, p_dist, p_toll = 138, 87, 11.2, 6.94
-    elif cur_p == "Brooklyn":
+    elif cur_choice == "Brooklyn":
         p_orig, p_dest, p_dist, p_toll = 230, 255, 4.8, 0.00
-    elif cur_p == "Newark":
+    elif cur_choice == "Newark":
         p_orig, p_dest, p_dist, p_toll = 1, 43, 17.8, 16.50
     else:
         p_orig, p_dest, p_dist, p_toll = 138, 230, 8.5, 0.00
 
-    col_setup, col_ticket = st.columns([1.1, 1.3], gap="large")
+    col_input, col_output = st.columns([1, 1.2], gap="large")
     
-    with col_setup:
-        st.markdown('<div class="modern-card">', unsafe_allow_html=True)
-        st.markdown("#### 📍 Corridor & Trip Setup")
-        
-        if not zones_df.empty:
-            zone_map = {f"{r['loc_id']}: {r['zone_name']} ({r['borough_name']})": int(r['loc_id']) for _, r in zones_df.iterrows()}
-            o_idx = list(zone_map.values()).index(p_orig) if p_orig in zone_map.values() else 0
-            d_idx = list(zone_map.values()).index(p_dest) if p_dest in zone_map.values() else 1
+    with col_input:
+        with st.container(border=True):
+            st.subheader("📍 Journey Setup")
             
-            sel_orig = st.selectbox("🟢 Pickup Origin Zone:", list(zone_map.keys()), index=o_idx)
-            sel_dest = st.selectbox("🔴 Drop-off Destination Zone:", list(zone_map.keys()), index=d_idx)
-            
-            chosen_orig = zone_map[sel_orig]
-            chosen_dest = zone_map[sel_dest]
-        else:
-            chosen_orig, chosen_dest = p_orig, p_dest
-            
-        c_dist, c_pass = st.columns(2)
-        with c_dist:
-            dist_val = st.slider("Trip Distance (Miles):", 0.5, 35.0, p_dist, 0.5)
-        with c_pass:
-            pass_val = st.number_input("Riders / Passenger Count:", 1, 6, 1, 1)
-            
-        c_time, c_toll = st.columns(2)
-        with c_time:
-            time_window = st.selectbox(
-                "Departure Time Window:",
-                ["⚡ Real-Time (Current)", "🌅 Morning Commute (08:30)", "🌤️ Midday Off-Peak (14:00)", "🌆 Evening Rush Hour (18:00)", "🌙 Late Night (23:30)"],
-                index=3
+            if not zones_df.empty:
+                zone_map = {f"{r['loc_id']}: {r['zone_name']} ({r['borough_name']})": int(r['loc_id']) for _, r in zones_df.iterrows()}
+                o_idx = list(zone_map.values()).index(p_orig) if p_orig in zone_map.values() else 0
+                d_idx = list(zone_map.values()).index(p_dest) if p_dest in zone_map.values() else 1
+                
+                sel_orig = st.selectbox("🟢 Pickup Origin Zone:", list(zone_map.keys()), index=o_idx)
+                sel_dest = st.selectbox("🔴 Drop-off Destination Zone:", list(zone_map.keys()), index=d_idx)
+                
+                chosen_orig = zone_map[sel_orig]
+                chosen_dest = zone_map[sel_dest]
+            else:
+                chosen_orig, chosen_dest = p_orig, p_dest
+                
+            c_dist, c_pass = st.columns(2)
+            with c_dist:
+                dist_val = st.slider("Trip Distance (Miles):", 0.5, 35.0, p_dist, 0.5)
+            with c_pass:
+                pass_val = st.number_input("Riders / Passenger Count:", 1, 6, 1, 1)
+                
+            c_time, c_toll = st.columns(2)
+            with c_time:
+                time_window = st.selectbox(
+                    "Departure Time Window:",
+                    ["⚡ Real-Time (Current)", "🌅 Morning Commute (08:30)", "🌤️ Midday Off-Peak (14:00)", "🌆 Evening Rush Hour (18:00)", "🌙 Late Night (23:30)"],
+                    index=3
+                )
+            with c_toll:
+                toll_val = st.number_input("Toll Charges ($):", 0.0, 35.0, p_toll, 0.5)
+
+            service_tier = st.radio(
+                "Vehicle Tier:",
+                ["🚕 Standard Yellow Cab", "🚙 Comfort XL SUV (+25%)", "⚡ Priority Green Eco (+8%)"],
+                index=0,
+                horizontal=True
             )
-        with c_toll:
-            toll_val = st.number_input("Toll Charges ($):", 0.0, 35.0, p_toll, 0.5)
+            tier_multiplier = 1.25 if "Comfort" in service_tier else (1.08 if "Priority" in service_tier else 1.0)
+            tier_label = "Standard Yellow Cab" if tier_multiplier == 1.0 else ("Comfort SUV (XL)" if tier_multiplier == 1.25 else "Priority Green Hybrid")
+            
+            st.button("🚀 Calculate Live Quote", type="primary", use_container_width=True)
 
-        service_tier = st.radio(
-            "Vehicle Service Tier:",
-            ["🚕 Standard Yellow Cab", "🚙 Comfort XL SUV (+25%)", "⚡ Priority Green Eco (+8%)"],
-            index=0,
-            horizontal=True
-        )
-        tier_multiplier = 1.25 if "Comfort" in service_tier else (1.08 if "Priority" in service_tier else 1.0)
-        tier_label = "Standard Yellow Cab" if tier_multiplier == 1.0 else ("Comfort SUV (XL)" if tier_multiplier == 1.25 else "Priority Green Hybrid")
-        
-        st.button("🚀 Recalculate Live Quote", type="primary", use_container_width=True)
-        st.markdown('</div>', unsafe_allow_html=True)
-
-    with col_ticket:
+    with col_output:
         now_dt = datetime.now()
         if "Morning" in time_window:
             sim_dt = now_dt.replace(hour=8, minute=30)
             traffic_advisory = "⚠️ Morning Commute Congestion Active"
-            traffic_badge = "pill-amber"
+            traffic_type = "warning"
         elif "Evening" in time_window:
             sim_dt = now_dt.replace(hour=18, minute=0)
             traffic_advisory = "🚨 Evening Rush Hour Gridlock Buffer"
-            traffic_badge = "pill-rose"
+            traffic_type = "error"
         elif "Late Night" in time_window:
             sim_dt = now_dt.replace(hour=23, minute=30)
             traffic_advisory = "🌙 Night-Owl Transit Flow Active"
-            traffic_badge = "pill-purple"
+            traffic_type = "info"
         elif "Midday" in time_window:
             sim_dt = now_dt.replace(hour=14, minute=0)
             traffic_advisory = "🟢 Steady Off-Peak Flow"
-            traffic_badge = "pill-green"
+            traffic_type = "success"
         else:
             sim_dt = now_dt
             traffic_advisory = "⚡ Real-Time Telemetry"
-            traffic_badge = "pill-cyan"
+            traffic_type = "info"
             
         pred_quote = predictor.predict(
             origin_loc_id=chosen_orig,
@@ -603,75 +378,59 @@ with tabs[0]:
         arrival_str = pred_quote['estimated_arrival_time'].split(' ')[1]
         speed_mph = (dist_val / (dur_mins / 60)) if dur_mins > 0 else 12.5
         
-        # Digital Ticket View
-        st.markdown(f"""
-        <div class="digital-ticket">
-            <div class="ticket-top">
-                <span class="status-pill pill-green">🔒 GUARANTEED PRICE LOCK</span>
-                <span class="status-pill {traffic_badge}">{traffic_advisory}</span>
-            </div>
+        # Native Container Card (100% Reliable, Zero HTML Leaks)
+        with st.container(border=True):
+            if traffic_type == "error":
+                st.error(traffic_advisory)
+            elif traffic_type == "warning":
+                st.warning(traffic_advisory)
+            elif traffic_type == "success":
+                st.success(traffic_advisory)
+            else:
+                st.info(traffic_advisory)
+                
+            st.markdown(f"**Route:** 🟢 **{o_name}** ({o_boro}) ➔ 🔴 **{d_name}** ({d_boro}) • **{dist_val:.1f} mi**")
             
-            <div class="route-strip">
-                <div>
-                    <div class="route-point-title">PICKUP ORIGIN</div>
-                    <div class="route-point-name">{o_name}</div>
-                    <div style="font-size: 11px; color: #94a3b8;">{o_boro}</div>
-                </div>
-                <div style="color: #38bdf8; font-size: 13px; font-weight: 800; text-align: center;">
-                    ➔ {dist_val:.1f} mi ➔
-                </div>
-                <div style="text-align: right;">
-                    <div class="route-point-title">DROP-OFF DESTINATION</div>
-                    <div class="route-point-name">{d_name}</div>
-                    <div style="font-size: 11px; color: #94a3b8;">{d_boro}</div>
-                </div>
-            </div>
+            st.divider()
             
-            <div style="display: flex; justify-content: space-between; align-items: flex-end;">
-                <div>
-                    <div style="font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase;">Guaranteed Fare ({tier_label})</div>
-                    <div class="hero-price">${final_fare:.2f}</div>
-                    <div style="font-size: 12px; color: #34d399; font-weight: 600;">✓ Price Locked • Zero Meter Surprises</div>
-                </div>
-                <div style="text-align: right;">
-                    <div style="font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase;">Guaranteed ETA</div>
-                    <div style="font-size: 32px; font-weight: 800; color: #ffffff;">{arrival_str}</div>
-                    <div style="font-size: 12px; color: #38bdf8; font-weight: 600;">⏱️ {dur_mins:.1f} mins duration</div>
-                </div>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        # Operational Payout Row
-        fuel_cost = round(dist_val * 0.16, 2)
-        driver_payout = round(final_fare * 0.78, 2)
-        platform_fee = round(final_fare * 0.12, 2)
-        taxes_surcharges = round(final_fare - (driver_payout + platform_fee), 2)
-        
-        st.markdown("<br>", unsafe_allow_html=True)
-        op1, op2, op3, op4 = st.columns(4)
-        with op1:
-            st.metric("Velocity", f"{speed_mph:.1f} mph", "Traffic Adjusted")
-        with op2:
-            st.metric("Driver Net", f"${driver_payout:.2f}", "78% Payout")
-        with op3:
-            st.metric("Estimated Fuel", f"${fuel_cost:.2f}", "-Opex")
-        with op4:
-            st.metric("TLC Fees", f"${platform_fee + taxes_surcharges:.2f}", "Regulatory")
+            p_col, a_col = st.columns(2)
+            with p_col:
+                st.caption(f"GUARANTEED UPFRONT FARE ({tier_label})")
+                st.markdown(f"<h2 style='font-family: JetBrains Mono, monospace; font-size: 40px; font-weight: 800; color: #38bdf8; margin: 2px 0;'>${final_fare:.2f}</h2>", unsafe_allow_html=True)
+                st.caption("✓ Price Locked • Zero Surprise Surcharges")
+            with a_col:
+                st.caption("ESTIMATED ARRIVAL TIME")
+                st.markdown(f"<h2 style='font-family: JetBrains Mono, monospace; font-size: 38px; font-weight: 800; color: #f8fafc; margin: 2px 0;'>⏱️ {arrival_str}</h2>", unsafe_allow_html=True)
+                st.caption(f"{dur_mins:.1f} mins duration • {speed_mph:.1f} mph avg")
+                
+            st.divider()
             
-        with st.expander("🧾 Itemized Regulatory Fare Structure"):
-            st.markdown(f"""
-- **Base Flagdrop:** $3.00
-- **Corridor Mileage Fare ({dist_val:.1f} mi):** ${max(0, raw_fare - toll_val - 3.00):.2f}
-- **Bridge / Tunnel Tolls:** ${toll_val:.2f}
-- **Service Tier Differential ({tier_label}):** ${final_fare - raw_fare:.2f}
-- **Total Guaranteed Passenger Quote:** **${final_fare:.2f}**
-""")
+            fuel_cost = round(dist_val * 0.16, 2)
+            driver_payout = round(final_fare * 0.78, 2)
+            platform_fee = round(final_fare * 0.12, 2)
+            taxes_surcharges = round(final_fare - (driver_payout + platform_fee), 2)
+            
+            m1, m2, m3, m4 = st.columns(4)
+            with m1:
+                st.metric("Driver Net", f"${driver_payout:.2f}")
+            with m2:
+                st.metric("Estimated Fuel", f"${fuel_cost:.2f}")
+            with m3:
+                st.metric("TLC Fees", f"${platform_fee + taxes_surcharges:.2f}")
+            with m4:
+                st.metric("Speed", f"{speed_mph:.1f} mph")
+                
+        with st.expander("🧾 View Itemized Regulatory Breakdown"):
+            st.write(f"- **Base Flagdrop:** $3.00")
+            st.write(f"- **Corridor Mileage Fare ({dist_val:.1f} mi):** ${max(0, raw_fare - toll_val - 3.00):.2f}")
+            st.write(f"- **Bridge / Tunnel Tolls:** ${toll_val:.2f}")
+            st.write(f"- **Vehicle Tier Surcharge ({tier_label}):** ${final_fare - raw_fare:.2f}")
+            st.write(f"- **Guaranteed Passenger Total:** **${final_fare:.2f}**")
 
 # ── TAB 2: GEOSPATIAL HOTSPOTS & GIS ──────────────────────
 with tabs[1]:
     st.markdown("### 📍 Geospatial Hotspots & NYC Taxi Zone Clustering ($k=6$)")
-    st.markdown("Unsupervised K-Means clustering ($k=6$, Silhouette Score 0.45) delineating commercial arteries, nightlife corridors, and airport hubs.")
+    st.caption("K-Means spatial-temporal clustering segmenting commercial arteries, nightlife corridors, and airport hubs.")
     
     if not hotspots_df.empty:
         cluster_labels = {
@@ -690,48 +449,38 @@ with tabs[1]:
             format_func=lambda c: cluster_labels.get(c, f"Cluster {c}")
         )
         
-        col_map, col_inspect = st.columns([1.5, 1], gap="medium")
+        col_map, col_inspect = st.columns([1.6, 1], gap="large")
         
         with col_map:
             map_file = os.path.join(BASE_DIR, "hotspots_map.html")
             if os.path.exists(map_file):
-                st.markdown("##### 🗺️ Interactive NYC Mobility GIS Map")
+                st.markdown("##### 🗺️ Interactive NYC Mobility Map (263 TLC Zones)")
                 with open(map_file, "r", encoding="utf-8") as f:
-                    components.html(f.read(), height=580)
+                    components.html(f.read(), height=560)
             else:
-                st.info("Generating Map...")
+                st.info("Compiling GIS Map...")
                 
         with col_inspect:
             st.markdown("##### 🔍 Zone Analytics & Inspector")
             zone_search_list = sorted([str(z) for z in zones_df['zone_name'].dropna().unique() if str(z).strip()]) if not zones_df.empty else []
-            selected_zone_name = st.selectbox("Inspect Zone Details:", zone_search_list, index=0 if zone_search_list else 0)
+            selected_zone_name = st.selectbox("Select Any Zone:", zone_search_list, index=0 if zone_search_list else 0)
             
             if selected_zone_name and not hotspots_df.empty:
                 z_match = hotspots_df[hotspots_df['zone_name'] == selected_zone_name]
                 if not z_match.empty:
                     z_row = z_match.iloc[0]
-                    st.markdown(f"""
-                    <div class="metric-card-glass" style="margin-top: 10px;">
-                        <div style="font-size: 18px; font-weight: 800; color: #38bdf8;">{z_row['zone_name']}</div>
-                        <div style="font-size: 12px; color: #94a3b8;">Borough: <b>{z_row['borough_name']}</b> | Zone ID: <b>{z_row['loc_id']}</b></div>
-                        <hr style="border-color: rgba(255,255,255,0.08); margin: 12px 0;">
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-                            <div>
-                                <div style="font-size: 11px; color: #94a3b8; font-weight: 600;">ANNUAL PICKUPS</div>
-                                <div style="font-size: 22px; font-weight: 800; color: #ffffff;">{int(z_row['total_trips']):,}</div>
-                            </div>
-                            <div>
-                                <div style="font-size: 11px; color: #94a3b8; font-weight: 600;">AVERAGE FARE</div>
-                                <div style="font-size: 22px; font-weight: 800; color: #34d399;">${z_row['mean_fare']:.2f}</div>
-                            </div>
-                        </div>
-                        <div style="margin-top: 14px;">
-                            <span class="status-pill pill-purple">{cluster_labels.get(z_row['cluster'], f"Cluster {z_row['cluster']}")}</span>
-                        </div>
-                    </div>
-                    """, unsafe_allow_html=True)
-                    
-            st.markdown("---")
+                    with st.container(border=True):
+                        st.subheader(f"📍 {z_row['zone_name']}")
+                        st.caption(f"Borough: {z_row['borough_name']} | Zone ID: {z_row['loc_id']}")
+                        
+                        zm1, zm2 = st.columns(2)
+                        with zm1:
+                            st.metric("Annual Pickups", f"{int(z_row['total_trips']):,}")
+                        with zm2:
+                            st.metric("Average Fare", f"${z_row['mean_fare']:.2f}")
+                            
+                        st.info(cluster_labels.get(z_row['cluster'], f"Cluster {z_row['cluster']}"))
+                        
             st.markdown("##### 🏆 Busiest NYC Taxi Zones")
             filt_zones = hotspots_df[hotspots_df['cluster'].isin(chosen_clusters)]
             st.dataframe(
@@ -743,14 +492,14 @@ with tabs[1]:
                     'mean_fare': '${:.2f}',
                     'night_ratio': '{:.1%}'
                 }),
-                height=240,
+                height=220,
                 use_container_width=True
             )
 
 # ── TAB 3: FLEET DISPATCHER (72H FORECAST) ──────────────────
 with tabs[2]:
     st.markdown("### 📈 The Fleet Dispatcher: 72-Hour Continuous Demand Forecaster")
-    st.markdown("Autoregressive LightGBM time-series forecaster delivering **$R^2 = 94.68%$** with a **79% error reduction** over traditional Holt-Winters models.")
+    st.caption("Autoregressive LightGBM time-series forecaster delivering R² = 94.68% with a 79% error reduction over baseline models.")
     
     if not forecast_df.empty:
         fig_fc = go.Figure()
@@ -771,23 +520,23 @@ with tabs[2]:
             line=dict(color='#f43f5e', width=1.5, dash='dot')
         ))
         fig_fc.update_layout(
-            title="Interactive 72-Hour Demand Horizon",
+            title="Interactive 72-Hour Demand Curve",
             xaxis_title="Timeline (Consecutive Hours)",
             yaxis_title="Trips / Hour",
             paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(14,23,42,0.6)',
-            font=dict(color='#94a3b8'), height=340,
+            font=dict(color='#94a3b8'), height=320,
             legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
         )
         st.plotly_chart(fig_fc, use_container_width=True)
         
-    st.markdown("---")
-    st.markdown("#### 🧭 Dynamic Pre-Positioning Dispatch Console")
+    st.divider()
+    st.subheader("🧭 Dynamic Fleet Pre-Positioning Console")
     
-    col_day_sel, col_hr_sel = st.columns(2)
-    with col_day_sel:
-        target_disp_day = st.selectbox("Simulate Dispatch Day:", ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], index=4)
-    with col_hr_sel:
-        target_disp_hr = st.slider("Simulate Hour of Day (0–23):", 0, 23, 18)
+    col_day, col_hr = st.columns(2)
+    with col_day:
+        target_disp_day = st.selectbox("Dispatch Day:", ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], index=4)
+    with col_hr:
+        target_disp_hr = st.slider("Dispatch Hour of Day (0–23):", 0, 23, 18)
         
     if target_disp_hr in [7, 8, 9]:
         man_pct, qns_pct, brk_pct, brx_pct = 65, 18, 14, 3
@@ -806,8 +555,8 @@ with tabs[2]:
         demand_status = "🟢 NORMAL STEADY DISPATCH"
         directive_text = "Standard Daytime Operations: Maintain balanced distribution with continuous airport buffer queues at JFK and LGA."
         
-    disp_cols = st.columns([1, 1.2], gap="large")
-    with disp_cols[0]:
+    disp1, disp2 = st.columns([1, 1.2], gap="large")
+    with disp1:
         disp_pie_df = pd.DataFrame({
             'Borough': ['Manhattan', 'Queens (Airports)', 'Brooklyn', 'Bronx'],
             'Recommended Fleet Allocation (%)': [man_pct, qns_pct, brk_pct, brx_pct]
@@ -820,55 +569,42 @@ with tabs[2]:
         )
         fig_pie.update_layout(
             title=f"Fleet Allocation ({target_disp_day} at {target_disp_hr:02d}:00)",
-            paper_bgcolor='rgba(0,0,0,0)', font=dict(color='#94a3b8'), height=280
+            paper_bgcolor='rgba(0,0,0,0)', font=dict(color='#94a3b8'), height=260
         )
         st.plotly_chart(fig_pie, use_container_width=True)
         
-    with disp_cols[1]:
-        st.markdown(f"""
-        <div class="metric-card-glass" style="margin-top: 20px;">
-            <span class="status-pill pill-cyan">{demand_status}</span>
-            <div style="font-size: 17px; font-weight: 800; color: #ffffff; margin: 12px 0 6px 0;">Fleet Dispatch Directive:</div>
-            <p style="font-size: 13px; color: #e2e8f0; line-height: 1.6;">
-                {directive_text}
-            </p>
-            <hr style="border-color: rgba(255,255,255,0.08); margin: 12px 0;">
-            <div style="font-size: 12px; color: #34d399; font-weight: 600;">
-                ⏱️ Predictive positioning cuts passenger pickup latency from <b>6.4 minutes to 2.1 minutes</b>.
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+    with disp2:
+        with st.container(border=True):
+            st.caption(demand_status)
+            st.subheader("Operational Dispatch Directive")
+            st.write(directive_text)
+            st.success("⏱️ Predictive pre-positioning cuts passenger pickup latency from 6.4 mins to 2.1 mins.")
 
 # ── TAB 4: AI MOBILITY COPILOT ──────────────────────────────
 with tabs[3]:
     st.markdown("### 🤖 CodeWave AI Mobility Copilot (Track 5)")
-    st.markdown("Natural language assistant enabling dispatchers, city planners, and riders to query model predictions and spatial intelligence in plain English.")
+    st.caption("Natural language assistant enabling dispatchers and city planners to query model predictions in plain English.")
     
     col_c_history, col_c_chips = st.columns([1.6, 1], gap="large")
     
     with col_c_chips:
-        st.markdown("##### 💡 1-Click Fast Prompts:")
+        st.markdown("##### 💡 Instant Query Prompts:")
         p_click1 = st.button("💵 JFK to Times Square Fare & ETA", use_container_width=True)
         p_click2 = st.button("📍 Where should drivers position now?", use_container_width=True)
-        p_click3 = st.button("🏙️ How do taxi flows compare across boroughs?", use_container_width=True)
+        p_click3 = st.button("🏙️ Compare demand across boroughs", use_container_width=True)
         p_click4 = st.button("⚡ Estimate LGA to Wall St (11 mi)", use_container_width=True)
         
-        st.markdown("---")
+        st.divider()
         if st.button("🗑️ Clear Chat History", use_container_width=True):
             st.session_state.chat_history = []
             st.rerun()
             
-        st.markdown("""
-        <div class="metric-card-glass">
-            <div style="font-size: 12px; font-weight: 700; color: #38bdf8;">COPILOT CAPABILITIES</div>
-            <ul style="font-size: 12px; color: #94a3b8; margin: 8px 0 0 -16px; line-height: 1.6;">
-                <li>Natural language entity extraction (landmarks, distances, riders)</li>
-                <li>Direct pipeline to XGBoost & LightGBM inference engines</li>
-                <li>Hotspot cluster identification & dynamic fleet advice</li>
-            </ul>
-        </div>
-        """, unsafe_allow_html=True)
-        
+        with st.container(border=True):
+            st.caption("COPILOT CAPABILITIES")
+            st.write("• Natural language entity parsing (landmarks, distances, riders)")
+            st.write("• Direct pipeline to XGBoost & LightGBM inference engines")
+            st.write("• Hotspot cluster identification & fleet advice")
+            
     with col_c_history:
         if "chat_history" not in st.session_state or len(st.session_state.chat_history) == 0:
             st.session_state.chat_history = [
@@ -891,12 +627,12 @@ with tabs[3]:
             
         for msg in st.session_state.chat_history:
             with st.chat_message(msg["role"]):
-                st.markdown(msg["content"])
+                st.write(msg["content"])
 
 # ── TAB 5: EXECUTIVE BI & STRATEGIC ROI CALCULATOR ──────────
 with tabs[4]:
     st.markdown("### 📊 Executive Business Intelligence & Fleet ROI Calculator")
-    st.markdown("Transforming taxi big-data analytics into actionable management decisions, fuel savings, and driver revenue growth.")
+    st.caption("Transforming taxi big-data analytics into actionable management decisions, fuel savings, and driver revenue growth.")
     
     if not kpi_df.empty and 'pickup_borough' in kpi_df.columns:
         borough_hourly = kpi_df.groupby(['pickup_borough', 'pickup_hour'])['total_trips'].sum().reset_index()
@@ -910,27 +646,26 @@ with tabs[4]:
             xaxis=dict(title="Hour of Day (0–23)", tickmode='linear', tick0=0, dtick=2),
             yaxis=dict(title="Aggregated Volume"),
             paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(14,23,42,0.6)',
-            font=dict(color='#94a3b8'), height=290
+            font=dict(color='#94a3b8'), height=280
         )
         st.plotly_chart(fig_bh, use_container_width=True)
     
     bi1, bi2 = st.columns(2, gap="medium")
     
     with bi1:
-        st.markdown("##### 💳 Tipping Dynamics & Digital Gratuity Recapture")
+        st.markdown("##### 💳 Tipping Dynamics by Payment Method")
         fig_tip = go.Figure(data=[
             go.Bar(name='Recorded Tip ($)', x=['Credit Card', 'Cash Settlement'], y=[3.48, 0.00], marker_color=['#38bdf8', '#64748b'])
         ])
         fig_tip.update_layout(
-            title="Recorded Gratuity by Payment Method",
             paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
-            font=dict(color='#94a3b8'), height=260
+            font=dict(color='#94a3b8'), height=240
         )
         st.plotly_chart(fig_tip, use_container_width=True)
         st.caption("💡 **Executive Takeaway**: Cash transactions record $0 tips in TLC telemetry. In-app digital card payments unlock ~$18.2M annually in driver tips.")
         
     with bi2:
-        st.markdown("##### 🧹 Data Hygiene & Systematic Anomaly Filtering")
+        st.markdown("##### 🧹 Systematic Anomaly Filtering (48.6M Scale)")
         if not audit_df.empty:
             fig_anom = px.bar(
                 audit_df.sort_values('% Impact', ascending=True),
@@ -943,14 +678,13 @@ with tabs[4]:
             )
             fig_anom.update_traces(texttemplate='%{text:.2f}%', textposition='outside')
             fig_anom.update_layout(
-                title="Systematic Anomaly Classes Filtered (48.6M Scale)",
                 paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
-                font=dict(color='#94a3b8'), height=260, coloraxis_showscale=False
+                font=dict(color='#94a3b8'), height=240, coloraxis_showscale=False
             )
             st.plotly_chart(fig_anom, use_container_width=True)
             
-    st.markdown("---")
-    st.markdown("#### 💰 Interactive Enterprise ROI & Fuel Savings Simulator")
+    st.divider()
+    st.subheader("💰 Interactive Enterprise ROI & Fuel Savings Simulator")
     
     r_input, r_output = st.columns([1, 1.4], gap="large")
     with r_input:
@@ -965,26 +699,12 @@ with tabs[4]:
         co2_tons_saved = (saved_miles_day * 365 * 404) / 1_000_000
         driver_revenue_gain = (saved_miles_day * 365) * 1.85 * 0.78
         
-        st.markdown(f"""
-        <div class="metric-card-glass" style="border-color: rgba(16, 185, 129, 0.4); background: linear-gradient(135deg, rgba(6, 78, 59, 0.35) 0%, rgba(14, 23, 42, 0.9) 100%);">
-            <div style="font-size: 13px; font-weight: 700; color: #34d399; text-transform: uppercase;">Projected Annual Enterprise Impact</div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px;">
-                <div>
-                    <div style="font-size: 11px; color: #94a3b8; font-weight: 600;">ANNUAL FUEL SAVINGS</div>
-                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 800; color: #34d399;">${annual_fuel_saved_usd:,.0f}</div>
-                </div>
-                <div>
-                    <div style="font-size: 11px; color: #94a3b8; font-weight: 600;">CARBON EMISSIONS AVOIDED</div>
-                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 800; color: #38bdf8;">{co2_tons_saved:,.1f} MT CO₂</div>
-                </div>
-                <div>
-                    <div style="font-size: 11px; color: #94a3b8; font-weight: 600;">DRIVER WAGE ENHANCEMENT</div>
-                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 800; color: #c084fc;">${driver_revenue_gain:,.0f}</div>
-                </div>
-                <div>
-                    <div style="font-size: 11px; color: #94a3b8; font-weight: 600;">DEADHEAD MILES CUT</div>
-                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 800; color: #fbbf24;">{saved_miles_day*365/1_000_000:,.1f}M Miles</div>
-                </div>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+        with st.container(border=True):
+            st.caption("PROJECTED ANNUAL ENTERPRISE IMPACT")
+            roi1, roi2 = st.columns(2)
+            with roi1:
+                st.metric("Annual Fuel Savings", f"${annual_fuel_saved_usd:,.0f}")
+                st.metric("Driver Wage Gain", f"${driver_revenue_gain:,.0f}")
+            with roi2:
+                st.metric("Carbon Avoided", f"{co2_tons_saved:,.1f} MT CO₂")
+                st.metric("Deadhead Miles Cut", f"{saved_miles_day*365/1_000_000:,.1f}M Miles")
