@@ -23,165 +23,312 @@ from ai_mobility_assistant import AIMobilityAssistant
 
 # ── 1. STREAMLIT PAGE CONFIG ────────────────────────────────
 st.set_page_config(
-    page_title="Urban Flow AI • CodeWave",
+    page_title="Urban Flow AI • CodeWave Enterprise",
     page_icon="🚕",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# ── 2. ULTRA-CLEAR ENTERPRISE CSS & STYLING ─────────────────
+# ── 2. ULTRA-MODERN LUXURY EXECUTIVE CSS & DESIGN SYSTEM ────
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
     
-    * { font-family: 'Plus Jakarta Sans', sans-serif; }
+    :root {
+        --bg-main: #070b14;
+        --surface: #0e172a;
+        --surface-hover: #172544;
+        --border-subtle: rgba(255, 255, 255, 0.08);
+        --border-glow: rgba(56, 189, 248, 0.35);
+        --accent-cyan: #38bdf8;
+        --accent-blue: #0284c7;
+        --accent-emerald: #10b981;
+        --accent-purple: #a855f7;
+        --accent-amber: #f59e0b;
+        --accent-rose: #f43f5e;
+        --text-primary: #f8fafc;
+        --text-secondary: #94a3b8;
+    }
+    
+    * {
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
     
     .stApp {
-        background-color: #090d16;
-        color: #f8fafc;
+        background: radial-gradient(circle at 50% 0%, #0d1933 0%, #070b14 65%, #050810 100%);
+        color: var(--text-primary);
     }
     
-    /* Hero Header */
-    .hero-container {
-        background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 100%);
+    /* Top Hero Command Center */
+    .hero-glass {
+        background: linear-gradient(135deg, rgba(14, 23, 42, 0.90) 0%, rgba(20, 34, 61, 0.85) 100%);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         border: 1px solid rgba(56, 189, 248, 0.25);
-        border-radius: 16px;
-        padding: 24px 30px;
-        margin-bottom: 22px;
-        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+        border-radius: 20px;
+        padding: 26px 32px;
+        margin-bottom: 24px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 16px;
     }
     
-    .hero-title {
-        font-size: 30px;
+    .hero-title-group h1 {
+        font-size: 32px;
         font-weight: 800;
-        background: linear-gradient(90deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+        letter-spacing: -0.8px;
+        margin: 0;
+        background: linear-gradient(90deg, #ffffff 0%, #38bdf8 50%, #c084fc 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        margin: 0 0 6px 0;
-        letter-spacing: -0.5px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
     }
     
-    .hero-subtitle {
+    .hero-title-group p {
         font-size: 14px;
-        color: #94a3b8;
+        color: var(--text-secondary);
+        margin: 6px 0 0 0;
         font-weight: 500;
-        line-height: 1.5;
+        line-height: 1.4;
     }
     
-    /* Sleek KPI Cards */
-    .metric-card {
-        background: rgba(17, 24, 39, 0.75);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 12px;
-        padding: 16px 18px;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        transition: transform 0.2s ease, border-color 0.2s ease;
+    .hero-badges-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
     }
-    .metric-card:hover {
-        transform: translateY(-2px);
-        border-color: rgba(56, 189, 248, 0.4);
+    
+    /* Sleek Pulse Status Badge */
+    .live-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(16, 185, 129, 0.12);
+        border: 1px solid rgba(16, 185, 129, 0.35);
+        border-radius: 30px;
+        padding: 6px 14px;
+        font-size: 12px;
+        font-weight: 700;
+        color: #34d399;
+        letter-spacing: 0.3px;
     }
-    .metric-label {
+    
+    .live-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #10b981;
+        box-shadow: 0 0 10px #10b981;
+        display: inline-block;
+        animation: pulse-dot 2s infinite;
+    }
+    
+    @keyframes pulse-dot {
+        0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+        70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+        100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+    
+    /* Modern Metric Scorecards */
+    .metric-card-modern {
+        background: linear-gradient(145deg, rgba(14, 23, 42, 0.85) 0%, rgba(20, 31, 56, 0.75) 100%);
+        backdrop-filter: blur(16px);
+        border: 1px solid var(--border-subtle);
+        border-radius: 16px;
+        padding: 20px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .metric-card-modern:hover {
+        transform: translateY(-3px);
+        border-color: var(--border-glow);
+        box-shadow: 0 12px 32px rgba(56, 189, 248, 0.15);
+    }
+    
+    .metric-card-modern::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.6), transparent);
+    }
+    
+    .metric-label-modern {
         font-size: 11px;
         font-weight: 700;
-        color: #94a3b8;
+        color: var(--text-secondary);
         text-transform: uppercase;
-        letter-spacing: 0.8px;
-    }
-    .metric-value {
-        font-size: 24px;
-        font-weight: 800;
-        color: #ffffff;
-        margin: 4px 0 2px 0;
+        letter-spacing: 0.9px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
     }
     
-    /* Badges */
-    .badge {
+    .metric-value-modern {
+        font-size: 26px;
+        font-weight: 800;
+        color: #ffffff;
+        margin: 6px 0 4px 0;
+        letter-spacing: -0.6px;
+    }
+    
+    .metric-pill-modern {
         display: inline-flex;
         align-items: center;
         gap: 4px;
         font-size: 11px;
-        font-weight: 600;
-        padding: 3px 8px;
-        border-radius: 6px;
+        font-weight: 700;
+        padding: 3px 9px;
+        border-radius: 8px;
+        margin-top: 4px;
     }
-    .badge-success { background: rgba(74, 222, 128, 0.15); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.3); }
-    .badge-info    { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
-    .badge-purple  { background: rgba(192, 132, 252, 0.15); color: #c084fc; border: 1px solid rgba(192, 132, 252, 0.3); }
-    .badge-amber   { background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); }
-    .badge-danger  { background: rgba(244, 63, 94, 0.15); color: #f43f5e; border: 1px solid rgba(244, 63, 94, 0.3); }
     
-    /* Executive Upfront Quote Box */
-    .quote-box {
-        background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.85) 100%);
-        border: 1px solid rgba(56, 189, 248, 0.25);
-        border-radius: 16px;
-        padding: 24px 28px;
-        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
-        transition: border-color 0.2s ease;
+    .pill-cyan   { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+    .pill-green  { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .pill-purple { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+    .pill-amber  { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .pill-rose   { background: rgba(244, 63, 94, 0.15); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.3); }
+    
+    /* Luxury Digital Boarding Pass Ticket */
+    .ticket-container {
+        background: linear-gradient(135deg, rgba(15, 26, 48, 0.95) 0%, rgba(22, 38, 70, 0.9) 100%);
+        border: 1px solid rgba(56, 189, 248, 0.35);
+        border-radius: 20px;
+        padding: 26px 28px;
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+        position: relative;
     }
-    .quote-box:hover {
-        border-color: rgba(56, 189, 248, 0.45);
+    
+    .ticket-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px dashed rgba(255, 255, 255, 0.15);
+        padding-bottom: 16px;
+        margin-bottom: 20px;
     }
-    .quote-price {
-        font-size: 50px;
-        font-weight: 800;
-        color: #38bdf8;
-        letter-spacing: -1.5px;
-        line-height: 1.1;
-        margin: 4px 0;
-    }
-    .route-pill {
-        background: rgba(15, 23, 42, 0.65);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 10px;
-        padding: 10px 14px;
-        margin: 14px 0 16px 0;
-        font-size: 13px;
-        color: #e2e8f0;
+    
+    .route-display {
         display: flex;
         align-items: center;
-        flex-wrap: wrap;
-        gap: 8px;
+        justify-content: space-between;
+        background: rgba(10, 16, 30, 0.65);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 14px;
+        padding: 16px 20px;
+        margin-bottom: 20px;
+        gap: 12px;
     }
     
-    /* Step Indicator */
-    .step-badge {
-        background: #0284c7;
-        color: white;
+    .route-node {
+        flex: 1;
+    }
+    
+    .route-node-title {
         font-size: 11px;
         font-weight: 700;
-        padding: 2px 8px;
-        border-radius: 12px;
-        margin-right: 6px;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
     }
     
-    /* Custom Tabs */
+    .route-node-name {
+        font-size: 16px;
+        font-weight: 800;
+        color: #ffffff;
+        margin-top: 2px;
+    }
+    
+    .route-connector {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: var(--accent-cyan);
+        font-size: 12px;
+        font-weight: 700;
+        padding: 0 10px;
+    }
+    
+    .fare-price-hero {
+        font-size: 52px;
+        font-weight: 800;
+        letter-spacing: -1.5px;
+        line-height: 1.0;
+        color: #38bdf8;
+        text-shadow: 0 0 24px rgba(56, 189, 248, 0.35);
+        margin: 6px 0;
+    }
+    
+    /* Modern Streamlit Tab Overrides */
     .stTabs [data-baseweb="tab-list"] {
-        gap: 6px;
-        background: rgba(15, 23, 42, 0.65);
+        background: rgba(14, 23, 42, 0.75) !important;
+        border: 1px solid var(--border-subtle);
+        border-radius: 14px;
         padding: 6px;
-        border-radius: 12px;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    .stTabs [data-baseweb="tab"] {
-        border-radius: 8px;
-        font-size: 13px;
-        font-weight: 600;
-        padding: 9px 18px;
-        color: #94a3b8;
-    }
-    .stTabs [aria-selected="true"] {
-        background: #0284c7 !important;
-        color: #ffffff !important;
+        gap: 8px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
     }
     
-    /* ROI Impact Box */
-    .roi-box {
-        background: linear-gradient(135deg, rgba(6, 78, 59, 0.4) 0%, rgba(15, 23, 42, 0.85) 100%);
-        border: 1px solid rgba(52, 211, 153, 0.35);
-        border-radius: 14px;
+    .stTabs [data-baseweb="tab"] {
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 700;
+        padding: 10px 18px;
+        color: var(--text-secondary);
+        transition: all 0.2s ease;
+        border: none !important;
+    }
+    
+    .stTabs [data-baseweb="tab"]:hover {
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.05);
+    }
+    
+    .stTabs [aria-selected="true"] {
+        background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+        color: #ffffff !important;
+        box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);
+    }
+    
+    /* Styled Input Cards */
+    .setup-card {
+        background: rgba(14, 23, 42, 0.65);
+        border: 1px solid var(--border-subtle);
+        border-radius: 16px;
         padding: 22px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    }
+    
+    .setup-header {
+        font-size: 14px;
+        font-weight: 800;
+        color: #38bdf8;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 14px;
+    }
+    
+    /* Quick Preset Chips */
+    .preset-chip-bar {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 6px;
+        margin-bottom: 16px;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -243,45 +390,45 @@ fare_mae = metadata.get("fare_results", {}).get(fare_engine, {}).get("Test", {})
 dur_r2 = metadata.get("duration_results", {}).get(dur_engine, {}).get("Test", {}).get("R2", 0.8715)
 dur_mae = metadata.get("duration_results", {}).get(dur_engine, {}).get("Test", {}).get("MAE", 3.10)
 
-# ── 4. SIDEBAR BRANDING & HEALTH MONITOR ────────────────────
+# ── 4. SIDEBAR BRANDING & ADVANCED NAVIGATION ────────────────
 with st.sidebar:
     st.markdown("""
     <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
-        <span style="font-size: 36px;">🚕</span>
+        <span style="font-size: 38px;">🚕</span>
         <div>
-            <h2 style="margin: 0; font-size: 22px; font-weight: 800; color: #38bdf8;">CodeWave AI</h2>
-            <p style="margin: 0; font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px;">Urban Mobility Suite v2.5</p>
+            <h2 style="margin: 0; font-size: 22px; font-weight: 800; color: #ffffff; letter-spacing: -0.5px;">CodeWave AI</h2>
+            <p style="margin: 0; font-size: 11px; color: #38bdf8; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Urban Mobility Suite v2.6</p>
         </div>
     </div>
     """, unsafe_allow_html=True)
     
     st.markdown("""
-    <div style="background: rgba(34, 197, 94, 0.12); border: 1px solid rgba(34, 197, 94, 0.35); border-radius: 8px; padding: 8px 12px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
-        <span style="color: #4ade80; font-size: 14px;">●</span>
-        <span style="font-size: 12px; font-weight: 700; color: #4ade80;">Production Engines Online</span>
+    <div class="live-status" style="width: 100%; justify-content: center; margin-bottom: 16px;">
+        <span class="live-dot"></span>
+        <span>PRODUCTION ENGINES ONLINE</span>
     </div>
     """, unsafe_allow_html=True)
     
-    st.markdown("##### ⚡ Verified Production Benchmarks")
+    st.markdown("##### ⚡ Production Benchmarks")
     st.markdown(f"""
-    <div style="background: rgba(15,23,42,0.85); border: 1px solid #1e293b; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px;">
-        <div style="font-size: 11px; color: #94a3b8;">Base Fare Engine ({fare_engine})</div>
-        <div style="font-size: 15px; font-weight: 800; color: #4ade80;">R² = {fare_r2*100:.2f}% | MAE = ${fare_mae:.2f}</div>
+    <div style="background: rgba(14,23,42,0.85); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 12px; margin-bottom: 10px;">
+        <div style="font-size: 11px; color: #94a3b8; font-weight: 600;">Upfront Base Fare ({fare_engine})</div>
+        <div style="font-size: 16px; font-weight: 800; color: #34d399; margin-top: 2px;">R² = {fare_r2*100:.2f}% • MAE = ${fare_mae:.2f}</div>
     </div>
-    <div style="background: rgba(15,23,42,0.85); border: 1px solid #1e293b; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px;">
-        <div style="font-size: 11px; color: #94a3b8;">Dynamic ETA Engine ({dur_engine})</div>
-        <div style="font-size: 15px; font-weight: 800; color: #38bdf8;">R² = {dur_r2*100:.2f}% | MAE = {dur_mae:.2f} min</div>
+    <div style="background: rgba(14,23,42,0.85); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 12px; margin-bottom: 10px;">
+        <div style="font-size: 11px; color: #94a3b8; font-weight: 600;">Dynamic ETA Engine ({dur_engine})</div>
+        <div style="font-size: 16px; font-weight: 800; color: #38bdf8; margin-top: 2px;">R² = {dur_r2*100:.2f}% • MAE = {dur_mae:.2f} min</div>
     </div>
-    <div style="background: rgba(15,23,42,0.85); border: 1px solid #1e293b; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px;">
-        <div style="font-size: 11px; color: #94a3b8;">Fleet Demand Dispatcher</div>
-        <div style="font-size: 15px; font-weight: 800; color: #c084fc;">R² = 94.68% (80% Error Drop)</div>
+    <div style="background: rgba(14,23,42,0.85); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 12px; margin-bottom: 10px;">
+        <div style="font-size: 11px; color: #94a3b8; font-weight: 600;">Fleet Demand Dispatcher</div>
+        <div style="font-size: 16px; font-weight: 800; color: #c084fc; margin-top: 2px;">R² = 94.68% (79% Error Drop)</div>
     </div>
     """, unsafe_allow_html=True)
     
     st.markdown("---")
-    st.markdown("##### 🧭 Instant Journey Presets")
+    st.markdown("##### 🧭 Instant Scenario Presets")
     preset = st.selectbox(
-        "Load Corridors Instant Template:",
+        "Load Rapid Corridor Scenario:",
         [
             "Custom Journey Setup",
             "✈️ JFK Airport ➔ Times Square",
@@ -290,78 +437,87 @@ with st.sidebar:
             "✈️ Newark Airport (EWR) ➔ Central Park"
         ],
         index=1,
-        help="Quickly populate origin, destination, distance, and toll paths."
+        help="Quickly pre-fill origin, destination, distance, and tolls."
     )
     
-    with st.expander("🔍 Model Architecture & Diagnostics"):
-        st.markdown(f"- **Input Features:** {len(metadata.get('features', []))} pre-trip signals")
-        st.markdown(f"- **Training Rows:** {metadata.get('sample_size', 553063):,} clean trips")
-        st.markdown(f"- **Spatial Prior Speeds:** 5,284 OD Corridors")
-        st.markdown(f"- **Cross-Validation:** 5-Fold Stratified Split")
-        st.caption("🔒 Strict Zero-Leakage Pre-Trip Guarantee.")
+    with st.expander("🔍 System Architecture & Health"):
+        st.markdown("- **Data Ingestion:** Apache Spark / PySpark")
+        st.markdown("- **Raw Records:** 48,601,782 rides (12 months)")
+        st.markdown("- **Cleaned Parquet:** 34,197,136 production rides")
+        st.markdown("- **Spatial Priors:** 5,284 OD Corridors")
+        st.markdown("- **Zero-Leakage:** 100% Pre-Trip Features Only")
         
     st.markdown("---")
     report_file = os.path.join(BASE_DIR, "TECHNICAL_REPORT.md")
     if os.path.exists(report_file):
         with open(report_file, "r", encoding="utf-8") as f:
             st.download_button(
-                label="📥 Download Full Technical Report",
+                label="📥 Download Technical Report",
                 data=f.read(),
                 file_name="CodeWave_Technical_Report.md",
                 mime="text/markdown",
                 use_container_width=True
             )
 
-# ── 5. TOP EXECUTIVE HERO BANNER & SCORECARD ────────────────
+# ── 5. TOP EXECUTIVE HERO BANNER & 5-COLUMN SCORECARDS ───────
 st.markdown("""
-<div class="hero-container">
-    <div class="hero-title">🚕 Urban Flow Intelligence & Dispatch Platform</div>
-    <div class="hero-subtitle">
-        <b>Team CodeWave</b> • SLIIT Codefest Datathon 2026 Champion Architecture<br>
-        End-to-End Supervised Pricing, Minute-Level On-Time Arrival, 72-Hour Demand Dispatching & AI Mobility Assistant.
+<div class="hero-glass">
+    <div class="hero-title-group">
+        <h1>🚕 Urban Flow Intelligence Platform</h1>
+        <p>
+            <b>Team CodeWave</b> • SLIIT Codefest Datathon 2026 Champion Solution<br>
+            Enterprise Supervised Upfront Pricing, Minute-Level ETA, 72h Continuous Dispatching & Natural Language Copilot.
+        </p>
+    </div>
+    <div class="hero-badges-group">
+        <div class="live-status">
+            <span class="live-dot"></span>
+            <span>PYSPARK 48.6M DATASET INGESTED</span>
+        </div>
     </div>
 </div>
 """, unsafe_allow_html=True)
 
+# 5 Sleek Unified KPI Scorecards
 kpi1, kpi2, kpi3, kpi4, kpi5 = st.columns(5)
 with kpi1:
     st.markdown("""
-    <div class="metric-card">
-        <div class="metric-label">PySpark Cleaned Rides</div>
-        <div class="metric-value">34.20M</div>
-        <span class="badge badge-success">✓ 48.6M Full Dataset Ingested</span>
+    <div class="metric-card-modern">
+        <div class="metric-label-modern">📦 Cleaned Production Rides</div>
+        <div class="metric-value-modern">34.20M</div>
+        <div class="metric-pill-modern pill-green">✓ 48.6M Full Ingestion</div>
     </div>
     """, unsafe_allow_html=True)
 with kpi2:
     st.markdown("""
-    <div class="metric-card">
-        <div class="metric-label">Fleet Gross Revenue</div>
-        <div class="metric-value">$950.8M</div>
-        <span class="badge badge-info">Avg $27.81 / Trip</span>
+    <div class="metric-card-modern">
+        <div class="metric-label-modern">💵 Fleet Gross Revenue</div>
+        <div class="metric-value-modern">$950.8M</div>
+        <div class="metric-pill-modern pill-cyan">Avg $27.81 / Trip</div>
     </div>
     """, unsafe_allow_html=True)
 with kpi3:
     st.markdown(f"""
-    <div class="metric-card">
-        <div class="metric-label">Base Fare Accuracy</div>
-        <div class="metric-value">{fare_r2*100:.2f}%</div>
-        <span class="badge badge-success">MAE ±${fare_mae:.2f} ({fare_engine} 🏆)</span>
+    <div class="metric-card-modern">
+        <div class="metric-label-modern">🎯 Base Fare Engine</div>
+        <div class="metric-value-modern">{fare_r2*100:.2f}%</div>
+        <div class="metric-pill-modern pill-green">MAE ±${fare_mae:.2f} ({fare_engine} 🏆)</div>
     </div>
     """, unsafe_allow_html=True)
 with kpi4:
     st.markdown(f"""
-    <div class="metric-card">
-        <div class="metric-label">Trip Duration (ETA)</div>
-        <div class="metric-value">{dur_r2*100:.2f}%</div>
-        <span class="badge badge-info">MAE ±{dur_mae:.2f} min ({dur_engine} 🏆)</span>
+    <div class="metric-card-modern">
+        <div class="metric-label-modern">⏱️ Dynamic ETA Accuracy</div>
+        <div class="metric-value-modern">{dur_r2*100:.2f}%</div>
+        <div class="metric-pill-modern pill-cyan">MAE ±{dur_mae:.2f} min ({dur_engine} 🏆)</div>
     </div>
     """, unsafe_allow_html=True)
 with kpi5:
     st.markdown("""
-    <div class="metric-card">
-        <div class="metric-label">72h Demand Forecast</div>
-        <div class="metric-value">94.68%</div>
-        <span class="badge badge-purple">80% Baseline Error Drop</span>
+    <div class="metric-card-modern">
+        <div class="metric-label-modern">📈 72h Demand Forecast</div>
+        <div class="metric-value-modern">94.68%</div>
+        <div class="metric-pill-modern pill-purple">79% Error Drop vs Baseline</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -370,23 +526,18 @@ st.markdown("<br>", unsafe_allow_html=True)
 # ── 6. NAVIGATION TABS ──────────────────────────────────────
 tabs = st.tabs([
     "🚖 1. Instant Pricing & ETA Simulator",
-    "📍 2. Geospatial Hotspots & Zones",
+    "📍 2. Geospatial Hotspots & GIS",
     "📈 3. Fleet Dispatcher (72h Forecast)",
-    "🤖 4. CodeWave AI Mobility Copilot",
+    "🤖 4. AI Mobility Copilot",
     "📊 5. Executive BI & ROI Calculator"
 ])
 
 # ── TAB 1: INSTANT PRICING & ETA SIMULATOR ──────────────────
 with tabs[0]:
-    st.markdown("### 🚖 No-Surprises Upfront Fare & On-Time Arrival Estimator")
-    st.markdown("Locks in a legally compliant, guaranteed upfront passenger quote and exact drop-off arrival time before vehicle dispatch.")
-    
     col_setup, col_ticket = st.columns([1.1, 1.3], gap="large")
     
     with col_setup:
-        st.markdown("#### <span class='step-badge'>Step 1</span> Select Route & Journey Details", unsafe_allow_html=True)
-        
-        # Preset values resolution
+        # Resolve preset coordinates
         if "JFK" in preset:
             p_orig, p_dest, p_dist, p_toll = 132, 230, 16.5, 6.94
         elif "LaGuardia" in preset:
@@ -398,6 +549,11 @@ with tabs[0]:
         else:
             p_orig, p_dest, p_dist, p_toll = 138, 230, 8.5, 0.00
             
+        st.markdown("""
+        <div class="setup-card">
+            <div class="setup-header">📍 Step 1: Origin & Destination Corridor</div>
+        """, unsafe_allow_html=True)
+        
         if not zones_df.empty:
             zone_map = {f"{r['loc_id']}: {r['zone_name']} ({r['borough_name']})": int(r['loc_id']) for _, r in zones_df.iterrows()}
             o_idx = list(zone_map.values()).index(p_orig) if p_orig in zone_map.values() else 0
@@ -411,11 +567,13 @@ with tabs[0]:
         else:
             chosen_orig, chosen_dest = p_orig, p_dest
             
-        st.markdown("#### <span class='step-badge'>Step 2</span> Trip Transit Parameters", unsafe_allow_html=True)
+        st.markdown("""
+            <div class="setup-header" style="margin-top: 20px;">⚙️ Step 2: Journey & Fleet Parameters</div>
+        """, unsafe_allow_html=True)
         
         c_dist, c_pass = st.columns(2)
         with c_dist:
-            dist_val = st.slider("Trip Distance (Miles):", 0.5, 35.0, p_dist, 0.5, help="Estimated shortest roadway path.")
+            dist_val = st.slider("Trip Distance (Miles):", 0.5, 35.0, p_dist, 0.5, help="Estimated shortest roadway route.")
         with c_pass:
             pass_val = st.number_input("Riders / Passenger Count:", 1, 6, 1, 1)
             
@@ -427,11 +585,10 @@ with tabs[0]:
                 index=3
             )
         with c_toll:
-            toll_val = st.number_input("Bridge / Tunnel Tolls ($):", 0.0, 35.0, p_toll, 0.5, help="TLC recognized bridge/tunnel path fees.")
+            toll_val = st.number_input("Bridge / Tunnel Tolls ($):", 0.0, 35.0, p_toll, 0.5, help="TLC recognized bridge/tunnel toll fees.")
 
-        # Vehicle Tier Option
         service_tier = st.radio(
-            "Vehicle Service Tier:",
+            "Select Vehicle Service Tier:",
             ["🚕 Standard Yellow Cab (1-4 Pax)", "🚙 Comfort / XL SUV (Up to 6 Pax)", "⚡ Priority Green Eco (Hybrid/EV)"],
             index=0,
             horizontal=True
@@ -440,32 +597,31 @@ with tabs[0]:
         tier_label = "Standard Yellow Cab" if tier_multiplier == 1.0 else ("Comfort SUV (XL)" if tier_multiplier == 1.25 else "Priority Green Hybrid")
             
         calc_trigger = st.button("🚀 Re-Calculate Guaranteed Price & ETA", type="primary", use_container_width=True)
+        st.markdown("</div>", unsafe_allow_html=True)
 
     with col_ticket:
-        st.markdown("#### <span class='step-badge'>Step 3</span> Guaranteed Upfront Quote", unsafe_allow_html=True)
-        
         # Calculate simulation time
         now_dt = datetime.now()
         if "Morning" in time_window:
             sim_dt = now_dt.replace(hour=8, minute=30)
             traffic_advisory = "⚠️ Morning Commute Congestion Active"
-            traffic_badge = "badge-amber"
+            traffic_badge = "pill-amber"
         elif "Evening" in time_window:
             sim_dt = now_dt.replace(hour=18, minute=0)
             traffic_advisory = "🚨 Evening Rush Hour Gridlock Buffer"
-            traffic_badge = "badge-danger"
+            traffic_badge = "pill-rose"
         elif "Late Night" in time_window:
             sim_dt = now_dt.replace(hour=23, minute=30)
             traffic_advisory = "🌙 Night-Owl Transit Corridor Active"
-            traffic_badge = "badge-purple"
+            traffic_badge = "pill-purple"
         elif "Midday" in time_window:
             sim_dt = now_dt.replace(hour=14, minute=0)
             traffic_advisory = "🟢 Steady Off-Peak Corridor Flow"
-            traffic_badge = "badge-success"
+            traffic_badge = "pill-green"
         else:
             sim_dt = now_dt
             traffic_advisory = "⚡ Real-Time Telemetry Flow"
-            traffic_badge = "badge-info"
+            traffic_badge = "pill-cyan"
             
         pred_quote = predictor.predict(
             origin_loc_id=chosen_orig,
@@ -491,31 +647,46 @@ with tabs[0]:
         arrival_str = pred_quote['estimated_arrival_time'].split(' ')[1]
         speed_mph = (dist_val / (dur_mins / 60)) if dur_mins > 0 else 12.5
         
-        # Premium Upfront Quote Container (Native Streamlit, Zero HTML Code Leakage)
-        with st.container(border=True):
-            b_col1, b_col2 = st.columns([1, 1.2])
-            with b_col1:
-                st.markdown('<span class="badge badge-success">✓ Guaranteed Fare Lock</span>', unsafe_allow_html=True)
-            with b_col2:
-                st.markdown(f'<span class="badge {traffic_badge}">{traffic_advisory}</span>', unsafe_allow_html=True)
-                
-            st.info(f"🚕 **Route:** {o_name} ({o_boro}) ➔ {d_name} ({d_boro}) • **{dist_val:.1f} mi**")
+        # Luxury Digital Boarding Pass Ticket
+        st.markdown(f"""
+        <div class="ticket-container">
+            <div class="ticket-header">
+                <span class="metric-pill-modern pill-green">🔒 GUARANTEED PRICE LOCK</span>
+                <span class="metric-pill-modern {traffic_badge}">{traffic_advisory}</span>
+            </div>
             
-            st.metric(
-                label=f"Guaranteed Upfront Fare ({tier_label})",
-                value=f"${final_fare:.2f}",
-                delta="✓ Rate Locked • Zero Surge Surprises at Drop-off"
-            )
+            <div class="route-display">
+                <div class="route-node">
+                    <div class="route-node-title">PICKUP ORIGIN</div>
+                    <div class="route-node-name">{o_name}</div>
+                    <div style="font-size: 12px; color: #94a3b8;">{o_boro}</div>
+                </div>
+                <div class="route-connector">
+                    <span>➔ {dist_val:.1f} mi ➔</span>
+                </div>
+                <div class="route-node" style="text-align: right;">
+                    <div class="route-node-title">DROP-OFF DESTINATION</div>
+                    <div class="route-node-name">{d_name}</div>
+                    <div style="font-size: 12px; color: #94a3b8;">{d_boro}</div>
+                </div>
+            </div>
             
-            st.divider()
-            
-            m1, m2 = st.columns(2)
-            with m1:
-                st.metric("Estimated Trip Duration", f"{dur_mins:.1f} mins", f"Speed: {speed_mph:.1f} mph")
-            with m2:
-                st.metric("Guaranteed Drop-Off Time", arrival_str, f"Corridor: {dist_val:.1f} mi")
-                
-        # Operational Economics & Transparent Breakdown
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 10px;">
+                <div>
+                    <div style="font-size: 12px; font-weight: 700; color: #94a3b8; text-transform: uppercase;">Guaranteed Upfront Fare ({tier_label})</div>
+                    <div class="fare-price-hero">${final_fare:.2f}</div>
+                    <div style="font-size: 12px; color: #34d399; font-weight: 600;">✓ Price Locked • Zero Surprise Meter Surcharges</div>
+                </div>
+                <div style="text-align: right;">
+                    <div style="font-size: 12px; font-weight: 700; color: #94a3b8; text-transform: uppercase;">Guaranteed Arrival</div>
+                    <div style="font-size: 32px; font-weight: 800; color: #ffffff; letter-spacing: -0.5px;">{arrival_str}</div>
+                    <div style="font-size: 12px; color: #38bdf8; font-weight: 600;">⏱️ {dur_mins:.1f} min travel time</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Operational Economics Metric Row
         fuel_cost = round(dist_val * 0.16, 2)
         driver_payout = round(final_fare * 0.78, 2)
         platform_fee = round(final_fare * 0.12, 2)
@@ -526,28 +697,27 @@ with tabs[0]:
         with op1:
             st.metric("Effective Velocity", f"{speed_mph:.1f} mph", "Traffic Adjusted")
         with op2:
-            st.metric("Driver Net Payout", f"${driver_payout:.2f}", "78% Net")
+            st.metric("Driver Net Payout", f"${driver_payout:.2f}", "78% Net Split")
         with op3:
-            st.metric("Estimated Fuel", f"${fuel_cost:.2f}", "-Opex")
+            st.metric("Estimated Fuel", f"${fuel_cost:.2f}", "-Fleet Opex")
         with op4:
             st.metric("TLC / City Fees", f"${platform_fee + taxes_surcharges:.2f}", "Regulatory")
             
-        with st.expander("🧾 Itemized TLC Transparent Fare Breakdown"):
+        with st.expander("🧾 View Itemized Regulatory Breakdown"):
             st.markdown(f"""
 - **Base Flagdrop Fee:** $3.00
 - **Corridor Mileage Fare ({dist_val:.1f} mi):** ${max(0, raw_fare - toll_val - 3.00):.2f}
 - **Bridge / Tunnel Tolls:** ${toll_val:.2f}
-- **Vehicle Tier Surcharge ({tier_label}):** ${final_fare - raw_fare:.2f}
+- **Vehicle Tier Premium ({tier_label}):** ${final_fare - raw_fare:.2f}
 - **Guaranteed Passenger Total:** **${final_fare:.2f}**
 """)
 
-# ── TAB 2: GEOSPATIAL HOTSPOTS & ZONES ──────────────────────
+# ── TAB 2: GEOSPATIAL HOTSPOTS & GIS ──────────────────────
 with tabs[1]:
     st.markdown("### 📍 Geospatial Hotspots & NYC Taxi Zone Clustering ($k=6$)")
-    st.markdown("Unsupervised segmentation delineating commuter arteries, nightlife corridors, and high-margin airport transfer zones.")
+    st.markdown("Unsupervised K-Means clustering ($k=6$, Silhouette Score 0.45) delineating commercial arteries, nightlife corridors, and airport transfer zones.")
     
     if not hotspots_df.empty:
-        # Cluster filter chips
         cluster_labels = {
             2: "🏢 Cluster 2: Commercial & Midtown Arteries (High Commuter Density)",
             1: "🍸 Cluster 1: Nightlife & Dining Hubs (54% Night Volume)",
@@ -558,49 +728,49 @@ with tabs[1]:
         }
         
         chosen_clusters = st.multiselect(
-            "Filter Map by Cluster Persona:",
+            "Filter Visual Clusters:",
             options=sorted(hotspots_df['cluster'].unique()),
             default=sorted(hotspots_df['cluster'].unique()),
             format_func=lambda c: cluster_labels.get(c, f"Cluster {c}")
         )
         
-        col_interactive_map, col_zone_inspect = st.columns([1.5, 1], gap="medium")
+        col_map, col_inspect = st.columns([1.5, 1], gap="medium")
         
-        with col_interactive_map:
+        with col_map:
             map_file = os.path.join(BASE_DIR, "hotspots_map.html")
             if os.path.exists(map_file):
-                st.markdown("##### 🗺️ Interactive NYC Mobility Map (265 TLC Zones)")
+                st.markdown("##### 🗺️ Interactive NYC Mobility GIS Map (263 TLC Zones)")
                 with open(map_file, "r", encoding="utf-8") as f:
-                    components.html(f.read(), height=540)
+                    components.html(f.read(), height=580)
             else:
                 st.info("Map is compiling...")
                 
-        with col_zone_inspect:
+        with col_inspect:
             st.markdown("##### 🔍 Zone Analytics & Inspector")
             zone_search_list = sorted([str(z) for z in zones_df['zone_name'].dropna().unique() if str(z).strip()]) if not zones_df.empty else []
-            selected_zone_name = st.selectbox("Search / Inspect Any Zone:", zone_search_list, index=0 if zone_search_list else 0)
+            selected_zone_name = st.selectbox("Select Any Zone to Inspect:", zone_search_list, index=0 if zone_search_list else 0)
             
             if selected_zone_name and not hotspots_df.empty:
                 z_match = hotspots_df[hotspots_df['zone_name'] == selected_zone_name]
                 if not z_match.empty:
                     z_row = z_match.iloc[0]
                     st.markdown(f"""
-                    <div class="metric-card" style="margin-top: 10px;">
-                        <div style="font-size: 16px; font-weight: 800; color: #38bdf8;">{z_row['zone_name']}</div>
+                    <div class="metric-card-modern" style="margin-top: 10px;">
+                        <div style="font-size: 18px; font-weight: 800; color: #38bdf8;">{z_row['zone_name']}</div>
                         <div style="font-size: 12px; color: #94a3b8;">Borough: <b>{z_row['borough_name']}</b> | Zone ID: <b>{z_row['loc_id']}</b></div>
-                        <hr style="border-color: rgba(255,255,255,0.08); margin: 10px 0;">
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <hr style="border-color: rgba(255,255,255,0.08); margin: 12px 0;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
                             <div>
-                                <div style="font-size: 11px; color: #94a3b8;">ANNUAL PICKUPS</div>
-                                <div style="font-size: 20px; font-weight: 800; color: #ffffff;">{int(z_row['total_trips']):,}</div>
+                                <div style="font-size: 11px; color: #94a3b8; font-weight: 600;">ANNUAL PICKUPS</div>
+                                <div style="font-size: 22px; font-weight: 800; color: #ffffff;">{int(z_row['total_trips']):,}</div>
                             </div>
                             <div>
-                                <div style="font-size: 11px; color: #94a3b8;">AVERAGE FARE</div>
-                                <div style="font-size: 20px; font-weight: 800; color: #4ade80;">${z_row['mean_fare']:.2f}</div>
+                                <div style="font-size: 11px; color: #94a3b8; font-weight: 600;">AVERAGE FARE</div>
+                                <div style="font-size: 22px; font-weight: 800; color: #34d399;">${z_row['mean_fare']:.2f}</div>
                             </div>
                         </div>
-                        <div style="margin-top: 10px;">
-                            <span class="badge badge-purple">{cluster_labels.get(z_row['cluster'], f"Cluster {z_row['cluster']}")}</span>
+                        <div style="margin-top: 14px;">
+                            <span class="metric-pill-modern pill-purple">{cluster_labels.get(z_row['cluster'], f"Cluster {z_row['cluster']}")}</span>
                         </div>
                     </div>
                     """, unsafe_allow_html=True)
@@ -623,10 +793,9 @@ with tabs[1]:
 
 # ── TAB 3: FLEET DISPATCHER (72H FORECAST) ──────────────────
 with tabs[2]:
-    st.markdown("### 📈 The Fleet Dispatcher: 72-Hour Ahead Passenger Demand Forecasting")
-    st.markdown("Autoregressive LightGBM time-series forecaster delivering **$R^2 = 94.68%$** with an **80% error reduction** over traditional Holt-Winters models.")
+    st.markdown("### 📈 The Fleet Dispatcher: 72-Hour Continuous Demand Forecaster")
+    st.markdown("Autoregressive LightGBM time-series model delivering **$R^2 = 94.68%$** with a **79% error reduction** over traditional Holt-Winters models.")
     
-    # Interactive 72-Hour Forecast Plotly Line Chart
     if not forecast_df.empty:
         fig_fc = go.Figure()
         fig_fc.add_trace(go.Scatter(
@@ -637,37 +806,33 @@ with tabs[2]:
         fig_fc.add_trace(go.Scatter(
             x=forecast_df['timestamp'], y=forecast_df['lightgbm_forecast'],
             mode='lines', name='LightGBM 72h Forecaster (R²=94.68%)',
-            line=dict(color='#38bdf8', width=2.5)
+            line=dict(color='#38bdf8', width=3),
+            fill='tonexty', fillcolor='rgba(56, 189, 248, 0.08)'
         ))
         fig_fc.add_trace(go.Scatter(
             x=forecast_df['timestamp'], y=forecast_df['holt_winters_baseline'],
-            mode='lines', name='Holt-Winters Baseline (R²=73.4%)',
+            mode='lines', name='Holt-Winters Baseline (RMSE 1592)',
             line=dict(color='#f43f5e', width=1.5, dash='dot')
         ))
         fig_fc.update_layout(
-            title="Interactive 72-Hour Demand Curve (Zoom & Hover for Exact Hourly Volume)",
+            title="Interactive 72-Hour Demand Horizon (Hover & Zoom for Hourly Breakdown)",
             xaxis_title="Timeline (Consecutive Hours)",
             yaxis_title="Trips / Hour",
-            paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(15,23,42,0.6)',
-            font=dict(color='#94a3b8'), height=320,
+            paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(14,23,42,0.6)',
+            font=dict(color='#94a3b8'), height=340,
             legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
         )
         st.plotly_chart(fig_fc, use_container_width=True)
-    else:
-        img_forecast = os.path.join(BASE_DIR, "notebooks", "spatiotemporal", "plots", "demand_forecast_72h.png")
-        if os.path.exists(img_forecast):
-            st.image(img_forecast, caption="Continuous 72-Hour Demand Curve across NYC Holdout Period", use_container_width=True)
         
     st.markdown("---")
-    st.markdown("#### 🧭 Interactive Dispatch & Vehicle Prepositioning Console")
+    st.markdown("#### 🧭 Dynamic Pre-Positioning Dispatch Console")
     
     col_day_sel, col_hr_sel = st.columns(2)
     with col_day_sel:
-        target_disp_day = st.selectbox("Dispatch Day:", ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], index=4)
+        target_disp_day = st.selectbox("Simulate Dispatch Day:", ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], index=4)
     with col_hr_sel:
-        target_disp_hr = st.slider("Dispatch Hour of Day (0–23):", 0, 23, 18, help="Simulate fleet allocation for any hour.")
+        target_disp_hr = st.slider("Simulate Hour of Day (0–23):", 0, 23, 18, help="Simulate fleet allocation directives for any hour.")
         
-    # Fleet allocation percentages based on empirical hourly distribution
     if target_disp_hr in [7, 8, 9]:
         man_pct, qns_pct, brk_pct, brx_pct = 65, 18, 14, 3
         demand_status = "🟡 HIGH COMMUTER DEMAND"
@@ -675,11 +840,11 @@ with tabs[2]:
     elif target_disp_hr in [16, 17, 18, 19]:
         man_pct, qns_pct, brk_pct, brx_pct = 68, 17, 12, 3
         demand_status = "🔴 PEAK RUSH GRIDLOCK ALERT"
-        directive_text = "Evening Peak Surge: Direct 68% of available vehicles to Midtown & Penn Station. Extreme outbound commuter flows towards Queens & Brooklyn."
+        directive_text = "Evening Peak Surge: Direct 68% of available vehicles to Midtown & Penn Station. Heavy outbound commuter flows toward Queens & Brooklyn."
     elif target_disp_hr in [21, 22, 23, 0, 1, 2]:
         man_pct, qns_pct, brk_pct, brx_pct = 52, 24, 21, 3
         demand_status = "🟣 NIGHTLIFE ENTERTAINMENT SURGE"
-        directive_text = "Nightlife Transition: Rotate drivers into East Village, Lower East Side, and Williamsburg (night trips account for 54% of volume with +$4.20 higher tips)."
+        directive_text = "Nightlife Transition: Rotate drivers into East Village, Lower East Side, and Williamsburg (night trips represent 54% volume with +$4.20 higher tips)."
     else:
         man_pct, qns_pct, brk_pct, brx_pct = 58, 22, 16, 4
         demand_status = "🟢 NORMAL STEADY DISPATCH"
@@ -694,34 +859,34 @@ with tabs[2]:
         fig_pie = px.pie(
             disp_pie_df, names='Borough', values='Recommended Fleet Allocation (%)',
             color='Borough',
-            color_discrete_map={'Manhattan':'#38bdf8', 'Queens (Airports)':'#818cf8', 'Brooklyn':'#4ade80', 'Bronx':'#fbbf24'},
-            hole=0.45
+            color_discrete_map={'Manhattan':'#38bdf8', 'Queens (Airports)':'#818cf8', 'Brooklyn':'#34d399', 'Bronx':'#fbbf24'},
+            hole=0.5
         )
         fig_pie.update_layout(
-            title=f"Recommended Fleet Distribution ({target_disp_day} at {target_disp_hr:02d}:00)",
+            title=f"Fleet Allocation ({target_disp_day} at {target_disp_hr:02d}:00)",
             paper_bgcolor='rgba(0,0,0,0)', font=dict(color='#94a3b8'), height=280
         )
         st.plotly_chart(fig_pie, use_container_width=True)
         
     with disp_cols[1]:
         st.markdown(f"""
-        <div class="metric-card" style="margin-top: 25px;">
-            <span class="badge badge-info">{demand_status}</span>
-            <div style="font-size: 18px; font-weight: 800; color: #38bdf8; margin: 10px 0 6px 0;">Operational Directive:</div>
-            <p style="font-size: 14px; color: #e2e8f0; line-height: 1.5;">
+        <div class="metric-card-modern" style="margin-top: 20px;">
+            <span class="metric-pill-modern pill-cyan">{demand_status}</span>
+            <div style="font-size: 18px; font-weight: 800; color: #ffffff; margin: 12px 0 6px 0;">Fleet Dispatch Directive:</div>
+            <p style="font-size: 14px; color: #e2e8f0; line-height: 1.6;">
                 {directive_text}
             </p>
             <hr style="border-color: rgba(255,255,255,0.08); margin: 12px 0;">
-            <div style="font-size: 12px; color: #94a3b8;">
-                ⏱️ Pre-positioning impact: Reduces customer pickup latency from <b>6.4 minutes to 2.1 minutes</b>.
+            <div style="font-size: 12px; color: #34d399; font-weight: 600;">
+                ⏱️ Predictive positioning cuts passenger pickup latency from <b>6.4 minutes to 2.1 minutes</b>.
             </div>
         </div>
         """, unsafe_allow_html=True)
 
 # ── TAB 4: AI MOBILITY COPILOT ──────────────────────────────
 with tabs[3]:
-    st.markdown("### 🤖 CodeWave AI Mobility Copilot")
-    st.markdown("An intelligent natural language assistant enabling dispatchers and riders to query model predictions and spatial intelligence in plain English.")
+    st.markdown("### 🤖 CodeWave AI Mobility Copilot (Track 5)")
+    st.markdown("Natural language assistant enabling dispatchers, city planners, and riders to query model predictions and spatial intelligence in plain English.")
     
     col_c_history, col_c_chips = st.columns([1.6, 1], gap="large")
     
@@ -729,7 +894,7 @@ with tabs[3]:
         st.markdown("##### 💡 1-Click Interactive Prompts")
         st.caption("Click any prompt to run it instantly:")
         
-        p_click1 = st.button("💵 Fare & ETA from JFK to Times Square (2 riders)", use_container_width=True)
+        p_click1 = st.button("💵 Fare & ETA from JFK to Times Square", use_container_width=True)
         p_click2 = st.button("📍 Where should drivers position right now?", use_container_width=True)
         p_click3 = st.button("🏙️ How does demand compare across boroughs?", use_container_width=True)
         p_click4 = st.button("⚡ Estimate LGA to Financial District over 11 miles", use_container_width=True)
@@ -740,11 +905,11 @@ with tabs[3]:
             st.rerun()
             
         st.markdown("""
-        <div class="metric-card">
+        <div class="metric-card-modern">
             <div style="font-size: 12px; font-weight: 700; color: #38bdf8;">COPILOT CAPABILITIES</div>
             <ul style="font-size: 12px; color: #94a3b8; margin: 8px 0 0 -16px; line-height: 1.6;">
-                <li>Natural language entity parsing (landmarks, distances, riders)</li>
-                <li>Direct pipeline connection to XGBoost & LightGBM inference engines</li>
+                <li>Natural language entity extraction (landmarks, distances, riders)</li>
+                <li>Direct pipeline to XGBoost & LightGBM inference engines</li>
                 <li>Hotspot cluster identification & dynamic fleet advice</li>
             </ul>
         </div>
@@ -753,7 +918,7 @@ with tabs[3]:
     with col_c_history:
         if "chat_history" not in st.session_state or len(st.session_state.chat_history) == 0:
             st.session_state.chat_history = [
-                {"role": "assistant", "content": "👋 Hello! I am your **CodeWave AI Mobility Copilot**. You can ask me anything about upfront taxi fares, trip duration ETAs, demand hotspots, or fleet dispatch directives!"}
+                {"role": "assistant", "content": "👋 Hello! I am your **CodeWave AI Mobility Copilot**. Ask me anything about upfront taxi fares, trip duration ETAs, demand hotspots, or fleet dispatch directives!"}
             ]
             
         def handle_user_message(query_text):
@@ -777,23 +942,21 @@ with tabs[3]:
 # ── TAB 5: EXECUTIVE BI & STRATEGIC ROI CALCULATOR ──────────
 with tabs[4]:
     st.markdown("### 📊 Executive Business Intelligence & Fleet ROI Calculator")
-    st.markdown("Translating analytical findings into actionable management decisions, fuel savings, and driver revenue growth.")
+    st.markdown("Transforming taxi big-data analytics into actionable management decisions, fuel savings, and driver revenue growth.")
     
-    # Borough hourly profile from Power BI dataset
     if not kpi_df.empty and 'pickup_borough' in kpi_df.columns:
-        st.markdown("##### 🏙️ Diurnal Transit Demand Patterns across NYC Boroughs")
         borough_hourly = kpi_df.groupby(['pickup_borough', 'pickup_hour'])['total_trips'].sum().reset_index()
         fig_bh = px.line(
             borough_hourly, x='pickup_hour', y='total_trips', color='pickup_borough',
             title="Hourly Trips by Borough (24-Hour Cycle)",
             markers=True,
-            color_discrete_sequence=['#38bdf8', '#818cf8', '#4ade80', '#fbbf24', '#f43f5e']
+            color_discrete_sequence=['#38bdf8', '#818cf8', '#34d399', '#fbbf24', '#f43f5e']
         )
         fig_bh.update_layout(
             xaxis=dict(title="Hour of Day (0–23)", tickmode='linear', tick0=0, dtick=2),
             yaxis=dict(title="Aggregated Volume"),
-            paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(15,23,42,0.6)',
-            font=dict(color='#94a3b8'), height=280
+            paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(14,23,42,0.6)',
+            font=dict(color='#94a3b8'), height=290
         )
         st.plotly_chart(fig_bh, use_container_width=True)
     
@@ -810,7 +973,7 @@ with tabs[4]:
             font=dict(color='#94a3b8'), height=260
         )
         st.plotly_chart(fig_tip, use_container_width=True)
-        st.caption("💡 **Executive Takeaway**: Cash transactions record $0 tips in TLC telemetry. Prompting in-app digital card payments unlocks ~$18.2M annually in driver tips.")
+        st.caption("💡 **Executive Takeaway**: Cash transactions record $0 tips in TLC telemetry. In-app digital card payments unlock ~$18.2M annually in driver tips.")
         
     with bi2:
         st.markdown("##### 🧹 Data Hygiene & Systematic Anomaly Filtering")
@@ -821,20 +984,16 @@ with tabs[4]:
                 orientation='h',
                 text='% Impact',
                 color='% Impact',
-                color_continuous_scale='Reds',
-                hover_data=['Impacted Rows', 'Methodological Justification']
+                color_continuous_scale='Blues',
+                hover_data=['Impacted Rows (Full 48.6M Scale)', 'Methodological Justification'] if 'Impacted Rows (Full 48.6M Scale)' in audit_df.columns else None
             )
             fig_anom.update_traces(texttemplate='%{text:.2f}%', textposition='outside')
             fig_anom.update_layout(
-                title="8 Anomaly Classes Filtered (Hover for Justification)",
+                title="Systematic Anomaly Classes Filtered (48.6M Scale)",
                 paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
                 font=dict(color='#94a3b8'), height=260, coloraxis_showscale=False
             )
             st.plotly_chart(fig_anom, use_container_width=True)
-        else:
-            img_anom = os.path.join(BASE_DIR, "cleaned_data", "plots", "anomaly_impact_bar.png")
-            if os.path.exists(img_anom):
-                st.image(img_anom, caption="Distribution of 8 Systematic Anomaly Classes (7.82% Total Cleaned)", use_container_width=True)
             
     st.markdown("---")
     st.markdown("#### 💰 Interactive Enterprise ROI & Fuel Savings Simulator")
@@ -853,29 +1012,25 @@ with tabs[4]:
         driver_revenue_gain = (saved_miles_day * 365) * 1.85 * 0.78 # Converting cruising miles into paid fares
         
         st.markdown(f"""
-        <div class="roi-box">
-            <div style="font-size: 13px; font-weight: 700; color: #4ade80; text-transform: uppercase;">Projected Annual Enterprise Impact</div>
+        <div class="metric-card-modern" style="border-color: rgba(16, 185, 129, 0.4); background: linear-gradient(135deg, rgba(6, 78, 59, 0.35) 0%, rgba(14, 23, 42, 0.9) 100%);">
+            <div style="font-size: 13px; font-weight: 700; color: #34d399; text-transform: uppercase;">Projected Annual Enterprise Impact</div>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px;">
                 <div>
-                    <div style="font-size: 11px; color: #94a3b8;">ANNUAL FUEL SAVINGS</div>
-                    <div style="font-size: 26px; font-weight: 800; color: #4ade80;">${annual_fuel_saved_usd:,.0f}</div>
+                    <div style="font-size: 11px; color: #94a3b8; font-weight: 600;">ANNUAL FUEL SAVINGS</div>
+                    <div style="font-size: 28px; font-weight: 800; color: #34d399;">${annual_fuel_saved_usd:,.0f}</div>
                 </div>
                 <div>
-                    <div style="font-size: 11px; color: #94a3b8;">CARBON AVOIDED</div>
-                    <div style="font-size: 26px; font-weight: 800; color: #38bdf8;">{co2_tons_saved:,.1f} MT CO₂</div>
+                    <div style="font-size: 11px; color: #94a3b8; font-weight: 600;">CARBON EMISSIONS AVOIDED</div>
+                    <div style="font-size: 28px; font-weight: 800; color: #38bdf8;">{co2_tons_saved:,.1f} MT CO₂</div>
                 </div>
                 <div>
-                    <div style="font-size: 11px; color: #94a3b8;">DRIVER WAGE ENHANCEMENT</div>
-                    <div style="font-size: 26px; font-weight: 800; color: #c084fc;">${driver_revenue_gain:,.0f}</div>
+                    <div style="font-size: 11px; color: #94a3b8; font-weight: 600;">DRIVER WAGE ENHANCEMENT</div>
+                    <div style="font-size: 28px; font-weight: 800; color: #c084fc;">${driver_revenue_gain:,.0f}</div>
                 </div>
                 <div>
-                    <div style="font-size: 11px; color: #94a3b8;">DEADHEAD MILES CUT</div>
-                    <div style="font-size: 26px; font-weight: 800; color: #fbbf24;">{saved_miles_day*365/1_000_000:,.1f}M Miles</div>
+                    <div style="font-size: 11px; color: #94a3b8; font-weight: 600;">DEADHEAD MILES CUT</div>
+                    <div style="font-size: 28px; font-weight: 800; color: #fbbf24;">{saved_miles_day*365/1_000_000:,.1f}M Miles</div>
                 </div>
             </div>
         </div>
         """, unsafe_allow_html=True)
-
-    if not audit_df.empty:
-        with st.expander("📋 View Systematic Anomaly Cleaning Audit Table (Member 1)"):
-            st.dataframe(audit_df, use_container_width=True)
