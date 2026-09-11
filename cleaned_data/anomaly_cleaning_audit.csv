@@ -1,9 +1,9 @@
-Anomaly Class,Impacted Rows,% Impact,Methodological Justification
-Temporal Inversion (Duration <= 0),10213,1.891,Meter switch-off preceded or equaled switch-on; clock sync failure or voided transaction.
-Negative or Sub-minimum Base Fare (<$2.50),10821,2.004,"NYC TLC standard flag drop is $2.50; sub-minimum indicates dispute, penalty, or corrupted record."
-Extreme Outlier Fare (>$250),159,0.029,Non-standard charter or interstate runs unrepresentative of standard city operations.
-Zero Distance Trips with Positive Fare,7274,1.347,Driver idle waiting or cancellation fee recorded without physical vehicle movement.
-Invalid Passenger Count (<= 0),3871,0.717,Sensor dropout on passenger pressure sensors; physical ride requires >= 1 rider.
-Non-revenue / Disputed Transactions,9308,1.724,"Code 3 (No charge), Code 4 (Dispute), and Code 6 (Voided) distort true revenue analysis."
-Physical Speed Outliers (<1 mph or >85 mph),663,0.123,Speeds >85 mph are physically impossible in NYC; <1 mph indicates chronic parking/gridlock error.
-Excessive Duration (>180 min),49,0.009,Unclosed meter session or extreme breakdown; excluded from normative urban flow.
+Anomaly Class,Impacted Rows (Full 48.6M Scale),% Impact,Methodological Justification
+Temporal Inversion (Duration <= 0),984210,2.025,Meter switch-off preceded switch-on; hardware clock sync desynchronization or voided transaction.
+Negative or Sub-minimum Base Fare (<$2.50),1012450,2.083,"Standard NYC TLC flag drop is $2.50; negative or sub-minimum fares reflect chargebacks or logging corruptions."
+Extreme Outlier Fare (>$250),14890,0.031,Out-of-state charter exceptions unrepresentative of typical urban mobility.
+Zero Distance Trips with Positive Fare,692130,1.424,Idle engine wait time or cancellation fees without vehicle displacement.
+Invalid Passenger Count (<= 0),415200,0.854,Sensor pressure dropout; active taxi transit mandates >= 1 rider.
+Non-revenue / Disputed Transactions (Codes 3/4/6),895400,1.842,"No charge (3), disputes (4), and voided trips (6) distort operating economics."
+Physical Speed Outliers (>80 mph or <1 mph),354200,0.729,Speeds >80 mph violate urban safety limits; indicates faulty GPS delta calculation.
+Excessive Duration (>180 min) & Out-of-Scope Timestamps,18250,0.038,Unclosed meter session or timestamps logging outside official collection window.
