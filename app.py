@@ -717,7 +717,7 @@ with t4:
 # ══════════════════════════════════════════════════════════════
 with t5:
     st.markdown("### 📊 Executive Business Intelligence & Fleet ROI Calculator")
-<<<<<<< HEAD
+
     st.markdown("Translating analytical findings into actionable management decisions, fuel savings, and driver revenue growth.")
     
     # Borough hourly profile from Power BI dataset
@@ -819,7 +819,7 @@ with t5:
         """, unsafe_allow_html=True)
 =======
     st.caption("Data-driven insights across 34 M cleaned trips — tipping behaviour, anomaly filtering, and enterprise ROI simulation.")
->>>>>>> cb5b4028f1f1188a748dce6ff2ddf07a213a053b
+
 
     # ── Borough 24-h Demand Curve ─────────────────────────────
     if not kpi_df.empty and 'pickup_borough' in kpi_df.columns:
