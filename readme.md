@@ -24,8 +24,8 @@ codefest_datathon/
 │
 ├── notebooks/
 │   ├── CodeWave_FinalNotebook.ipynb           ← [Official Master Notebook] Complete End-to-End Pipeline
-│   ├── EDA_taxi_data.ipynb                    ← [Member 1] Data Preprocessing & EDA
-│   ├── Member2_PredictiveModeling.ipynb       ← [Member 2] Supervised Fare & Duration ML
+│   ├── EDA_taxi_data.ipynb                    ← [Member 1] PySpark Big Data Pipeline (48.6M Records, 6 Anomalies, Parquet)
+│   ├── Member2_PredictiveModeling.ipynb       ← [Member 2] Supervised Fare & Duration ML (Parquet / Multi-Engine)
 │   ├── Member3_SpatialTemporal_Demand_AI.ipynb ← [Member 3] Demand Forecaster & AI Assistant
 │   ├── predict.py                             ← Real-time Upfront Fare & Duration Inference API
 │   ├── ai_mobility_assistant.py               ← Natural Language AI Mobility Agent

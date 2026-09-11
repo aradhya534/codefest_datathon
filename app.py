@@ -327,16 +327,16 @@ kpi1, kpi2, kpi3, kpi4, kpi5 = st.columns(5)
 with kpi1:
     st.markdown("""
     <div class="metric-card">
-        <div class="metric-label">Cleaned Annual Volume</div>
-        <div class="metric-value">553,063</div>
-        <span class="badge badge-success">✓ 7.82% Anomalies Cleaned</span>
+        <div class="metric-label">PySpark Cleaned Rides</div>
+        <div class="metric-value">34.20M</div>
+        <span class="badge badge-success">✓ 48.6M Full Dataset Ingested</span>
     </div>
     """, unsafe_allow_html=True)
 with kpi2:
     st.markdown("""
     <div class="metric-card">
         <div class="metric-label">Fleet Gross Revenue</div>
-        <div class="metric-value">$15.38M</div>
+        <div class="metric-value">$950.8M</div>
         <span class="badge badge-info">Avg $27.81 / Trip</span>
     </div>
     """, unsafe_allow_html=True)
